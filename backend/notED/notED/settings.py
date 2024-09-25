@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user.apps.UserConfig',
+    'groups.apps.GroupsConfig',
     'rest_framework',
     "corsheaders",
 ]
@@ -72,6 +74,18 @@ TEMPLATES = [
         },
     },
 ]
+
+STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [BASE_DIR / "static_my_project",
+                    BASE_DIR / "templates" / "build",
+                     ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn", "static_root")
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "static_cdn", "media_root")
 
 WSGI_APPLICATION = 'notED.wsgi.application'
 

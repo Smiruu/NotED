@@ -40,7 +40,7 @@ class User(AbstractBaseUser):
         unique=True,
     )
     name = models.CharField(max_length=200)
-    user_id = models.CharField(max_length=4, unique=True, blank=True)  # Unique 4-digit ID
+    user_tag = models.CharField(max_length=4, unique=True, blank=True)  # Unique 4-digit ID
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -65,14 +65,14 @@ class User(AbstractBaseUser):
         return self.is_admin
 
     def save(self, *args, **kwargs):
-        """Assigns a unique 4-digit ID if not already assigned."""
-        if not self.user_id:
-            self.user_id = self.generate_unique_user_id()
+        """Assigns a unique 4-digit user tag if not already assigned."""
+        if not self.user_tag:
+            self.user_tag = self.generate_unique_user_tag()  # Call the updated method
         super().save(*args, **kwargs)
 
-    def generate_unique_user_id(self):
-        """Generates a unique 4-digit user ID."""
+    def generate_unique_user_tag(self):
+        """Generates a unique 4-digit user tag."""
         while True:
-            new_id = str(random.randint(0, 9999)).zfill(4)  # Generates 4-digit ID
-            if not User.objects.filter(user_id=new_id).exists():  # Ensures it's unique
-                return new_id
+            new_tag = str(random.randint(0, 9999)).zfill(4)  # Generates 4-digit tag
+            if not User.objects.filter(user_tag=new_tag).exists():  # Ensures it's unique
+                return new_tag
