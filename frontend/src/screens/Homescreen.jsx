@@ -10,7 +10,9 @@ const chats = [
 
 const HomeScreen = () => {
   const navigate = useNavigate();
-  const userInfo = localStorage.getItem("userInfo") // Move useSelector here
+  const userInfo = useSelector((state) => state.userLogin.userInfo);// Move useSelector here
+
+
 
   // Check for userInfo in local storage
   useEffect(() => {
