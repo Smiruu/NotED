@@ -6,7 +6,7 @@ import {
     GROUP_IMAGE_UPLOAD_REQUEST,
     GROUP_IMAGE_UPLOAD_SUCCESS,
     GROUP_IMAGE_UPLOAD_FAIL,
-  } from './groupConstants';
+  } from '../constants/groupConstants';
   
   const initialState = {
     loading: false,
