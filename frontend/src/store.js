@@ -7,12 +7,18 @@ import {
   SendChangePasswordReducer,
   ConfirmChangePasswordReducer,
 } from "./reducers/userReducers";
+import {
+  groupCreateReducer,
+  groupImageUploadReducer
+} from "./reducers/groupReducers"
 const reducer = {
   userRegister: userRegisterReducer,
   userLogin: userLoginReducer,
   passwordChange: passwordChangeReducer,
   SendcChangePassword: SendChangePasswordReducer,
   ConfirmChangePassword: ConfirmChangePasswordReducer,
+  groupCreate: groupCreateReducer,
+  groupImageUpload: groupImageUploadReducer,
 };
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

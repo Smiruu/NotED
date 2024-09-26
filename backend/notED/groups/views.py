@@ -11,58 +11,122 @@ from django.shortcuts import get_object_or_404
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_group(request):
-    # Create the serializer with the provided data
+    
     serializer = GroupSerializer(data=request.data)
     user_id = request.data.get('user_id')
     
     user = get_object_or_404(User, pk=user_id)
 
-    # Check if the serializer is valid
     if serializer.is_valid():
-        group = serializer.save(user=user)  # Save the group with the user as creator
+        group = serializer.save(user=user)  
         
-        # If no group image is provided, you can set a default image or handle it here
+        
         if not request.data.get('group_image'):
             # Optionally set a default image path
-            group.group_image = 'group_images/default.jpg'  # Change to your default image path
-            group.save()  # Save changes if you set a default image
+            group.group_image = 'group_images/default.jpg'  
+            group.save()  
         
         return Response(GroupSerializer(group).data, status=status.HTTP_201_CREATED)
     
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def upload_group_image(request, group_tag):
+    group = get_object_or_404(Group, group_tag=group_tag)
+    user_id = request.data.get('user_id')
+    user = get_object_or_404(User, pk=user_id)
+    if group.user != user:
+        return Response({'message': 'You are not authorized to change this group image.'}, status=status.HTTP_403_FORBIDDEN)
+
+    new_image = request.FILES.get('group_image')
+    
+    if not new_image:
+        return Response({'message': 'No image file provided.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    group.group_image = new_image
+    group.save()
+
+    return Response({'message': 'Group image updated successfully.', 'group_image': group.group_image.url}, status=status.HTTP_200_OK)
+
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def remove_group_image(request, group_tag):
+    group = get_object_or_404(Group, group_tag=group_tag)
+    user_id = request.data.get('user_id')
+    user = get_object_or_404(User, pk=user_id)
+
+    if group.user != user:
+        return Response({'message': 'You are not authorized to remove this group image.'}, status=status.HTTP_403_FORBIDDEN)
+
+    group.group_image = 'group_images/default.jpg'
+    group.save()
+
+    return Response({'message': 'Group image removed successfully, reverted to default image.', 'group_image': group.group_image.url}, status=status.HTTP_200_OK)
+
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def join_group(request):
-    user_id = request.data.get('user_id')  # Get the currently authenticated user
-    group_tag = request.data.get('group_tag')  # Get the group ID from the request data
+    user_id = request.data.get('user_id')  
+    group_tag = request.data.get('group_tag')  
     
-    # Retrieve the group object or return a 404 if not found
     group = get_object_or_404(Group, group_tag=group_tag)
     user = get_object_or_404(User, pk=user_id)
-    # Add the user to the group's members
-    group.members.add(user)  # Add the user to the members of the group
-    group.save()  # Save the changes to the group
+    
+    group.members.add(user)  
+    group.save()  
 
     return Response({'message': 'Successfully joined the group.'}, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_favorite_group(request):
+    user_id = request.data.get('user_id')  
+    group_tag = request.data.get('group_tag')
+    user = get_object_or_404(User, pk=user_id)
+    group = get_object_or_404(Group, group_tag=group_tag)
+
+    if group.favorites.filter(id=user.id).exists():
+        return Response({'message': 'This group is already in your favorites.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    group.favorites.add(user)
+    group.save()
+
+    return Response({'message': 'Group added to favorites successfully.'}, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def remove_favorite_group(request):
+    user_id = request.data.get('user_id')
+    group_tag = request.data.get('group_tag')
+
+    user = get_object_or_404(User, pk=user_id)
+    group = get_object_or_404(Group, group_tag=group_tag)
+
+    if group.favorites.filter(pk=user_id).exists():
+        group.favorites.remove(user)
+        return Response({'message': 'Group removed from favorites.'}, status=status.HTTP_200_OK)
+    else:
+        return Response({'error': 'Group is not in favorites.'}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def user_groups(request):
-    user_id = request.data.get('user_id')  # Get the currently authenticated user
+    user_id = request.data.get('user_id')
     user = get_object_or_404(User, pk=user_id)
 
-    # Fetch groups created by the user
+    favorite_groups = Group.objects.filter(favorites=user)
     created_groups = Group.objects.filter(user=user)
-
-    # Fetch groups the user is a member of
     joined_groups = Group.objects.filter(members=user)
 
-    # Serialize the data
+    favorite_groups_data = GroupSerializer(favorite_groups, many=True).data
     created_groups_data = GroupSerializer(created_groups, many=True).data
     joined_groups_data = GroupSerializer(joined_groups, many=True).data
 
     return Response({
+        'favorite_groups': favorite_groups_data,
         'created_groups': created_groups_data,
         'joined_groups': joined_groups_data
     }, status=status.HTTP_200_OK)
+

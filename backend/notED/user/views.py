@@ -16,6 +16,7 @@ def get_tokens_for_user(user):
         'refresh': str(refresh),
         'access': str(refresh.access_token),
         'user_tag': user.user_tag,
+        'user_id': user.id,
         'name': user.name,
         'email': user.email,
     }
