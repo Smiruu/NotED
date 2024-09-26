@@ -8,8 +8,14 @@ import {
   ConfirmChangePasswordReducer,
 } from "./reducers/userReducers";
 import {
+  favoriteGroupReducer,
+  favoriteGroupRemoveReducer,
   groupCreateReducer,
-  groupImageUploadReducer
+  groupImageRemoveReducer,
+  groupImageUploadReducer,
+  groupJoinReducer,
+  groupsListReducer,
+  userGroupsReducer
 } from "./reducers/groupReducers"
 const reducer = {
   userRegister: userRegisterReducer,
@@ -19,6 +25,12 @@ const reducer = {
   ConfirmChangePassword: ConfirmChangePasswordReducer,
   groupCreate: groupCreateReducer,
   groupImageUpload: groupImageUploadReducer,
+  gruopImageRemove: groupImageRemoveReducer,
+  groupJoin: groupJoinReducer,
+  favoriteGroup:favoriteGroupReducer,
+  favoriteGroupRemove: favoriteGroupRemoveReducer,
+  userGroups: userGroupsReducer,
+  groupsList: groupsListReducer,
 };
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

@@ -13,9 +13,9 @@ from django.shortcuts import get_object_or_404
 def create_group(request):
     
     serializer = GroupSerializer(data=request.data)
-    user_id = request.data.get('user_id')
     
-    user = get_object_or_404(User, pk=user_id)
+    
+    user = request.user
 
     if serializer.is_valid():
         group = serializer.save(user=user)  
@@ -68,12 +68,11 @@ def remove_group_image(request, group_tag):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def join_group(request):
-    user_id = request.data.get('user_id')  
+
     group_tag = request.data.get('group_tag')  
     
     group = get_object_or_404(Group, group_tag=group_tag)
-    user = get_object_or_404(User, pk=user_id)
-    
+    user = request.user
     group.members.add(user)  
     group.save()  
 
@@ -82,9 +81,8 @@ def join_group(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def add_favorite_group(request):
-    user_id = request.data.get('user_id')  
     group_tag = request.data.get('group_tag')
-    user = get_object_or_404(User, pk=user_id)
+    user = request.user
     group = get_object_or_404(Group, group_tag=group_tag)
 
     if group.favorites.filter(id=user.id).exists():
@@ -98,10 +96,10 @@ def add_favorite_group(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def remove_favorite_group(request):
-    user_id = request.data.get('user_id')
+    user_id = request.user.id 
     group_tag = request.data.get('group_tag')
 
-    user = get_object_or_404(User, pk=user_id)
+    user = request.user
     group = get_object_or_404(Group, group_tag=group_tag)
 
     if group.favorites.filter(pk=user_id).exists():
@@ -113,8 +111,7 @@ def remove_favorite_group(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def user_groups(request):
-    user_id = request.data.get('user_id')
-    user = get_object_or_404(User, pk=user_id)
+    user = request.user
 
     favorite_groups = Group.objects.filter(favorites=user)
     created_groups = Group.objects.filter(user=user)
@@ -130,3 +127,37 @@ def user_groups(request):
         'joined_groups': joined_groups_data
     }, status=status.HTTP_200_OK)
 
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])  
+def groups_list(request):
+    groups = Group.objects.all()  
+    groups_data = GroupSerializer(groups, many=True).data  
+
+    return Response({
+        'groups': groups_data
+    }, status=status.HTTP_200_OK)
+
+@api_view(['POST'])  
+@permission_classes([IsAuthenticated])  
+def leave_group(request):
+    try:
+        group_tag = request.data.get("group_tag")
+        group = Group.objects.get(group_tag=group_tag)
+
+       
+        if request.user in group.members.all():
+            group.members.remove(request.user) 
+            return Response({
+                'message': f'You have left the group "{group.name}".',
+                'group': GroupSerializer(group).data  
+            }, status=status.HTTP_200_OK)
+        else:
+            return Response({
+                'message': 'You are not a member of this group.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+    except Group.DoesNotExist:
+        return Response({
+            'message': 'Group not found.'
+        }, status=status.HTTP_404_NOT_FOUND)
