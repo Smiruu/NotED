@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from .models import Group
 from user.models import User
-from .serializers import GroupSerializer
+from .serializers import GroupSerializer, GroupDetailsSerializer
 from django.shortcuts import get_object_or_404
 
 @api_view(['POST'])
@@ -73,6 +73,9 @@ def join_group(request):
     
     group = get_object_or_404(Group, group_tag=group_tag)
     user = request.user
+
+    if group.user == user:
+        return Response({'error': 'You cannot join a group that you created.'}, status=status.HTTP_400_BAD_REQUEST)
     group.members.add(user)  
     group.save()  
 
@@ -161,3 +164,48 @@ def leave_group(request):
         return Response({
             'message': 'Group not found.'
         }, status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])  # Ensure the user is authenticated
+def get_group_details(request, group_tag):
+    try:
+        # Fetch the group based on the group_tag
+        group = get_object_or_404(Group, group_tag=group_tag)
+        
+        # Serialize the group data
+        serializer = GroupDetailsSerializer(group)
+        member_info = [
+            {'name': member.name, 'user_tag': member.user_tag} for member in group.members.all()
+        ]
+        creator_info = {
+            'name': group.user.name,  # Creator's name
+            'user_tag': group.user.user_tag  # Creator's user_tag
+        }
+
+        # Construct the response data
+        response_data = {
+            'creator': creator_info,  # Include creator info
+            'group_tag': serializer.data['group_tag'],
+            'name': serializer.data['name'],
+            'group_image': serializer.data['group_image'],
+            'members': member_info  # Include the member info here
+        }
+        
+        # Return the serialized data
+        return Response(response_data, status=status.HTTP_200_OK)
+    
+    except Group.DoesNotExist:
+        return Response({'message': 'Group not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['DELETE'])  # Changed to DELETE for deleting resources
+@permission_classes([IsAuthenticated]) 
+def delete_group(request, group_tag):  # Removed 'self'
+    group = get_object_or_404(Group, group_tag=group_tag)
+    
+    # Check if the request user is the creator of the group
+    if request.user == group.user:
+        group.delete()  # Delete the group
+        return Response({'message': 'Group deleted successfully.'}, status=status.HTTP_204_NO_CONTENT)
+    else:
+        return Response({'message': 'You do not have permission to delete this group.'}, status=status.HTTP_403_FORBIDDEN)

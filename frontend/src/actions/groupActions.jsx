@@ -23,7 +23,16 @@ import {
   USER_GROUPS_FAIL,
   GROUPS_LIST_REQUEST,
   GROUPS_LIST_SUCCESS,
-  GROUPS_LIST_FAIL
+  GROUPS_LIST_FAIL,
+  GROUP_LEAVE_REQUEST,
+  GROUP_LEAVE_SUCCESS,
+  GROUP_LEAVE_FAIL,
+  GROUP_DETAILS_REQUEST,
+  GROUP_DETAILS_SUCCESS,
+  GROUP_DETAILS_FAIL,
+  DELETE_GROUP_REQUEST,
+  DELETE_GROUP_SUCCESS,
+  DELETE_GROUP_FAIL,
   } from '../constants/groupConstants';
   
 const instance = axios.create({
@@ -266,4 +275,87 @@ const instance = axios.create({
             payload: error.response && error.response.data.message ? error.response.data.message : error.message,
         });
     }
+};
+
+export const leaveGroup = (group_tag) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: GROUP_LEAVE_REQUEST });
+
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const token = userInfo ? userInfo.token.access : null;
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`, // Add token for authentication
+      },
+    };
+
+    const { data } = await instance.post(
+      `/api/groups/leave/`, // Your backend API endpoint
+      { group_tag },
+      config
+    );
+
+    dispatch({
+      type: GROUP_LEAVE_SUCCESS,
+      payload: data, // Data from the API response
+    });
+  } catch (error) {
+    dispatch({
+      type: GROUP_LEAVE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getGroupDetails = (groupTag) => async (dispatch, getState) => {
+  try {
+      dispatch({ type: GROUP_DETAILS_REQUEST });
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      const token = userInfo ? userInfo.token.access : null;
+      // Assuming you have a base URL set for your API
+      const { data } = await instance.get(`/api/groups/details/${groupTag}/`, {
+          headers: {
+              Authorization: `Bearer ${token}`, // Adjust based on your auth mechanism
+          },
+      });
+
+      dispatch({
+          type: GROUP_DETAILS_SUCCESS,
+          payload: data,
+      });
+  } catch (error) {
+      dispatch({
+          type: GROUP_DETAILS_FAIL,
+          payload: error.response && error.response.data.message
+              ? error.response.data.message
+              : error.message,
+      });
+  }
+};
+
+export const deleteGroup = (group_tag) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: DELETE_GROUP_REQUEST });
+
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const token = userInfo ? userInfo.token.access : null;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`, // Use your auth token here
+      },
+    };
+
+    await instance.delete(`/api/groups/delete/${group_tag}/`, config); // Adjust URL as needed
+
+    dispatch({ type: DELETE_GROUP_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: DELETE_GROUP_FAIL,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
+  }
 };

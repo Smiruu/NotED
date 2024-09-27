@@ -13,5 +13,7 @@ urlpatterns = [
     path('remove-favorite/', remove_favorite_group, name='remove-favorite-group'),
     path('user-groups/', user_groups, name='user-groups'),
     path('list/', groups_list, name='list_groups'),
+    path('details/<str:group_tag>/', get_group_details, name='group-details'),
+    path('delete/<str:group_tag>/', delete_group, name='delete_group'),
     
 ]

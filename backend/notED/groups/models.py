@@ -31,5 +31,8 @@ class Group(models.Model):
                     break
         super().save(*args, **kwargs)
 
+    def get_member_names(self):
+        return [member.name for member in self.members.all()]  # Get names of all members
+
     def __str__(self):
         return f"Group {self.name} ({self.group_tag}) created by {self.user.name}"

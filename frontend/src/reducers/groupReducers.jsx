@@ -23,13 +23,22 @@ import {
   USER_GROUPS_FAIL,
   GROUPS_LIST_REQUEST,
   GROUPS_LIST_SUCCESS,
-  GROUPS_LIST_FAIL
+  GROUPS_LIST_FAIL,
+  GROUP_LEAVE_REQUEST,
+  GROUP_LEAVE_SUCCESS,
+  GROUP_LEAVE_FAIL,
+  GROUP_DETAILS_REQUEST,
+  GROUP_DETAILS_SUCCESS,
+  GROUP_DETAILS_FAIL,
+  DELETE_GROUP_REQUEST,
+  DELETE_GROUP_SUCCESS,
+  DELETE_GROUP_FAIL,
   } from '../constants/groupConstants';
   
   const initialState = {
     loading: false,
     groups: [],
-    group: null,
+    group: {},
     error: null,
     favorite_groups: [],
     created_groups: [],
@@ -144,4 +153,43 @@ import {
         default:
             return state;
     }
+};
+
+export const groupLeaveReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GROUP_LEAVE_REQUEST:
+      return { loading: true };
+    case GROUP_LEAVE_SUCCESS:
+      return { loading: false, success: true, group: action.payload };
+    case GROUP_LEAVE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const groupDetailsReducer = (state = initialState, action) => {
+  switch (action.type) {
+      case GROUP_DETAILS_REQUEST:
+          return { loading: true, ...state };
+      case GROUP_DETAILS_SUCCESS:
+          return { loading: false, group: action.payload };
+      case GROUP_DETAILS_FAIL:
+          return { loading: false, error: action.payload };
+      default:
+          return state;
+  }
+};
+
+export const groupDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case DELETE_GROUP_REQUEST:
+      return { loading: true };
+    case DELETE_GROUP_SUCCESS:
+      return { loading: false, success: true };
+    case DELETE_GROUP_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
 };

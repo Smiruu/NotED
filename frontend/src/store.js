@@ -15,7 +15,10 @@ import {
   groupImageUploadReducer,
   groupJoinReducer,
   groupsListReducer,
-  userGroupsReducer
+  userGroupsReducer,
+  groupLeaveReducer,
+  groupDetailsReducer,
+  groupDeleteReducer
 } from "./reducers/groupReducers"
 const reducer = {
   userRegister: userRegisterReducer,
@@ -31,6 +34,9 @@ const reducer = {
   favoriteGroupRemove: favoriteGroupRemoveReducer,
   userGroups: userGroupsReducer,
   groupsList: groupsListReducer,
+  groupLeave: groupLeaveReducer,
+  groupDetails: groupDetailsReducer,
+  groupDelete: groupDeleteReducer,
 };
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
