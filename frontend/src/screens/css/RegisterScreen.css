@@ -1,95 +1,98 @@
-/* RegisterScreen.css */
-body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Full viewport height */
+/* Add this CSS to your styles */
+html, body {
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  height: 100%; /* Full height */
 }
 
-.main-container {
-    display: flex; /* Use flexbox for layout */
-    height: 80vh; /* Full height of the viewport */
-    width: 75rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Optional shadow */
-    border-radius: 20px; /* Rounded corners */
-    margin-bottom: 20px;
+/* Outer container */
+.register-screen {
+  display: flex; /* Flexbox for side-by-side layout */
+  height: 100vh; /* Full height of the viewport */
+  width: 100%; /* Full width of the viewport */
 }
-  
-  .left-container {
-    background-color: #001f3f; /* Left container color */
-    width: 50%; /* Half of the screen */
-    border-radius: 20px; /* Rounded corners */
-  }
-  
-  .right-container {
-    width: 50%; /* Half of the screen */
-    display: flex; /* Use flex to center the content */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    background-color: white;
-    border-radius: 20px; /* Rounded corners */
-  }
-  
-  .register-container {
-    background-color: white; /* Optional background for the form */
-    padding: 20px; /* Padding inside the form */
-    align-content: center;
-    width: 95%; /* Width of the form */
-    height: 95%;
-  }
-  
-  .registerText {
-    text-align: center;
-  }
-  
-  .form-group {
-    display: flex;               /* Use flexbox for alignment */
-    flex-direction: column;      /* Align label and input in a column */
-    margin-bottom: 15px;        /* Space between each form group */
+
+/* Left container */
+.left-container {
+  flex: 1; /* Take up equal space */
+  background-color: #3a6d8c; /* Background color for the left container */
+  height: 100%; /* Full height */
+  margin: 0; /* Remove margins */
+  padding: 0; /* Remove padding */
+}
+
+.right-container {
+  flex: 1; /* Take full height */
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  background-color: #ead8b1; /* Background color for the form area */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Form styles */
+.form {
+  width: 100%; /* Full width of the container */
+  max-width: 400px; /* Max width for form */
+  margin: 0 auto; /* Center the form */
+}
+
+.form-group {
+  margin-bottom: 15px; /* Space between fields */
 }
 
 label {
-    margin-bottom: 5px;         /* Space between label and input */
-    font-weight: bold;          /* Optional: Make labels bold */
+  display: block; /* Block layout for labels */
+  margin-bottom: 5px; /* Space between label and input */
+  font-weight: bold; /* Bold labels */
 }
 
-input {
-    width: 100%;                /* Make all input fields full width */
-    padding: 10px;             /* Add padding for better look */
-    border: 1px solid #ccc;    /* Add border */
-    border-radius: 5px;        /* Optional: Round corners */
-    box-sizing: border-box;     /* Include padding and border in width */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%; /* Full width for inputs */
+  padding: 10px; /* Padding inside inputs */
+  border: 1px solid #ccc; /* Light border for inputs */
+  border-radius: 4px; /* Slightly rounded corners */
+  box-sizing: border-box; /* Include padding in width */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #007bff; /* Change border color on focus */
+  outline: none; /* Remove default outline */
 }
 
 .button-container {
-    display: flex;            /* Use Flexbox for alignment */
-    justify-content: center;  /* Center items horizontally */
-    margin-top: 2rem;        /* Optional: Add some space above the button */
+  margin-top: 20px; /* Space above button */
 }
 
 .registerbutton {
-    color: #001f3f;
-    background-color: white;
-    border-radius: 10px;
-    padding: 5px 10px;
-    
+  width: 100%; /* Full width button */
+  padding: 10px; /* Padding inside button */
+  background-color: #007bff; /* Primary color for button */
+  color: white; /* White text */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Slightly rounded corners */
+  font-size: 16px; /* Font size for button */
+  cursor: pointer; /* Pointer cursor on hover */
 }
 
 .registerbutton:hover {
-    background-color: #ead8b1;
+  background-color: #0056b3; /* Darker shade on hover */
 }
-  .error-message {
-    color: red; /* Color for error messages */
-  }
-  
-  .loading-spinner {
-    /* Style for loading spinner */
-    font-size: 16px;
-  }
-  
-  .login-link {
-    text-align: center;
-    margin-top: 2rem;
-  }
+
+.login-link {
+  margin-top: 20px; /* Space above login link */
+}
+
+.login-link a {
+  color: #007bff; /* Link color */
+  text-decoration: none; /* No underline */
+}
+
+.login-link a:hover {
+  text-decoration: underline; /* Underline on hover */
+}

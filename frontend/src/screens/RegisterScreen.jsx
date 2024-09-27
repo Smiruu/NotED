@@ -4,7 +4,7 @@ import { register } from "../actions/userActions"; // Import the register action
 import { useNavigate } from "react-router-dom"; // For navigation
 import "./css/RegisterScreen.css";
 import Footer from "../components/Footer";
-import backgroundImage from './photos/registerbackground.jpg';
+import backgroundImage from "./photos/registerbackground.jpg";
 const RegisterScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -35,79 +35,74 @@ const RegisterScreen = () => {
   };
 
   return (
-    <>
-      <div className="main-container">
-        <div className="left-container"></div>
-        <div className="right-container">
-          <div className="register-container">
-            <h2 className="registerText">Register</h2>
-            {error && <div className="error-message">{error}</div>}
-            {loading && <div className="loading-spinner">Loading...</div>}
+    <div className="register-screen">
+      <div className="left-container"></div>
+      <div className="right-container">
+        <h2 className="registerText">Register</h2>
+        {error && <div className="error-message">{error}</div>}
+        {loading && <div className="loading-spinner">Loading...</div>}
 
-            <form onSubmit={submitHandler}>
-              <div className="form-group">
-                <label htmlFor="name">Name: </label>
-                <input
-                  type="text"
-                  id="name"
-                  placeholder="Enter name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="email">Email Address: </label>
-                <input
-                  type="email"
-                  id="email"
-                  placeholder="Enter email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="password">Password: </label>
-                <input
-                  type="password"
-                  id="password"
-                  placeholder="Enter password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="password2">Confirm Password: </label>
-                <input
-                  type="password"
-                  id="password2"
-                  placeholder="Confirm password"
-                  value={password2}
-                  onChange={(e) => setPassword2(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="button-container">
-                <button type="submit" className="registerbutton">
-                  Register
-                </button>
-              </div>
-            </form>
-
-            <div className="login-link">
-              Already have an account? <a href="/login">Login</a>
-            </div>
+        <form onSubmit={submitHandler} className="form">
+          <div className="form-group">
+            <label htmlFor="name">Name: </label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Enter name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
           </div>
+
+          <div className="form-group">
+            <label htmlFor="email">Email Address: </label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password: </label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password2">Confirm Password: </label>
+            <input
+              type="password"
+              id="password2"
+              placeholder="Confirm password"
+              value={password2}
+              onChange={(e) => setPassword2(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="button-container">
+            <button type="submit" className="registerbutton">
+              Register
+            </button>
+          </div>
+        </form>
+
+        <div className="login-link">
+          Already have an account? <a href="/login">Login</a>
         </div>
       </div>
-      <Footer />
-    </>
+    </div>
   );
 };
 
