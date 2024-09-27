@@ -50,12 +50,12 @@ const instance = axios.create({
   
       const config = {
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       };
   
       const response = await instance.post('/api/groups/create/', groupData, config);
+      console.log(groupData)
   
       dispatch({
         type: GROUP_CREATE_SUCCESS,

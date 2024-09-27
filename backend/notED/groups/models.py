@@ -36,3 +36,10 @@ class Group(models.Model):
 
     def __str__(self):
         return f"Group {self.name} ({self.group_tag}) created by {self.user.name}"
+    
+    def delete(self, *args, **kwargs):
+        # Delete the image file if it exists
+        if self.group_image:
+            if os.path.isfile(self.group_image.path):
+                os.remove(self.group_image.path)
+        super().delete(*args, **kwargs)

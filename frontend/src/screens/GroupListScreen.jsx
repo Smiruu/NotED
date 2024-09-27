@@ -132,7 +132,7 @@ const GroupListScreen = () => {
   const handleCreateGroup = () => {
     const formData = new FormData();
     formData.append("name", groupName); // Append group name
-    formData.append("image", groupImage); // Append uploaded image
+    formData.append("group_image", groupImage); // Append uploaded image
     window.location.reload();
 
     dispatch(createGroup(formData)); // Dispatch createGroup action
