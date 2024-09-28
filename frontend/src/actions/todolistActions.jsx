@@ -24,7 +24,7 @@ const getToken = () => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   return userInfo ? userInfo.token.access : null;
 };
-  
+
 // Action to list To-Do Lists
 export const listToDoLists = () => async (dispatch) => {
   try {
@@ -77,7 +77,7 @@ export const createToDoList = (todoData) => async (dispatch) => {
     });
   }
 };
-``
+
 // Action to update an existing To-Do List
 export const updateToDoList = (_id, updatedTodo) => async (dispatch) => {
   try {
