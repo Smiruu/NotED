@@ -7,12 +7,25 @@ import {
   SendChangePasswordReducer,
   ConfirmChangePasswordReducer,
 } from "./reducers/userReducers";
+
+import{
+  todoListReducer,
+  todoCreateReducer,
+  todoUpdateReducer,
+  todoDeleteReducer,
+}
+from './reducers/todolistReducers';
+
 const reducer = {
   userRegister: userRegisterReducer,
   userLogin: userLoginReducer,
   passwordChange: passwordChangeReducer,
   SendcChangePassword: SendChangePasswordReducer,
   ConfirmChangePassword: ConfirmChangePasswordReducer,
+  todoList: todoListReducer,
+  todoCreate: todoCreateReducer,
+  todoUpdate: todoUpdateReducer,
+  todoDelete: todoDeleteReducer,
 };
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

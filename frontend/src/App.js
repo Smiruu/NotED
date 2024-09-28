@@ -7,6 +7,7 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ResetPasswordScreen from "./screens/ResetpasswordScreen";
 import ConfirmChangePasswordScreen from "./screens/Confirmresetpassword";
+import TodolistScreen from "./screens/TodolistScreen";
 function App() {
   return (
     <Router>
@@ -19,6 +20,7 @@ function App() {
             <Route path="/register" element={<RegisterScreen />}/>
             <Route path="/reset-password" element={<ResetPasswordScreen/>} />
             <Route path="api/user/reset/:uid/:token" element={<ConfirmChangePasswordScreen />} />
+            <Route path="/todolist" element={<TodolistScreen />}/>
           </Routes>
         </Container>
       </main>
