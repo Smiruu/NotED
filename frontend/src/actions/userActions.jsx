@@ -186,7 +186,6 @@ export const ConfirmChangePassword =
         payload: data,
       });
 
-      localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
       dispatch({
         type: CONFIRM_CHANGE_PASSWORD_FAIL,

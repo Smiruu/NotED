@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user.apps.UserConfig',
     'groups.apps.GroupsConfig',
+    'to_do_list.apps.ToDoListConfig',
     'rest_framework',
     "corsheaders",
 ]
