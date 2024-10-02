@@ -6,6 +6,7 @@ import {
   passwordChangeReducer,
   SendChangePasswordReducer,
   ConfirmChangePasswordReducer,
+  userProfileReducer,
 } from "./reducers/userReducers";
 import{
   todoListReducer,
@@ -33,6 +34,7 @@ const reducer = {
   passwordChange: passwordChangeReducer,
   SendcChangePassword: SendChangePasswordReducer,
   ConfirmChangePassword: ConfirmChangePasswordReducer,
+  userProfile: userProfileReducer,
   todoList: todoListReducer,
   todoCreate: todoCreateReducer,
   todoUpdate: todoUpdateReducer,
@@ -48,6 +50,7 @@ const reducer = {
   groupLeave: groupLeaveReducer,
   groupDetails: groupDetailsReducer,
   groupDelete: groupDeleteReducer,
+
 };
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

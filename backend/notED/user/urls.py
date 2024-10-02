@@ -6,6 +6,7 @@ from user.views import (
     UserChangePasswordView,
     SendPasswordResetEmailView,
     UserPasswordResetView,
+
 )
 
 urlpatterns = [

@@ -1,12 +1,13 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from user.serializers import SendPasswordResetEmailSerializer, UserChangePasswordSerializer, UserPasswordResetSerializer, UserRegistrationSerializers, UserLoginSerializer, UserProfileSerializer
+from user.serializers import *
 from django.contrib.auth import authenticate
 from user.renderers import UserRenderer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from django.views.decorators.csrf import csrf_exempt
+from .models import Profile
 
 #Generate token Manually
 def get_tokens_for_user(user):
@@ -50,9 +51,49 @@ class UserLoginView(APIView):
 class UserProfileView(APIView):
     renderer_classes = [UserRenderer]
     permission_classes = [IsAuthenticated]
+
     def get(self, request, format=None):
-        serializer= UserProfileSerializer(request.user)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        try:
+            # Fetch user profile data
+            profile = Profile.objects.get(user=request.user)
+            profile_serializer = ProfileSerializer(profile)
+
+            # Fetch user data
+            user_serializer = UserProfileSerializer(request.user)
+
+            # Combine profile and user data in one response
+            response_data = {
+                "user": user_serializer.data,
+                "profile": profile_serializer.data,
+            }
+
+            return Response(response_data, status=status.HTTP_200_OK)
+        except Profile.DoesNotExist:
+            return Response({"detail": "Profile not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    def put(self, request, format=None):
+        try:
+            # Fetch the user's profile data
+            profile = Profile.objects.get(user=request.user)
+            print(request)
+
+            # Only include 'bio' and 'photo' in the update data
+            update_data = {}
+            if 'bio' in request.data:
+                update_data['bio'] = request.data.get('bio')
+            if 'photo' in request.FILES:
+                update_data['photo'] = request.FILES.get('photo')
+
+            # Serialize and validate the filtered data
+            profile_serializer = ProfileSerializer(profile, data=update_data, partial=True)
+
+            if profile_serializer.is_valid():
+                profile_serializer.save()
+                return Response(profile_serializer.data, status=status.HTTP_200_OK)
+            return Response(profile_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Profile.DoesNotExist:
+            return Response({"detail": "Profile not found"}, status=status.HTTP_404_NOT_FOUND)
+
     
 
 class UserChangePasswordView(APIView):

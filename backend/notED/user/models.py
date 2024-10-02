@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager,AbstractBaseUser
 import random
+import os
+from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 #Custom User Manager
 class UserManager(BaseUserManager):
     def create_user(self, email, name,  password=None, password2=None):
@@ -76,3 +80,38 @@ class User(AbstractBaseUser):
             new_tag = str(random.randint(0, 9999)).zfill(4)  # Generates 4-digit tag
             if not User.objects.filter(user_tag=new_tag).exists():  # Ensures it's unique
                 return new_tag
+            
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    photo = models.ImageField(default='userprofile/default.jpg', upload_to='userprofile/')
+    bio = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.user.name if self.user.name else "Profile for user " + str(self.user.id)
+   
+    def get_profile_image(self):
+        return self.image.url if self.image else None
+    def save(self, *args, **kwargs):
+        # Check if the instance already exists
+        if self.pk:
+            # Get the current instance from the database
+            old_instance = Profile.objects.get(pk=self.pk)
+            # Check if the photo field is changing
+            if old_instance.photo != self.photo:
+                # If there is an old image, delete it
+                if old_instance.photo and old_instance.photo.name != 'userprofile/default.jpg':
+                    # Use os.path.join to construct the full path
+                    old_image_path = os.path.join(settings.MEDIA_ROOT, old_instance.photo.name)
+                    if os.path.isfile(old_image_path):
+                        os.remove(old_image_path)  # Delete the old image from filesystem
+
+        # Call the original save method
+        super().save(*args, **kwargs)
+    @receiver(post_save, sender=User)
+    def create_or_update_user_profile(sender, instance, created, **kwargs):
+        if created:
+        # Create a profile if the user is newly created
+            Profile.objects.create(user=instance)
+        else:
+        # Ensure the profile is saved when the user is updated
+            instance.profile.save()

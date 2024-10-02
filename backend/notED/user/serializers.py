@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from user.utils import Util
-from user.models import User
+from user.models import User, Profile
 from xml.dom import ValidationErr
 from django.utils.encoding import smart_str, force_bytes, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
@@ -114,3 +114,11 @@ class UserPasswordResetSerializer(serializers.Serializer):
         except DjangoUnicodeDecodeError as identifier:
             PasswordResetTokenGenerator().check_token(user, token)
             raise ValidationErr('Token is not Valid or Expired')
+        
+class ProfileSerializer(serializers.ModelSerializer):
+    user_name = serializers.CharField(source='user.name', read_only=True)
+    user_tag = serializers.CharField(source='user.user_tag', read_only=True)
+
+    class Meta:
+        model = Profile
+        fields = ['user_name', 'user_tag', 'photo', 'bio']

@@ -10,6 +10,7 @@ import ConfirmChangePasswordScreen from "./screens/Confirmresetpassword";
 import TodolistScreen from "./screens/TodolistScreen";
 import GroupListScreen from "./screens/GroupListScreen";
 import GroupViewScreen from "./screens/GroupViewScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 function App() {
   return (
     <Router>
@@ -24,6 +25,7 @@ function App() {
             <Route path="/todolist" element={<TodolistScreen />}/>
             <Route path="/groups" element={<GroupListScreen/>} />
             <Route path="/groups/:group_tag" element={<GroupViewScreen/>} />
+            <Route path="/profile" element={<ProfileScreen/>} />
           </Routes>
         </Container>
       </main>
