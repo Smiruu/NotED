@@ -1,42 +1,63 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom'; // For navigation between pages
-import { useDispatch, useSelector } from 'react-redux'; // Import hooks for Redux
-import { fetchUserProfile } from '../actions/userActions'; // Import the action to fetch user profile
-import './css/NavigationBar.css'; // External CSS for styling the navbar
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom"; // Added useNavigate here
+import { useDispatch, useSelector } from "react-redux"; // Import hooks for Redux
+import { fetchUserProfile, logout } from "../actions/userActions"; // Import the action to fetch user profile and logout
+import "./css/NavigationBar.css"; // External CSS for styling the navbar
 
 const NavigationBar = () => {
   const dispatch = useDispatch();
-  const { userProfile, loading, error } = useSelector((state) => state.userProfile); // Get userProfile from Redux store
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  const handleLogout = () => {
+    dispatch(logout()); // Dispatch the logout action
+    navigate("/login"); // Redirect to the login page
+  };
+
+  // Get user profile from Redux state
+  const { userProfile, loading, error } = useSelector(
+    (state) => state.userProfile
+  );
 
   useEffect(() => {
-    dispatch(fetchUserProfile()); // Fetch user profile when the component mounts
+    // Fetch the user's profile when the component mounts
+    dispatch(fetchUserProfile());
   }, [dispatch]);
-
-  // Check if loading or an error occurred
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error fetching profile: {error}</div>;
-  }
-
-  // Extract the profile picture from the userProfile data
-  const profilePic = userProfile ? userProfile.profile.photo : '';
 
   return (
     <div className="navbar">
       <div className="profile-section">
-        {profilePic && (
-          <img src={profilePic} alt="Profile" className="profile-pic" />
+        {/* Display the profile picture if available */}
+        {userProfile?.profile?.photo && (
+          <img
+            src={userProfile.profile.photo}
+            alt="Profile"
+            className="profile-pic"
+          />
         )}
-        <button className="profile-btn">Profile</button>
+        {/* Link to the profile page */}
+        <Link to="/profile" className="profile-btn">
+          Profile
+        </Link>
       </div>
       <div className="nav-links">
-        <Link to="/" className="nav-button">Home</Link>
-        <Link to="/inbox" className="nav-button">Inbox</Link>
-        <Link to="/groups" className="nav-button">Groups</Link>
-        <Link to="/todo" className="nav-button">To-Do</Link>
+        <Link to="/" className="nav-button-home">
+          Home
+        </Link>
+        <Link to="/inbox" className="nav-button-inbox">
+          Inbox
+        </Link>
+        <Link to="/groups" className="nav-button-groups">
+          Groups
+        </Link>
+        <Link to="/todo" className="nav-button-todo">
+          To-Do
+        </Link>
+      </div>
+      {/* Logout Button */}
+      <div className="logout-section">
+        <button className="logout-button" onClick={handleLogout}>
+          Logout
+        </button>
       </div>
     </div>
   );

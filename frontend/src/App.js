@@ -1,4 +1,3 @@
-
 import Footer from "./components/Footer";
 import { Container } from "react-bootstrap";
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
@@ -11,11 +10,12 @@ import TodolistScreen from "./screens/TodolistScreen";
 import GroupListScreen from "./screens/GroupListScreen";
 import GroupViewScreen from "./screens/GroupViewScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+
 function App() {
   return (
     <Router>
-      <main className="py-3">
-        <Container fluid>
+      <main>
+        <Container fluid className="p-0 m-0">
           <Routes>
             <Route path="/" element={<HomeScreen />}/>
             <Route path="/login" element={<LoginScreen />}/>
@@ -29,7 +29,6 @@ function App() {
           </Routes>
         </Container>
       </main>
-      <Footer />
     </Router>
   );
 }
