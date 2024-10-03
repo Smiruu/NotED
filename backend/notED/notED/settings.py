@@ -27,13 +27,14 @@ SECRET_KEY = 'django-insecure-n-8ox&w)4pk!66@00q&skovon!7&7w142f%qkcx6gc6)vy$#8h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'to_do_list.apps.ToDoListConfig',
     'rest_framework',
     "corsheaders",
+    
 ]
 
 MIDDLEWARE = [
@@ -88,7 +90,17 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "static_cdn", "media_root")
 
-WSGI_APPLICATION = 'notED.wsgi.application'
+# WSGI_APPLICATION = 'notED.wsgi.application'
+ASGI_APPLICATION = 'notED.asgi.application'
+
+CHANNEL_LAYERS = {
+	'default': {
+		'BACKEND': 'channels_redis.core.RedisChannelLayer',
+		'CONFIG': {
+			'hosts': [('127.0.0.1', 6379)]
+		}
+	}
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

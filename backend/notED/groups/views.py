@@ -21,7 +21,7 @@ def create_group(request):
         group = serializer.save(user=user)  
         
         
-        if not request.data.get('group_image'):
+        if not request.FILES.get('group_image'):
             # Optionally set a default image path
             group.group_image = 'group_images/default.jpg'  
             group.save()  
