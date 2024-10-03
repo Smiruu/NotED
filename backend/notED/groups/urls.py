@@ -15,5 +15,8 @@ urlpatterns = [
     path('list/', groups_list, name='list_groups'),
     path('details/<str:group_tag>/', get_group_details, name='group-details'),
     path('delete/<str:group_tag>/', delete_group, name='delete_group'),
+
+    path('meetings/create/', create_meeting, name='create_meeting'),
+    path('<str:group_tag>/meetings/', get_group_meetings, name='get_group_meetings'),
     
 ]

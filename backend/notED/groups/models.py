@@ -43,3 +43,14 @@ class Group(models.Model):
             if os.path.isfile(self.group_image.path):
                 os.remove(self.group_image.path)
         super().delete(*args, **kwargs)
+
+
+class Meeting(models.Model):
+    title = models.CharField(max_length=200)
+    body = models.TextField()
+    date_time = models.DateTimeField()  # This should remain as DateTimeField
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title

@@ -3,9 +3,9 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from .models import Group
+from .models import Group, Meeting
 from user.models import User
-from .serializers import GroupSerializer, GroupDetailsSerializer
+from .serializers import GroupSerializer, GroupDetailsSerializer, MeetingSerializer
 from django.shortcuts import get_object_or_404
 
 @api_view(['POST'])
@@ -209,3 +209,36 @@ def delete_group(request, group_tag):  # Removed 'self'
         return Response({'message': 'Group deleted successfully.'}, status=status.HTTP_204_NO_CONTENT)
     else:
         return Response({'message': 'You do not have permission to delete this group.'}, status=status.HTTP_403_FORBIDDEN)
+    
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_meeting(request):
+    serializer = MeetingSerializer(data=request.data)
+    user = request.user
+
+    # Fetch the group using the group tag from the request
+    group_tag = request.data.get('group_tag')
+    group = get_object_or_404(Group, group_tag=group_tag)
+
+    # Check if the user is a member of the group or the creator
+    if group.user != user and user not in group.members.all():
+        return Response({'error': 'You do not have permission to create a meeting for this group.'}, status=status.HTTP_403_FORBIDDEN)
+
+    if serializer.is_valid():
+        meeting = serializer.save(created_by=user, group=group)  # Set created_by automatically
+        return Response(MeetingSerializer(meeting).data, status=status.HTTP_201_CREATED)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_group_meetings(request, group_tag):
+    group = get_object_or_404(Group, group_tag=group_tag)
+    
+    # Check if the user is a member of the group or the creator
+    if request.user not in group.members.all() and request.user != group.user:
+        return Response({'error': 'You do not have permission to view meetings for this group.'}, status=status.HTTP_403_FORBIDDEN)
+
+    meetings = Meeting.objects.filter(group=group)
+    meetings_data = MeetingSerializer(meetings, many=True).data
+
+    return Response({'meetings': meetings_data}, status=status.HTTP_200_OK)
