@@ -29,6 +29,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
+import NavigationBar from "../components/NavigationBar";
+import "./css/GroupListScreen.css";
 
 const GroupListScreen = () => {
   const dispatch = useDispatch();
@@ -36,7 +38,6 @@ const GroupListScreen = () => {
   const userGroups = useSelector((state) => state.userGroups);
   const { loading, error, favorite_groups, created_groups, joined_groups } =
     userGroups;
-
 
   const allGroups = useSelector((state) => state.groupsList);
   const { groups = [], loading: groupsLoading } = allGroups;
@@ -49,7 +50,6 @@ const GroupListScreen = () => {
   const [groupName, setGroupName] = useState("");
   const [groupImage, setGroupImage] = useState(null);
 
-    
   // Fetch user groups on component mount
   useEffect(() => {
     dispatch(fetchUserGroups());
@@ -117,7 +117,7 @@ const GroupListScreen = () => {
       ) &&
       !created_groups.some(
         (createdGroup) => createdGroup.group_tag === group.group_tag
-      )&& // Exclude joined groups
+      ) && // Exclude joined groups
       (group.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         group.group_tag.toLowerCase().includes(searchTerm.toLowerCase())) // Search by name or tag
   );
@@ -127,7 +127,6 @@ const GroupListScreen = () => {
     setGroupImage(e.target.files[0]);
   };
 
-  
   // Handle Create Group form submission
   const handleCreateGroup = () => {
     const formData = new FormData();
@@ -140,100 +139,31 @@ const GroupListScreen = () => {
   };
 
   return (
-    <div className="container mt-4">
-      {loading && <h2>Loading...</h2>}
-      {error && <h2>{error}</h2>}
+    <>
+      <div className="grouplistpage">
+        <NavigationBar />
+        <div className="grouplistcontainer">
+          {loading && <h2>Loading...</h2>}
+          {error && <h2>{error}</h2>}
 
-      <Button color="primary" onClick={toggleModal}>
-        Join Group
-      </Button>
-      <Button color="primary" onClick={toggleCreateModal}>
-        Create Group
-      </Button>
+          <div className="button-container">
+            <button className="thebutton" onClick={toggleModal}>
+              Join Group
+            </button>
+            <button className="thebutton" onClick={toggleCreateModal}>
+              +
+            </button>
+          </div>
 
-      <h2>Created Groups</h2>
-      <Row>
-        {sortedGroups(created_groups).map((group, index) => (
-          <Col key={`${group.group_tag}-${index}`} sm="6" md="4" lg="3">
-            <Link
-              to={`/groups/${group.group_tag}`}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <Card className="mb-4">
-                <CardImg
-                  top
-                  width="100%"
-                  src={group.group_image}
-                  alt={group.name}
-                />
-                <CardBody>
-                  <CardTitle tag="h5">
-                    {group.name}
-                    <Button
-                      color="link"
-                      onClick={() => handleFavoriteToggle(group)}
-                    >
-                      <FontAwesomeIcon icon={renderStarIcon(group)} size="lg" />
-                    </Button>
-                  </CardTitle>
-                  <CardText>{group.group_tag}</CardText>
-                </CardBody>
-              </Card>
-            </Link>
-          </Col>
-        ))}
-      </Row>
-
-      <h2>Joined Groups</h2>
-      <Row>
-        {sortedGroups(joined_groups).map((group, index) => (
-          <Col key={`${group.group_tag}-${index}`} sm="6" md="4" lg="3">
-            <Link
-              to={`/groups/${group.group_tag}`}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <Card className="mb-4">
-                <CardImg
-                  top
-                  width="100%"
-                  src={group.group_image}
-                  alt={group.name}
-                />
-                <CardBody>
-                  <CardTitle tag="h5">
-                    {group.name}
-                    <Button
-                      color="link"
-                      onClick={() => handleFavoriteToggle(group)}
-                    >
-                      <FontAwesomeIcon icon={renderStarIcon(group)} size="lg" />
-                    </Button>
-                  </CardTitle>
-                  <CardText>{group.group_tag}</CardText>
-                </CardBody>
-              </Card>
-            </Link>
-          </Col>
-        ))}
-      </Row>
-
-      {/* Join Group Modal */}
-      <Modal isOpen={modal} toggle={toggleModal}>
-        <ModalHeader toggle={toggleModal}>Join a Group</ModalHeader>
-        <ModalBody>
-          <Input
-            type="text"
-            placeholder="Search for a group..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-          <Row className="mt-3">
-            {groupsLoading ? (
-              <h4>Loading Groups...</h4>
-            ) : (
-              filteredGroups.map((group, index) => (
+          {/* Container for Created Groups */}
+          <div className="created-groups-container">
+            <h2>Created Groups</h2>
+            <Row>
+              {sortedGroups(created_groups).map((group, index) => (
                 <Col key={`${group.group_tag}-${index}`} sm="6" md="4" lg="3">
-                  <Card className="mb-4">
+                  <Card className="mb-4 card">
+                    {" "}
+                    {/* Apply card class */}
                     <CardImg
                       top
                       width="100%"
@@ -241,55 +171,157 @@ const GroupListScreen = () => {
                       alt={group.name}
                     />
                     <CardBody>
-                      <CardTitle tag="h5">{group.name}</CardTitle>
-                      <Button
-                        color="primary"
-                        onClick={() => {
-                          dispatch(joinGroup(group.group_tag)); // Dispatch the joinGroup action
-                          toggleModal(); // Close the modal after joining
-                        }}
-                      >
-                        Join
-                      </Button>
+                      <CardTitle tag="h5" className="card-title">
+                        {" "}
+                        {/* Apply card-title class */}
+                        <Link
+                          to={`/groups/${group.group_tag}`}
+                          style={{
+                            textDecoration: "underline",
+                            color: "inherit",
+                          }}
+                        >
+                          {group.name}
+                        </Link>
+                        <Button
+                          color="link"
+                          onClick={(event) => {
+                            event.stopPropagation(); // Prevents the link from triggering
+                            handleFavoriteToggle(group); // Toggle favorite state
+                          }}
+                        >
+                          <FontAwesomeIcon
+                            icon={renderStarIcon(group)}
+                            size="lg"
+                          />
+                        </Button>
+                      </CardTitle>
+                      <CardText className="card-text">
+                        {group.group_tag}
+                      </CardText>{" "}
+                      {/* Apply card-text class */}
                     </CardBody>
                   </Card>
                 </Col>
-              ))
-            )}
-          </Row>
-        </ModalBody>
-      </Modal>
-      <Modal isOpen={modalCreate} toggle={toggleCreateModal}>
-        <ModalHeader toggle={toggleCreateModal}>Create New Group</ModalHeader>
-        <ModalBody>
-          <Form>
-            <FormGroup>
-              <Label for="groupName">Group Name</Label>
+              ))}
+            </Row>
+          </div>
+
+          {/* Container for Joined Groups */}
+          <div className="joined-groups-container">
+            <h2>Joined Groups</h2>
+            <Row>
+              {sortedGroups(joined_groups).map((group, index) => (
+                <Col key={`${group.group_tag}-${index}`} sm="6" md="4" lg="3">
+                  <Link to={`/groups/${group.group_tag}`}>
+                    <Card>
+                      <CardImg top src={group.group_image} alt={group.name} />
+                      <CardBody>
+                        <CardTitle tag="h5">
+                          {group.name}
+                          <button
+                            className="link-button" // You can style this if you need to
+                            onClick={() => handleFavoriteToggle(group)}
+                          >
+                            <FontAwesomeIcon
+                              icon={renderStarIcon(group)}
+                              size="lg"
+                            />
+                          </button>
+                        </CardTitle>
+                        <CardText>{group.group_tag}</CardText>
+                      </CardBody>
+                    </Card>
+                  </Link>
+                </Col>
+              ))}
+            </Row>
+          </div>
+
+          {/* Join Group Modal */}
+          <Modal isOpen={modal} toggle={toggleModal}>
+            <ModalHeader toggle={toggleModal}>Join a Group</ModalHeader>
+            <ModalBody>
               <Input
                 type="text"
-                id="groupName"
-                placeholder="Enter group name"
-                value={groupName}
-                onChange={(e) => setGroupName(e.target.value)} // Set group name
+                placeholder="Search for a group..."
+                value={searchTerm}
+                onChange={handleSearchChange}
               />
-            </FormGroup>
+              <Row className="mt-3">
+                {groupsLoading ? (
+                  <h4>Loading Groups...</h4>
+                ) : (
+                  filteredGroups.map((group, index) => (
+                    <Col
+                      key={`${group.group_tag}-${index}`}
+                      sm="6"
+                      md="4"
+                      lg="3"
+                    >
+                      <Card>
+                        <CardImg
+                          top
+                          width="100%"
+                          src={group.group_image}
+                          alt={group.name}
+                        />
+                        <CardBody>
+                          <CardTitle tag="h5">{group.name}</CardTitle>
+                          <button
+                            className="thebutton"
+                            onClick={() => {
+                              dispatch(joinGroup(group.group_tag)); // Dispatch the joinGroup action
+                              toggleModal(); // Close the modal after joining
+                            }}
+                          >
+                            Join
+                          </button>
+                        </CardBody>
+                      </Card>
+                    </Col>
+                  ))
+                )}
+              </Row>
+            </ModalBody>
+          </Modal>
 
-            <FormGroup>
-              <Label for="groupImage">Upload Group Image</Label>
-              <Input
-                type="file"
-                id="groupImage"
-                onChange={handleImageUpload} // Handle image upload
-              />
-            </FormGroup>
+          {/* Create Group Modal */}
+          <Modal isOpen={modalCreate} toggle={toggleCreateModal}>
+            <ModalHeader toggle={toggleCreateModal}>
+              Create New Group
+            </ModalHeader>
+            <ModalBody>
+              <Form>
+                <FormGroup>
+                  <Label for="groupName">Group Name</Label>
+                  <Input
+                    type="text"
+                    id="groupName"
+                    placeholder="Enter group name"
+                    value={groupName}
+                    onChange={(e) => setGroupName(e.target.value)} // Set group name
+                  />
+                </FormGroup>
 
-            <Button color="primary" onClick={handleCreateGroup}>
-              Create
-            </Button>
-          </Form>
-        </ModalBody>
-      </Modal>
-    </div>
+                <FormGroup>
+                  <Label for="groupImage">Upload Group Image</Label>
+                  <Input
+                    type="file"
+                    id="groupImage"
+                    onChange={handleImageUpload} // Handle image upload
+                  />
+                </FormGroup>
+
+                <button className="thebutton" onClick={handleCreateGroup}>
+                  Create
+                </button>
+              </Form>
+            </ModalBody>
+          </Modal>
+        </div>
+      </div>
+    </>
   );
 };
 

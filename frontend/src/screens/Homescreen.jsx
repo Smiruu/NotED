@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserGroups } from "../actions/groupActions";
+import { listToDoLists } from "../actions/todolistActions"; // Import the action to fetch todos
 import NavigationBar from "../components/NavigationBar";
 import FolderCard from '../components/FolderCard'; // Adjust the path as needed
 import "./css/Homescreen.css";
@@ -12,11 +13,6 @@ const chats = [
   { id: "3", name: "Charlie", lastMessage: "Let’s chat!" },
 ];
 
-const todoList = [
-  { id: "1", task: "Finish report", details: "Complete the quarterly report" },
-  { id: "2", task: "Grocery shopping", details: "Buy groceries for the week" },
-];
-
 const HomeScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,6 +20,10 @@ const HomeScreen = () => {
   const userInfo = useSelector((state) => state.userLogin.userInfo);
   const userGroups = useSelector((state) => state.userGroups);
   const { loading, error, created_groups, joined_groups } = userGroups;
+
+  // Fetch the to-do list from the Redux store
+  const todoListState = useSelector((state) => state.todoList);
+  const { loading: loadingTodos, error: todoError, todos } = todoListState;
 
   // Check for userInfo in local storage
   useEffect(() => {
@@ -35,6 +35,7 @@ const HomeScreen = () => {
   useEffect(() => {
     // Fetch user groups on component mount
     dispatch(fetchUserGroups());
+    dispatch(listToDoLists()); // Fetch the user's to-do lists
   }, [dispatch]);
 
   return (
@@ -66,12 +67,18 @@ const HomeScreen = () => {
 
         <div className="todo-column">
           <h1>To-Do List</h1>
-          {todoList.map((todo) => (
-            <div key={todo.id} className="todo-item">
-              <strong>{todo.task}</strong>
-              <p>{todo.details}</p>
-            </div>
-          ))}
+          {loadingTodos && <p>Loading To-Do items...</p>}
+          {todoError && <p>{todoError}</p>}
+          {todos && todos.length > 0 ? (
+            todos.map((todo) => (
+              <div key={todo._id} className="todo-item">
+                <strong>{todo.title}</strong>
+                <p>{todo.details}</p> {/* Assuming you have a details field */}
+              </div>
+            ))
+          ) : (
+            <p>No To-Do items found</p>
+          )}
         </div>
       </div>
     </div>

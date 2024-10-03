@@ -3,6 +3,11 @@ import { Link, useNavigate } from "react-router-dom"; // Added useNavigate here
 import { useDispatch, useSelector } from "react-redux"; // Import hooks for Redux
 import { fetchUserProfile, logout } from "../actions/userActions"; // Import the action to fetch user profile and logout
 import "./css/NavigationBar.css"; // External CSS for styling the navbar
+import { IoHome } from "react-icons/io5";
+import { IoMdMail } from "react-icons/io";
+import { MdOutlineGroups2 } from "react-icons/md";
+import { FaTasks } from "react-icons/fa";
+import { IoLogOutSharp } from "react-icons/io5";
 
 const NavigationBar = () => {
   const dispatch = useDispatch();
@@ -41,22 +46,35 @@ const NavigationBar = () => {
       </div>
       <div className="nav-links">
         <Link to="/" className="nav-button-home">
-          Home
+          <div className="nav-link-content">
+            <IoHome size={30} />
+            <span>Home</span>
+          </div>
         </Link>
         <Link to="/inbox" className="nav-button-inbox">
-          Inbox
+          <div className="nav-link-content">
+            <IoMdMail size={30} />
+            <span>Inbox</span>
+          </div>
         </Link>
         <Link to="/groups" className="nav-button-groups">
-          Groups
+          <div className="nav-link-content">
+            <MdOutlineGroups2 size={30} />
+            <span>Groups</span>
+          </div>
         </Link>
         <Link to="/todo" className="nav-button-todo">
-          To-Do
+          <div className="nav-link-content">
+            <FaTasks size={30} />
+            <span>Todo</span>
+          </div>
         </Link>
       </div>
       {/* Logout Button */}
       <div className="logout-section">
         <button className="logout-button" onClick={handleLogout}>
-          Logout
+          <IoLogOutSharp size={30} />
+          <span>Logout</span>
         </button>
       </div>
     </div>

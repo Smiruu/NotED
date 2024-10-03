@@ -113,3 +113,21 @@
   background-color: #ead8b1;
   margin-right: 0;
 }
+
+.nav-link-content span {
+  margin-left: 8px; /* Space between icon and text */
+}
+
+.logout-button {
+  background: none;
+  border: none; /* Remove default button border */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  color: white; /* Keep the color consistent with the rest of the UI */
+  display: flex; /* Use flexbox to center the icon */
+  align-items: center; /* Center the icon vertically */
+  margin-bottom: 2rem;
+}
+
+.logout-button:hover {
+  color: #ead8b1; /* Change color on hover, you can adjust this */
+}

@@ -26,6 +26,7 @@ function App() {
             <Route path="/groups" element={<GroupListScreen/>} />
             <Route path="/groups/:group_tag" element={<GroupViewScreen/>} />
             <Route path="/profile" element={<ProfileScreen/>} />
+            <Route path="/todo" element={<TodolistScreen/>} />
           </Routes>
         </Container>
       </main>
