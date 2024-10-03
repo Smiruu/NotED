@@ -115,7 +115,7 @@
 }
 
 .edit-button:hover {
-    background-color: black; /* Change background on hover */
+    background-color: #415a77; /* Change background on hover */
     color: #ead8b1; /* Change text color on hover */
 }
 
@@ -129,6 +129,6 @@
 }
 
 .task-done-button:hover {
-    background-color: black; /* Change background on hover */
+    background-color: #415a77; /* Change background on hover */
     color: #ead8b1; /* Change text color on hover */
 }
