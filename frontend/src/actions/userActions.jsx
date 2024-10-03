@@ -16,6 +16,12 @@ import {
     CONFIRM_CHANGE_PASSWORD_SUCCESS,
     CONFIRM_CHANGE_PASSWORD_REQUEST,
     CONFIRM_CHANGE_PASSWORD_FAIL,
+    USER_PROFILE_REQUEST,
+    USER_PROFILE_SUCCESS,
+    USER_PROFILE_FAIL,
+    UPDATE_PROFILE_REQUEST,
+    UPDATE_PROFILE_SUCCESS,
+    UPDATE_PROFILE_FAIL,
 } from '../constants/userConstants';
 
 const instance = axios.create({
@@ -186,7 +192,6 @@ export const ConfirmChangePassword =
         payload: data,
       });
 
-      localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
       dispatch({
         type: CONFIRM_CHANGE_PASSWORD_FAIL,
@@ -197,3 +202,54 @@ export const ConfirmChangePassword =
       });
     }
   };
+
+  export const fetchUserProfile = () => async (dispatch) => {
+    try {
+        dispatch({ type: USER_PROFILE_REQUEST });
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        const token = userInfo ? userInfo.token.access : null;
+
+        const { data } = await instance.get('/api/user/profile/', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }); // Adjust the URL as needed
+
+        dispatch({
+            type: USER_PROFILE_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: USER_PROFILE_FAIL,
+            payload: error.response && error.response.data.detail ? error.response.data.detail : error.message,
+        });
+    }
+};
+
+// Action to update user profile
+export const updateUserProfile = (profileData) => async (dispatch) => {
+    try {
+        dispatch({ type: UPDATE_PROFILE_REQUEST });
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        const token = userInfo ? userInfo.token.access : null;
+        console.log(profileData)
+
+        const { data } = await instance.put('/api/user/profile/', profileData,{
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/json'
+          },
+        }); // Adjust the URL as needed
+
+        dispatch({
+            type: UPDATE_PROFILE_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: UPDATE_PROFILE_FAIL,
+            payload: error.response && error.response.data.detail ? error.response.data.detail : error.message,
+        });
+    }
+};

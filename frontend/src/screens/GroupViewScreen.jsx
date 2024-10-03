@@ -16,7 +16,12 @@ const GroupViewScreen = () => {
   const groupDetails = useSelector((state) => state.groupDetails);
   const { group, loading, error } = groupDetails;
 
+<<<<<<< HEAD
   console.log(group.group_image)
+=======
+
+
+>>>>>>> origin/master
 
   const user = useSelector((state) => state.userLogin.userInfo);
   const [isCreator, setIsCreator] = useState(false);
