@@ -8,8 +8,6 @@ import {
   ConfirmChangePasswordReducer,
   userProfileReducer,
 } from "./reducers/userReducers";
-<<<<<<< HEAD
-=======
 import{
   todoListReducer,
   todoCreateReducer,
@@ -17,7 +15,6 @@ import{
   todoDeleteReducer,
 }
 from './reducers/todolistReducers';
->>>>>>> origin/master
 import {
   favoriteGroupReducer,
   favoriteGroupRemoveReducer,
@@ -37,14 +34,11 @@ const reducer = {
   passwordChange: passwordChangeReducer,
   SendcChangePassword: SendChangePasswordReducer,
   ConfirmChangePassword: ConfirmChangePasswordReducer,
-<<<<<<< HEAD
-=======
   userProfile: userProfileReducer,
   todoList: todoListReducer,
   todoCreate: todoCreateReducer,
   todoUpdate: todoUpdateReducer,
   todoDelete: todoDeleteReducer,
->>>>>>> origin/master
   groupCreate: groupCreateReducer,
   groupImageUpload: groupImageUploadReducer,
   gruopImageRemove: groupImageRemoveReducer,
@@ -56,10 +50,6 @@ const reducer = {
   groupLeave: groupLeaveReducer,
   groupDetails: groupDetailsReducer,
   groupDelete: groupDeleteReducer,
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 };
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
