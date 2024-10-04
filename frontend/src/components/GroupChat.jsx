@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const Chat = ({ groupId, currentUser }) => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
     const [socket, setSocket] = useState(null);
-    console.log(groupId)
-    console.log(currentUser.token.access)
+    const messagesEndRef = useRef(null); // Reference to scroll to the bottom
 
     useEffect(() => {
         const chatSocket = new WebSocket(
@@ -14,6 +13,7 @@ const Chat = ({ groupId, currentUser }) => {
 
         chatSocket.onmessage = (e) => {
             const data = JSON.parse(e.data);
+            console.log(data);
 
             if (data.messages) {
                 // Load existing messages
@@ -22,7 +22,11 @@ const Chat = ({ groupId, currentUser }) => {
                 // New message received
                 setMessages((prevMessages) => [
                     ...prevMessages,
-                    { user: data.user, content: data.message },
+                    {
+                        user: data.user,
+                        content: data.message,
+                        photo: data.photo || null, // Safeguard if photo is missing
+                    },
                 ]);
             }
         };
@@ -53,16 +57,30 @@ const Chat = ({ groupId, currentUser }) => {
             }
         }
     };
-    
+
+    // Scroll to the bottom whenever messages change
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'auto' });
+    }, [messages]);
 
     return (
         <div>
             <div id="chat-messages" style={{ height: '300px', overflowY: 'scroll', border: '1px solid #ccc', padding: '10px' }}>
-                {messages.map((msg, index) => (
-                    <div key={index}>
+                {messages.map((msg, index) => ( 
+                    <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                        {msg.photo ? ( // Only render image if photo URL exists
+                            <img
+                                src={msg.photo}
+                                alt={`${msg.user}'s profile`}
+                                style={{ width: '40px', height: '40px', borderRadius: '50%', marginRight: '10px' }} // Styling the image
+                            />
+                        ) : (
+                            <div style={{ width: '40px', height: '40px', marginRight: '10px' }} /> // Placeholder for spacing
+                        )}
                         <strong>{msg.user}:</strong> {msg.content}
                     </div>
                 ))}
+                <div ref={messagesEndRef} /> {/* Empty div for scrolling */}
             </div>
             <form onSubmit={sendMessage}>
                 <input

@@ -55,7 +55,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def get_chat_history(self):
         chat_messages = ChatMessage.objects.filter(group=self.group).order_by('timestamp')
-        return [{'user': message.user.name, 'content': message.content} for message in chat_messages]
+        return [
+        {
+            'user': message.user.name,
+            'content': message.content,
+            'photo': message.get_user_photo()  # Include the user's photo URL
+        }
+        for message in chat_messages
+        ]
 
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
@@ -64,6 +71,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
         # Save the message to the database
         chat_message = await self.save_message(message)
 
+        # Retrieve the user's photo URL asynchronously
+        photo_url = await self.get_user_photo(chat_message)
+
         # Send message to group
         await self.channel_layer.group_send(
             self.group_name,
@@ -71,8 +81,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'type': 'chat_message',
                 'message': chat_message.content,
                 'user': chat_message.user.name,
+                'photo': photo_url  # Use the retrieved photo URL
             }
         )
+
+    @database_sync_to_async
+    def get_user_photo(self, chat_message):
+        # Fetch the user's photo in a synchronous context
+        return chat_message.get_user_photo()
 
     @database_sync_to_async
     def save_message(self, message):
@@ -83,9 +99,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def chat_message(self, event):
         message = event['message']
         user = event['user']
+        photo = event.get('photo', None)  # Retrieve the photo from the event
 
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
             'message': message,
             'user': user,
+            'photo': photo  # Include the photo URL in the response
         }))

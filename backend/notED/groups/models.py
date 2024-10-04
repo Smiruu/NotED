@@ -2,6 +2,7 @@ import random
 from django.db import models
 from django.conf import settings
 import os
+from user.models import Profile
 
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)
@@ -60,6 +61,14 @@ class ChatMessage(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    def get_user_photo(self):
+        """Returns the profile photo of the user who sent the message."""
+        try:
+            profile = self.user.profile
+            return profile.photo.url 
+        except Profile.DoesNotExist:
+            return None  # or return a default photo URL
 
     def __str__(self):
         return f"{self.user.username}: {self.content[:20]}"
