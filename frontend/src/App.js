@@ -17,7 +17,6 @@ import NavigationBar from "./components/NavigationBar";
 function App() {
   return (
     <Router>
-      <NavigationBar />
       <main className="py-3">
         <Container fluid>
           <Routes>
