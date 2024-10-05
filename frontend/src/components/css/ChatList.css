@@ -1,0 +1,40 @@
+/* components/ChatList.css */
+.chat-list {
+    width: 300px; /* Set a fixed width */
+    height: 500px; /* Set a fixed height */
+    overflow-y: auto; /* Allow vertical scrolling if needed */
+    background-color: #fff; /* White background for the chat list */
+    border: 1px solid #e0e0e0; /* Light gray border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 10px; /* Padding around the content */
+    position: relative; /* Ensure positioning context for child elements */
+}
+
+.chat-list-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0; /* Divider between users */
+}
+
+.chat-list-item-photo {
+    width: 40px; /* Size of the photo */
+    height: 40px; /* Size of the photo */
+    border-radius: 50%; /* Make the image round */
+    margin-right: 10px; /* Space between the photo and text */
+}
+
+.chat-list-item-info {
+    display: flex;
+    flex-direction: column; /* Stack name and tag vertically */
+}
+
+.chat-list-item-name {
+    font-weight: bold; /* Bold name */
+}
+
+.chat-list-item-tag {
+    color: #777; /* Lighter color for the tag */
+    font-size: 12px; /* Smaller font for the tag */
+}

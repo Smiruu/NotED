@@ -28,17 +28,21 @@ import {
   groupDetailsReducer,
   groupDeleteReducer
 } from "./reducers/groupReducers"
+import { conversationReducer, userListReducer } from "./reducers/chatsReducers";
 const reducer = {
+  //USERS
   userRegister: userRegisterReducer,
   userLogin: userLoginReducer,
   passwordChange: passwordChangeReducer,
   SendcChangePassword: SendChangePasswordReducer,
   ConfirmChangePassword: ConfirmChangePasswordReducer,
   userProfile: userProfileReducer,
+  //TODOLIST
   todoList: todoListReducer,
   todoCreate: todoCreateReducer,
   todoUpdate: todoUpdateReducer,
   todoDelete: todoDeleteReducer,
+  //GROUPS
   groupCreate: groupCreateReducer,
   groupImageUpload: groupImageUploadReducer,
   gruopImageRemove: groupImageRemoveReducer,
@@ -50,6 +54,9 @@ const reducer = {
   groupLeave: groupLeaveReducer,
   groupDetails: groupDetailsReducer,
   groupDelete: groupDeleteReducer,
+  //CHATS
+  userList: userListReducer,
+  conversation: conversationReducer,
 };
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

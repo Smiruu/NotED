@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'groups.apps.GroupsConfig',
     'to_do_list.apps.ToDoListConfig',
+    'chats.apps.ChatsConfig',
     'rest_framework',
     "corsheaders",
     

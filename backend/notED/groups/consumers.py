@@ -4,7 +4,7 @@ from .models import ChatMessage, Group
 from rest_framework_simplejwt.authentication import JWTAuthentication
 import json
 
-class ChatConsumer(AsyncWebsocketConsumer):
+class GroupChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.group_tag = self.scope['url_route']['kwargs']['group_tag']
         self.group_name = f'chat_{self.group_tag}'

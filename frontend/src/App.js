@@ -12,9 +12,12 @@ import GroupListScreen from "./screens/GroupListScreen";
 import GroupViewScreen from "./screens/GroupViewScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import GroupChatScreen from "./screens/GroupChatScreen";
+import ChatsScreen from "./screens/ChatsScreen";
+import NavigationBar from "./components/NavigationBar";
 function App() {
   return (
     <Router>
+      <NavigationBar />
       <main className="py-3">
         <Container fluid>
           <Routes>
@@ -28,6 +31,7 @@ function App() {
             <Route path="/groups/:group_tag" element={<GroupViewScreen/>} />
             <Route path="/groups/:group_tag/chat" element={<GroupChatScreen/>}/>
             <Route path="/profile" element={<ProfileScreen/>} />
+            <Route path="/inbox" element={<ChatsScreen/>}/>
           </Routes>
         </Container>
       </main>

@@ -25,7 +25,7 @@ const HomeScreen = () => {
   return (
     <>
     <div>
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       {/* Other content of the screen */}
     </div>
     <div>

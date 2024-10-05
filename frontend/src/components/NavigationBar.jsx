@@ -6,13 +6,21 @@ import './css/NavigationBar.css'; // External CSS for styling the navbar
 
 const NavigationBar = () => {
   const dispatch = useDispatch();
-  const { userProfile, loading, error } = useSelector((state) => state.userProfile); // Get userProfile from Redux store
+  const { userProfile, loading, error } = useSelector((state) => state.userProfile);
+  const userInfo = useSelector((state) => state.userLogin.userInfo); // Get userInfo from Redux store
 
   useEffect(() => {
-    dispatch(fetchUserProfile()); // Fetch user profile when the component mounts
-  }, [dispatch]);
+    if (userInfo) {
+      dispatch(fetchUserProfile()); // Fetch user profile only if userInfo exists
+    }
+  }, [dispatch, userInfo]);
 
-  // Check if loading or an error occurred
+  // Check if userInfo exists; if not, return null to hide the component
+  if (!userInfo) {
+    return null; // Hide the component
+  }
+
+  // Check if loading or an error occurred (only if userInfo exists)
   if (loading) {
     return <div>Loading...</div>;
   }
