@@ -27,7 +27,7 @@ const ChatList = ({ onConversationSelect }) => {
                             <li 
                                 key={conversation.id} // Assuming `id` is a unique identifier for the conversation
                                 className="chat-list-item"
-                                onClick={() => onConversationSelect(conversation.user_tag)} // Handle conversation selection
+                                onClick={() => onConversationSelect(conversation.user_tag, conversation.username, conversation.photo)} // Handle conversation selection
                             >
                                 <img 
                                     src={conversation.photo} // Assuming `photo` contains the URL to the user's image

@@ -24,7 +24,7 @@ function App() {
             <Route path="/register" element={<RegisterScreen />}/>
             <Route path="/reset-password" element={<ResetPasswordScreen/>} />
             <Route path="api/user/reset/:uid/:token" element={<ConfirmChangePasswordScreen />} />
-            <Route path="/todolist" element={<TodolistScreen />}/>
+            <Route path="/todo" element={<TodolistScreen />}/>
             <Route path="/groups" element={<GroupListScreen/>} />
             <Route path="/groups/:group_tag" element={<GroupViewScreen/>} />
             <Route path="/groups/:group_tag/chat" element={<GroupChatScreen/>}/>

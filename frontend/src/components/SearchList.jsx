@@ -36,7 +36,7 @@ const SearchList = ({ searchTerm, onUserSelect }) => {
                             <li 
                                 key={user.user_tag} 
                                 className="chat-list-item" 
-                                onClick={() => onUserSelect(user.user_tag)} // Handle user selection
+                                onClick={() => onUserSelect(user.user_tag, user.name, user.photo)} // Handle user selection
                             >
                                 <img 
                                     src={user.photo} // Assuming `photo` contains the URL to the user's image

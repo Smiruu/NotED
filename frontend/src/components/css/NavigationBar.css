@@ -23,10 +23,11 @@
 }
 
 .profile-pic {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-bottom: 10px;
+  width: 100px; /* Adjust the width as per your design */
+  height: 100px; /* Set the height to match the width for a square container */
+  border-radius: 50%; /* For circular profile pictures */
+  object-fit: cover; /* Maintains the aspect ratio and crops the image if necessary */
+  border: 2px solid #ddd;
 }
 
 .profile-btn {
