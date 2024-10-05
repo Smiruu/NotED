@@ -1,6 +1,8 @@
 # serializers.py
 from rest_framework import serializers
-from .models import Group
+from .models import Group, Meeting
+from datetime import datetime
+
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,3 +20,18 @@ class GroupDetailsSerializer(serializers.ModelSerializer):
         member_names = [member.name for member in obj.members.all()]
         print("Member Names:", member_names)  # Debugging line
         return member_names
+    
+class MeetingSerializer(serializers.ModelSerializer):
+    date_time = serializers.CharField()  # Accepting as string
+    group_tag = serializers.CharField(source='group.group_tag')
+
+    class Meta:
+        model = Meeting
+        fields = ['title', 'body', 'date_time', 'group_tag']
+
+    def validate_date_time(self, value):
+        # Convert the string to a datetime object
+        try:
+            return datetime.strptime(value, '%m/%d/%Y %I:%M %p')  
+        except ValueError:
+            raise serializers.ValidationError("Date and time must be in the format MM/DD/YYYY HH:MM AM/PM.")

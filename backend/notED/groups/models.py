@@ -2,6 +2,7 @@ import random
 from django.db import models
 from django.conf import settings
 import os
+from user.models import Profile
 
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)
@@ -43,3 +44,31 @@ class Group(models.Model):
             if os.path.isfile(self.group_image.path):
                 os.remove(self.group_image.path)
         super().delete(*args, **kwargs)
+
+
+class Meeting(models.Model):
+    title = models.CharField(max_length=200)
+    body = models.TextField()
+    date_time = models.DateTimeField()  # This should remain as DateTimeField
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+    
+class ChatMessage(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='messages')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def get_user_photo(self):
+        """Returns the profile photo of the user who sent the message."""
+        try:
+            profile = self.user.profile
+            return profile.photo.url 
+        except Profile.DoesNotExist:
+            return None  # or return a default photo URL
+
+    def __str__(self):
+        return f"{self.user.username}: {self.content[:20]}"

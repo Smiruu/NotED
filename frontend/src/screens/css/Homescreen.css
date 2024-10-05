@@ -1,0 +1,47 @@
+.homescreenpage {
+    display: flex; /* Use flexbox for a horizontal layout */
+    height: 100vh; /* Full height of the viewport */
+    width: 100% !important;
+  }
+  
+  .content {
+    display: flex; /* Use flexbox for the content area */
+    flex: 1; /* Take the remaining space */
+    background-color: #ead8b1;
+    padding: 2rem;
+  }
+  
+  .folder-card-container {
+      display: flex;                 
+      flex-wrap: wrap;              
+      justify-content: flex-start;   /* Align items to the start */
+    }
+    
+    .folder-card {
+      margin: 10px;                   /* Adjust margin to reduce space */
+      /* Other styles... */
+    }
+    
+  
+  .messages-column,
+  .groups-column,
+  .todo-column {
+    flex: 1; /* Each column will take equal space */
+    padding: 20px; /* Padding for the content */
+    box-sizing: border-box; /* Include padding in width calculations */
+    margin: 1rem;
+    box-shadow: #2c3e50;
+    border-radius: 20px;
+    background-color: #dcc89d;
+  }
+  
+  /* Styling for individual items in each column */
+  .message,
+  .group,
+  .todo-item {
+    padding: 10px; /* Padding for items */
+    margin-bottom: 10px; /* Space between items */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Intensified shadow */
+    border-radius: 5px; /* Optional: Add slight rounded corners */
+  }
+  

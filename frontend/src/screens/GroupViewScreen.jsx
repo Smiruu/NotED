@@ -15,7 +15,7 @@ const GroupViewScreen = () => {
 
   const groupDetails = useSelector((state) => state.groupDetails);
   const { group, loading, error } = groupDetails;
-
+  console.log (group)
 
 
 
