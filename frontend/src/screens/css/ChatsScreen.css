@@ -1,0 +1,32 @@
+/* components/css/ChatsScreen.css */
+.chats-screen {
+    display: flex;
+    flex-direction: column; /* Stack the search bar on top */
+    height: 100vh; /* Full height */
+}
+
+.search-bar {
+    padding: 10px; /* Adjust as needed */
+    background: #f5f5f5; /* Background for search bar */
+}
+
+.chat-container {
+    display: flex; /* Flex container for chat list and chat window */
+    flex: 1; /* Fill remaining space */
+    overflow: hidden; /* Prevent overflow */
+}
+
+.chat-list-container {
+    width: 300px; /* Set a fixed width for the chat list */
+    background: #fff; /* Background for chat list */
+    border-right: 1px solid #ddd; /* Right border */
+    overflow-y: auto; /* Allow scrolling if needed */
+}
+
+.chat-window-container {
+    flex: 1; /* Take the remaining space */
+    background: #f0f0f0; /* Background for chat window */
+    display: flex;
+    align-items: stretch; /* Ensure the chat window fills the container */
+    overflow-y: auto; /* Allow scrolling if needed */
+}

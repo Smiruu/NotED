@@ -131,8 +131,9 @@ const GroupListScreen = () => {
   const handleCreateGroup = () => {
     const formData = new FormData();
     formData.append("name", groupName); // Append group name
-    formData.append("group_image", groupImage); // Append uploaded image
-    window.location.reload();
+    if (groupImage) {
+      formData.append("group_image", groupImage); // Append uploaded image
+    }
 
     dispatch(createGroup(formData)); // Dispatch createGroup action
     toggleCreateModal(); // Close modal after submission

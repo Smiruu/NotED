@@ -10,7 +10,9 @@ import TodolistScreen from "./screens/TodolistScreen";
 import GroupListScreen from "./screens/GroupListScreen";
 import GroupViewScreen from "./screens/GroupViewScreen";
 import ProfileScreen from "./screens/ProfileScreen";
-
+import GroupChatScreen from "./screens/GroupChatScreen";
+import ChatsScreen from "./screens/ChatsScreen";
+import NavigationBar from "./components/NavigationBar";
 function App() {
   return (
     <Router>
@@ -25,8 +27,9 @@ function App() {
             <Route path="/todolist" element={<TodolistScreen />}/>
             <Route path="/groups" element={<GroupListScreen/>} />
             <Route path="/groups/:group_tag" element={<GroupViewScreen/>} />
+            <Route path="/groups/:group_tag/chat" element={<GroupChatScreen/>}/>
             <Route path="/profile" element={<ProfileScreen/>} />
-            <Route path="/todo" element={<TodolistScreen/>} />
+            <Route path="/inbox" element={<ChatsScreen/>}/>
           </Routes>
         </Container>
       </main>
