@@ -13,6 +13,8 @@ import ProfileScreen from "./screens/ProfileScreen";
 import GroupChatScreen from "./screens/GroupChatScreen";
 import ChatsScreen from "./screens/ChatsScreen";
 import NavigationBar from "./components/NavigationBar";
+import NoteScreen from "./screens/NoteScreen";
+import VideoScreen from "./screens/VideoScreen";
 function App() {
   return (
     <Router>
@@ -30,6 +32,8 @@ function App() {
             <Route path="/groups/:group_tag/chat" element={<GroupChatScreen/>}/>
             <Route path="/profile" element={<ProfileScreen/>} />
             <Route path="/inbox" element={<ChatsScreen/>}/>
+            <Route path="/groups/:group_tag/notes" element={<NoteScreen/>}/>
+            <Route path="/groups/:group_tag/videos" element={<VideoScreen/>}/>
           </Routes>
         </Container>
       </main>
