@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../actions/userActions'; // Import the register action
 import { useNavigate } from 'react-router-dom'; // For navigation
+import '../components/css/RegisterScreen.css';
 
 const RegisterScreen = () => {
   const [name, setName] = useState('');
@@ -33,13 +34,27 @@ const RegisterScreen = () => {
   };
 
   return (
+    <div className="split-screen">
+
+        <div className="register-left-container">
+          <div className="register-image-container">
+            <img src="https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA2L3JtNjcwLWVsZW1lbnRzZ3JvdXAtdG4tMDEyLTAxYi1samR6ajh6di5qcGc.jpg" alt="Login Illustration" />
+            <div className="register-text-container">
+              <h1>Unlock Knowledge, Empower Success — Join NotED.</h1>
+              <p>NotED!</p>
+            </div>
+          </div>
+        </div>
+
+    <div className="register-right-container">
     <div className="register-container">
+    <img src="https://media.tenor.com/9YGa6pkKJ5YAAAAM/muh-cat.gif" alt="Logo" className="logo-image" />
       <h2>Register</h2>
       {error && <div className="error-message">{error}</div>}
       {loading && <div className="loading-spinner">Loading...</div>}
 
       <form onSubmit={submitHandler}>
-        <div className="form-group">
+        <div className="register-form-group">
           <label htmlFor="name">Name</label>
           <input
             type="text"
@@ -51,7 +66,7 @@ const RegisterScreen = () => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="register-form-group">
           <label htmlFor="email">Email Address</label>
           <input
             type="email"
@@ -63,7 +78,7 @@ const RegisterScreen = () => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="register-form-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -75,7 +90,7 @@ const RegisterScreen = () => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="register-form-group">
           <label htmlFor="password2">Confirm Password</label>
           <input
             type="password"
@@ -87,7 +102,7 @@ const RegisterScreen = () => {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="register-btn">
           Register
         </button>
       </form>
@@ -95,6 +110,8 @@ const RegisterScreen = () => {
       <div className="login-link">
         Already have an account? <a href="/login">Login</a>
       </div>
+    </div>
+    </div>
     </div>
   );
 };
