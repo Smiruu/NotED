@@ -28,6 +28,25 @@ import {
   groupDetailsReducer,
   groupDeleteReducer
 } from "./reducers/groupReducers"
+
+import {
+  titleListReducer,
+  titleCreateReducer,
+  titleUpdateReducer,
+  titleDeleteReducer,
+  videoCreateReducer,
+  videoDeleteReducer,
+  videoListReducer,
+  videoUpdateReducer,
+  fileListReducer,
+  fileCreateReducer,
+  fileUpdateReducer,
+  fileDeleteReducer,
+
+} from "./reducers/noteReducers";
+
+
+
 import { conversationReducer, userListReducer } from "./reducers/chatsReducers";
 const reducer = {
   //USERS
@@ -57,6 +76,25 @@ const reducer = {
   //CHATS
   userList: userListReducer,
   conversation: conversationReducer,
+  //TITLES
+  titleList: titleListReducer,
+  titleCreate: titleCreateReducer,
+  titleUpdate: titleUpdateReducer,
+  titleDelete: titleDeleteReducer,
+  //VIDEOS
+  videoList: videoListReducer,
+  videoCreate: videoCreateReducer,
+  videoUpdate: videoUpdateReducer,
+  videoDelete: videoDeleteReducer,
+  //FILES 
+  fileList: fileListReducer,
+  fileCreate: fileCreateReducer,
+  fileUpdate: fileUpdateReducer,
+  fileDelete: fileDeleteReducer,
+
+
+
+
 };
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

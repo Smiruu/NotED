@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'chats.apps.ChatsConfig',
     'rest_framework',
     "corsheaders",
+    'notes.apps.NotesConfig',
     
 ]
 

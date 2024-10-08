@@ -29,6 +29,7 @@ urlpatterns = [
     path('api/groups/', include('groups.urls')),
     path('api/todolist/', include('to_do_list.urls')),
     path('api/chats/', include('chats.urls')),
+    path('api/notes/', include('notes.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
