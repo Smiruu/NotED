@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { sendrequestChangePassword } from '../actions/userActions'; // Adjust based on your file structure
-import '../components/css/ResetpasswordScreen.css';
+import './css/ResetpasswordScreen.css';
 
 const ResetPasswordScreen = () => {
   const [email, setEmail] = useState('');

@@ -4,7 +4,7 @@ height: 100vh;
 overflow: hidden;
 }
 
-.reset-left-container{
+.register-left-container {
 flex: 1;
 display: flex;
 align-items: center;
@@ -13,7 +13,24 @@ background-color: #f7f7f7;
 position: relative;
 }
 
-.reset-text-container {
+.register-image-container {
+position: relative;
+width: 100%;
+height: 100%;
+overflow: hidden;
+}
+
+.register-image-container img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+position: absolute;
+top: 0;
+left: 0;
+display: block;
+}
+
+.register-text-container {
 position: absolute;
 top: 0;
 left: 0;
@@ -27,14 +44,14 @@ color: #fff; /* Text color */
 padding: 20px; /* Adds padding for spacing */
 }
 
-.reset-text-container h1 {
+.register-text-container h1 {
 font-size: 3rem; /* Increase font size for h1 */
 margin-left: 1rem !important;
 margin-right: 10rem !important;
 margin-top: .1rem !important;
 padding-top: 1rem !important;
 padding: 10px 0; /* Adds some padding for better spacing */
-font-family: "Anton", sans-serif !important;
+font-family: "Anton", sans-serif;
 font-weight: 700;
 font-style: bold;
 background: #B0967E;
@@ -43,57 +60,39 @@ background: linear-gradient(to bottom right, #B0967E 10%, #004888 60%);
 -webkit-text-fill-color: transparent;
 }
 
-.reset-text-container p {
+.register-text-container p {
 font-size: 4rem; /* Increase font size for p */
 margin-bottom: 20px;
-/* padding-bottom: .5rem; */
-font-family: "Kanit", sans-serif !important;
-font-weight: 700 !important;
-font-style: bold;
-color: #004888;
 margin-left: 1rem !important;
+/* padding-bottom: .5rem; */
+font-family: "Kanit", sans-serif;
+font-weight: 700;
+font-style: bold;
+color: #004888 ;
 }
 
-.reset-image-container {
-position: relative;
-width: 100%;
-height: 100%;
-overflow: hidden;
-}
-
-.reset-image-container img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-position: absolute;
-top: 0;
-left: 0;
-display: block;
-}
-
-.reset-right-container{
+.register-right-container {
 flex: 1;
 display: flex;
 align-items: center;
 justify-content: center;
-padding: 20px; 
+padding: 20px;
 }
 
-
-.reset-container {
+.register-container {
 width: 100%;
 max-width: 70%;
 }
 
-.reset-container p{
-text-align: center;
-font-family: "Kanit", sans-serif;
-font-weight: 400;
-font-style: normal;
-font-size: 1.2rem;
+.logo-image {
+display: block;
+margin: 0 auto 1.5rem; /* Center the image and add spacing below */
+width: 100px; /* Adjust width as needed */
+height: auto; /* Maintain aspect ratio */
+border-radius: 50%;
 }
 
-.reset-header {
+.register-container h2 {
 text-align: center;
 font-family: "Kanit", sans-serif;
 font-weight: 500;
@@ -102,14 +101,23 @@ font-size: 2.7rem;
 padding-bottom: 1rem;
 }
 
-.reset-form {
+.register-form{
+width: 100%;
+max-width: 40rem;
+margin: 0 auto;
+display: flex;
+flex-direction: column;
+align-items: stretch;
+}
+
+.register-form-group {
 margin-bottom: 1.5rem;
 font-family: "Kanit", sans-serif;
 font-weight: 400;
 font-style: bold;
 }
 
-.reset-form label{
+.register-form-group label {
 display: block;
 margin-bottom: 5px;
 font-size: 1.3rem;
@@ -118,27 +126,28 @@ font-weight: 500;
 font-style: bold;
 }
 
-.reset-input {
+.register-form-group input {
 width: 100%;
 padding: 1rem;
 border-radius: 2rem;
-border: solid .17rem;
+border: solid .17rem !important;
 font-size: 1.2rem;
 padding-left: 1.2rem;
-transition: .2s ease-in-out !important;
-}
-
-.reset-input:hover {
-border-color: #d9b99b;
+margin-bottom: -.8rem;
 transition: .2s ease-in-out;
 }
 
-.reset-input:focus{
-border-color: #d9b99b; /* Change this to the color you want when focused */
+.register-form-group input:hover{
+border-color: #d9b99b !important;
+transition: .2s ease-in-out;
+}
+
+.register-form-group input:focus {
+border-color: #d9b99b !important; /* Change this to the color you want when focused */
 outline: none; /* Optional: Removes the default browser outline */
 }
 
-.reset-button {
+.register-btn {
 width: 100%;
 padding: 10px;
 font-size: 1.5rem !important;
@@ -153,22 +162,13 @@ border: none;
 transition: .2s ease-in-out;
 }
 
-.reset-button:hover{
+.register-btn:hover{
 background-color: #d9b99b !important;
 transition: .2s ease-in-out !important;
 color: black !important;
 }
 
-.reset-button:disabled {
-background-color: #aaa;
-cursor: not-allowed;
-}
-
-.reset-button:hover:not(:disabled) {
-background-color: #0056b3;
-}
-
-.reset-login-link {
+.login-link {
 text-align: center;
 margin-top: .6rem;
 font-family: "Kanit", sans-serif !important;
@@ -177,38 +177,50 @@ font-style: bold !important;
 font-size: 1.1rem !important;
 }
 
-.reset-login-link a {
+.login-link a {
 color: rgb(0, 72, 136);
 transition: .2s ease-in-out;
 }
 
-.reset-login-link a:hover{
+.login-link a:hover{
     color: #d9b99b ;
     transition: .2s ease-in-out;
 }
 
-.reset-success {
-color: green;
-margin-top: 15px;
-}
-
-.reset-error {
-color: red;
-margin-top: 15px;
-}
-
+/* Responsive adjustments */
 @media (max-width: 768px) {
-.reset-left-container {
+.register-left-container {
     display: none;
 }
 
-.reset-right-container {
+.register-right-container {
     width: 100%;
     height: 100%;
 }
 
-.reset-container {
+.register-container {
     max-width: 100%;
     padding: 20px;
 }
+}
+
+.loading-container {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.loading-spinner {
+width: 40px;
+height: 40px;
+border: 4px solid rgba(0, 0, 0, 0.24);
+border-top: 4px solid rgb(0, 72, 136);
+border-radius: 50%;
+animation: spin 1s linear infinite;
+margin-top: 1.5rem;
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
 }

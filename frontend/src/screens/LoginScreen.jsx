@@ -2,7 +2,7 @@
   import { useDispatch, useSelector } from 'react-redux';
   import { login } from '../actions/userActions';  
   import { useNavigate } from 'react-router-dom';  
-  import '../components/css/LoginScreen.css';
+  import './css/LoginScreen.css';
 
   const LoginScreen = () => {
     const [email, setEmail] = useState('');
@@ -41,13 +41,12 @@
           <div className="login-container">
           <img src="https://media.tenor.com/9YGa6pkKJ5YAAAAM/muh-cat.gif" alt="Logo" className="logo-image" />
             <h2>Login</h2>
-            {error && <div className="error-message">{error}</div>}
-            {loading && <div className="loading-spinner">Loading...</div>}
 
-            <form onSubmit={submitHandler}>
+            <form onSubmit={submitHandler} className="login-form">
               <div className="login-form-group">
                 <label htmlFor="email">Email Address</label>
                 <input
+                  className='login-input'
                   type="email"
                   id="email"
                   placeholder="Enter email"
@@ -59,6 +58,7 @@
               <div className="login-form-group">
                 <label htmlFor="password">Password</label>
                 <input
+                  className='login-input'
                   type="password"
                   id="password"
                   placeholder="Enter password"
@@ -71,6 +71,9 @@
                 Login
               </button>
             </form>
+
+            {error && <div className="error-message">{error}</div>}
+            {loading && <div className="loading-container"><div className="loading-spinner"></div></div>}
 
             <div className="register-link">
               Don't have an account? <a href="/register">Register</a>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../actions/userActions'; // Import the register action
 import { useNavigate } from 'react-router-dom'; // For navigation
-import '../components/css/RegisterScreen.css';
+import './css/RegisterScreen.css';
 
 const RegisterScreen = () => {
   const [name, setName] = useState('');
@@ -50,10 +50,8 @@ const RegisterScreen = () => {
     <div className="register-container">
     <img src="https://media.tenor.com/9YGa6pkKJ5YAAAAM/muh-cat.gif" alt="Logo" className="logo-image" />
       <h2>Register</h2>
-      {error && <div className="error-message">{error}</div>}
-      {loading && <div className="loading-spinner">Loading...</div>}
 
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} className='register-form'>
         <div className="register-form-group">
           <label htmlFor="name">Name</label>
           <input
@@ -106,6 +104,9 @@ const RegisterScreen = () => {
           Register
         </button>
       </form>
+
+      {error && <div className="error-message">{error}</div>}
+      {loading && <div className="loading-container"><div className="loading-spinner"></div></div>}
 
       <div className="login-link">
         Already have an account? <a href="/login">Login</a>
