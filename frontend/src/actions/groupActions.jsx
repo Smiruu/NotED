@@ -73,18 +73,18 @@ const instance = axios.create({
     try {
       dispatch({ type: GROUP_IMAGE_UPLOAD_REQUEST });
   
-      const {
-        userLogin: { userInfo },
-      } = getState();
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      const token = userInfo ? userInfo.token.access : null; 
+  
   
       const formData = new FormData();
       formData.append('group_image', imageData);
-      formData.append('user_id', userInfo.id); // Include the user ID
+      formData.append('user_id', userInfo.token.user_id); // Include the user ID
   
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${userInfo.token}`, // Adjust based on your authentication setup
+          Authorization: `Bearer ${token}`, // Adjust based on your authentication setup
         },
       };
   
