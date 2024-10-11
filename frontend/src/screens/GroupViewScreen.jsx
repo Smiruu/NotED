@@ -63,6 +63,9 @@ const GroupViewScreen = () => {
           <NavItem>
             <NavLink href={`/groups/${group_tag}/videos`}>Videos</NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink href={`/groups/${group_tag}/announcements`}>Announcements</NavLink>
+          </NavItem>
           {isCreator && (
             <NavItem>
               <NavLink href={`/groups/${group_tag}/edit`}>Edit Group</NavLink>

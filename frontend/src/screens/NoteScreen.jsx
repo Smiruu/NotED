@@ -21,7 +21,7 @@ function NoteScreen() {
     const [fileData, setFileData] = useState({ titleId: '', section: '', file: null, text: '' }); // Include text field
 
     // Set the matching PDF.js version
-    const pdfjsVersion = '2.7.570'; // Ensure this matches the installed version
+    const pdfjsVersion = '3.0.279'; // Ensure this matches the installed version
 
     useEffect(() => {
         // Fetch files and titles when the component mounts or group_tag changes

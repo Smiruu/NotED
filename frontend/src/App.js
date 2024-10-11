@@ -15,6 +15,8 @@ import ChatsScreen from "./screens/ChatsScreen";
 import NavigationBar from "./components/NavigationBar";
 import NoteScreen from "./screens/NoteScreen";
 import VideoScreen from "./screens/VideoScreen";
+import AnnouncementScreen from "./screens/AnnouncementScreen";
+
 function App() {
   return (
     <Router>
@@ -34,6 +36,7 @@ function App() {
             <Route path="/inbox" element={<ChatsScreen/>}/>
             <Route path="/groups/:group_tag/notes" element={<NoteScreen/>}/>
             <Route path="/groups/:group_tag/videos" element={<VideoScreen/>}/>
+            <Route path="/groups/:group_tag/announcements" element={<AnnouncementScreen/>}/>
           </Routes>
         </Container>
       </main>

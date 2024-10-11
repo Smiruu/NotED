@@ -45,6 +45,15 @@ import {
 
 } from "./reducers/noteReducers";
 
+import {
+  announcementListReducer,
+  announcementCreateReducer,
+  announcementDeleteReducer,
+
+} from "./reducers/announcementReducers";
+
+
+
 
 
 import { conversationReducer, userListReducer } from "./reducers/chatsReducers";
@@ -91,9 +100,10 @@ const reducer = {
   fileCreate: fileCreateReducer,
   fileUpdate: fileUpdateReducer,
   fileDelete: fileDeleteReducer,
-
-
-
+  //ANNOUNCEMENTS
+  announcementList: announcementListReducer,
+  announcementCreate: announcementCreateReducer,
+  announcementDelete: announcementDeleteReducer,
 
 };
 
