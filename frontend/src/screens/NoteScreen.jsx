@@ -7,6 +7,9 @@ import AddFile from '../components/AddFile';
 import { Button, Modal } from 'react-bootstrap';
 import { Worker, Viewer } from '@react-pdf-viewer/core'; // Import PDF viewer components
 import '@react-pdf-viewer/core/lib/styles/index.css'; // Import styles
+import NavigationBar from '../components/NavigationBar';
+import './css/NoteScreen.css';
+import { Dropdown } from 'react-bootstrap';
 
 function NoteScreen() {
     const dispatch = useDispatch();
@@ -81,41 +84,69 @@ function NoteScreen() {
         return null;
     };
 
+    const [visibleIndex, setVisibleIndex] = useState(null); // To track which file's buttons are visible
+
+    const toggleButtons = (index) => {
+        setVisibleIndex(visibleIndex === index ? null : index); // Toggle visibility
+    };
+
     return (
-        <div>
-            <Title />
-            <AddFile group_tag={group_tag} titles={titles} />
-            <h2>Files</h2>
+        <div className='note-screen-main'>
+            <NavigationBar />
+            <div className='note-screen-content'>
+                <h2 className='notes-title'>Files</h2>
+                <div id="custom-container">
+                    <div className="add-actions">
+                        <div className="button-group">
+                            <Title className='notes-button' />
+                            <AddFile className='notes-button' group_tag={group_tag} titles={titles} />
+                        </div>
+                    </div>
+                </div>
 
-            {loadingFiles && <p>Loading files...</p>}
-            {errorFiles && <p style={{ color: 'red' }}>{errorFiles}</p>}
-            {files && files.length === 0 && <p>No files available for this group.</p>}
+                {loadingFiles && <p>Loading files...</p>}
+                {errorFiles && <p style={{ color: 'red' }}>{errorFiles}</p>}
+                {files && files.length === 0 && <p>No files available for this group.</p>}
 
-            <ul className="list-group">
-                {files && files.map((file) => {
-                    // Find the title corresponding to the file's titleId
-                    const title = titles.find(t => t._id === file.title); // Assuming file.title holds the title ID
+                <ul className="list-group">
+                    {files && files.map((file, index) => {
+                        const title = titles.find(t => t._id === file.title);
 
-                    return (
-                        <li key={file._id} className="list-group-item">
-                            <h6>{title ? title.name : 'No Title'}</h6> {/* Display the title name */}
-                            <p>Section: {file.section}</p>
-                            <p>
-                                File: 
-                                {file.file && (
-                                    <a href={file.file} target="_blank" rel="noopener noreferrer">
-                                        {file.file.split('/').pop()}
-                                    </a>
-                                )}
-                            </p>
-                            <p> Text: {file.text || 'No text'}</p> {/* Display additional text */}
-                            {renderFilePreview(file)} {/* Render file preview */}
-                            <Button variant="warning" onClick={() => handleEditClick(file)}>Edit</Button>
-                            <Button variant="danger" onClick={() => handleDelete(file._id)}>Delete</Button>
-                        </li>
-                    );
-                })}
-            </ul>
+                        return (
+                            <li key={file._id} className="list-group-item">
+                                <div className="file-info">
+                                    <h6>{title ? title.name : 'No Title'}</h6>
+                                    <Dropdown>
+                                    <Dropdown.Toggle
+                                        className="ellipsis"
+                                        variant="link"
+                                        id={`dropdown-${file._id}`}
+                                        drop="down"
+                                        style={{ padding: 0, border: 'none', background: 'none' }} // Add these styles to remove any background and borders
+                                    >
+                                        &#x22EE; {/* Vertical ellipsis symbol */}
+                                    </Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item as="button" className='notebtn' onClick={() => handleEditClick(file)}>Edit</Dropdown.Item>
+                                            <Dropdown.Item as="button" className='notebtn' onClick={() => handleDelete(file._id)}>Delete</Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                </div>
+                                <p>Section: {file.section}</p>
+                                <p>
+                                    File: 
+                                    {file.file && (
+                                        <a href={file.file} target="_blank" rel="noopener noreferrer">
+                                            {file.file.split('/').pop()}
+                                        </a>
+                                    )}
+                                </p>
+                                <p> Text: {file.text || 'No text'}</p>
+                                {renderFilePreview(file)}
+                            </li>
+                        );
+                    })}
+                </ul>
 
             {/* Edit Modal */}
             <Modal show={showEditModal} onHide={handleCloseEditModal}>
@@ -179,6 +210,7 @@ function NoteScreen() {
                     <Button variant="primary" onClick={handleEditSubmit}>Save Changes</Button>
                 </Modal.Footer>
             </Modal>
+        </div>
         </div>
     );
 }

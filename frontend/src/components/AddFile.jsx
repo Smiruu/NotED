@@ -66,7 +66,7 @@ const AddFile = ({ group_tag, titles }) => {
 
     return (
         <div>
-            <Button variant="primary" onClick={() => setShowModal(true)}>
+            <Button onClick={() => setShowModal(true)}>
                 Add File
             </Button>
 
