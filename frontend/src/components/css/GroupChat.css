@@ -1,0 +1,105 @@
+.custom-chat-messages {
+  max-height: 90%; /* Set a max height for scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 10px; /* Padding inside the messages container */
+  background-color: #ffffff; /* White background for clarity */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(160, 131, 131, 0.1); /* Soft shadow */
+}
+
+.custom-message {
+  display: flex; /* Flexbox for positioning */
+  align-items: flex-start; /* Align items to the start */
+  margin-bottom: 15px; /* Space between messages */
+}
+
+.custom-chat-window {
+    height: 100%;
+}
+
+.custom-message-body {
+  display: flex; /* Enable flexbox for message body */
+  align-items: center; /* Center align items vertically */
+  max-width: 75%; /* Limit the width to 75% of the container */
+  padding: 10px; /* Padding for the message body */
+  border-radius: 15px; /* Rounded corners for the message bubble */
+  margin: 5px; /* Margin for spacing */
+  word-wrap: break-word; /* Break long words and wrap to the next line */
+  overflow-wrap: break-word; /* Ensures word wrapping on overflow */
+}
+
+.custom-message-content-wrapper {
+  flex-grow: 1; /* Allow content to grow and fill available space */
+  margin-right: 10px; /* Space between content and photo */
+  margin-left: 10px;
+}
+
+.custom-message-photo-wrapper {
+  display: flex; /* Flexbox for photo alignment */
+  align-items: center; /* Center photo vertically */
+}
+
+.custom-sent {
+  justify-content: flex-end; /* Align sent messages to the right */
+}
+
+.custom-received {
+  justify-content: flex-start; /* Align received messages to the left */
+}
+
+.custom-sent .custom-message-body {
+  background-color: #147efb; /* Light blue for sent messages */
+  border-radius: 20px; /* Rounded corners for the message bubble */
+  padding: 10px 15px; /* Padding inside the bubble */
+}
+
+.custom-received .custom-message-body {
+  background-color: #53d769; /* White background for received messages */
+  border-radius: 20px; /* Rounded corners for the message bubble */
+  padding: 10px 15px; /* Padding inside the bubble */
+}
+
+.custom-message-header {
+  font-weight: bold; /* Bold user name */
+  margin-bottom: 5px; /* Space between user name and message */
+}
+
+.custom-message-content {
+  flex-grow: 1; /* Allow content to grow and fill available space */
+  word-wrap: break-word; /* Break long words onto new lines */
+  overflow-wrap: break-word; /* Ensure long words break if necessary */
+}
+
+.custom-message-photo {
+  width: 30px; /* Fixed width for photos */
+  height: 30px; /* Fixed height for photos */
+  border-radius: 50%; /* Circle photo */
+}
+
+.custom-chat-placeholder {
+  width: 30px; /* Fixed width for placeholder */
+  height: 30px; /* Fixed height for placeholder */
+  border-radius: 50%; /* Circle placeholder */
+  background-color: #dcdcdc; /* Light gray background for placeholder */
+}
+
+.custom-chat-input {
+  width: 100%; /* Full width for input */
+  padding: 10px; /* Padding for input field */
+  border-radius: 5px; /* Rounded corners */
+  border: 1px solid #ccc; /* Light border */
+  margin-top: 10px; /* Space above input */
+}
+
+.custom-chat-button {
+  padding: 10px 15px; /* Padding for button */
+  border-radius: 5px; /* Rounded corners */
+  border: none; /* Remove border */
+  background-color: #007bff; /* Blue background for button */
+  color: white; /* White text color */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.custom-chat-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
