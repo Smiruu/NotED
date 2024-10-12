@@ -1,11 +1,11 @@
-// Video.js
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { createVideo } from '../actions/noteActions';
 
-const AddVideo = ({ showModal, handleClose, titles, group_tag }) => {
+const AddVideo = ({ titles, group_tag }) => {
     const dispatch = useDispatch();
+    const [showModal, setShowModal] = useState(false); // State to control modal visibility
     const [videoInput, setVideoInput] = useState({ titleId: '', links: [''], videos: [''] });
 
     const handleFileChange = (index, e) => {
@@ -59,62 +59,69 @@ const AddVideo = ({ showModal, handleClose, titles, group_tag }) => {
         });
 
         setVideoInput({ titleId: '', links: [''], videos: [''] });
-        handleClose();
+        setShowModal(false);
     };
 
     return (
-        <Modal show={showModal} onHide={handleClose} size="lg">
-            <Modal.Header closeButton>
-                <Modal.Title>Add Video</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <div>
-                    <select
-                        value={videoInput.titleId}
-                        onChange={(e) => setVideoInput({ ...videoInput, titleId: e.target.value })}
-                        className="form-control mb-3"
-                    >
-                        <option value="">Select Title</option>
-                        {titles && titles.map((title) => (
-                            <option key={title._id} value={title._id}>{title.name}</option>
+        <div>
+            <Button onClick={() => setShowModal(true)} className="mb-3">
+                Add Video
+            </Button>
+
+            <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
+                <Modal.Header closeButton>
+                    <Modal.Title>Add Video</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div>
+                        <select
+                            value={videoInput.titleId}
+                            onChange={(e) => setVideoInput({ ...videoInput, titleId: e.target.value })}
+                            className="form-control mb-3"
+                        >
+                            <option value="">Select Title</option>
+                            {titles && titles.map((title) => (
+                                <option key={title._id} value={title._id}>{title.name}</option>
+                            ))}
+                        </select>
+
+                        {videoInput.links.map((link, index) => (
+                            <div key={index} className="mb-3 d-flex align-items-center">
+                                <input
+                                    type="url"
+                                    value={link}
+                                    onChange={(e) => handleLinkChange(index, e.target.value)}
+                                    placeholder="Enter video link"
+                                    className="form-control me-2"
+                                />
+                                <Button variant="danger" onClick={() => handleRemoveLink(index)}>Remove</Button>
+                            </div>
                         ))}
-                    </select>
-                    {videoInput.links.map((link, index) => (
-                        <div key={index} className="mb-3 d-flex align-items-center">
-                            <input
-                                type="url"
-                                value={link}
-                                onChange={(e) => handleLinkChange(index, e.target.value)}
-                                placeholder="Enter video link"
-                                className="form-control me-2"
-                            />
-                            <Button variant="danger" onClick={() => handleRemoveLink(index)}>Remove</Button>
-                        </div>
-                    ))}
-                    <Button variant="secondary" onClick={handleAddLink} className="mb-3">Add Another Link</Button>
-                    
-                    {videoInput.videos.map((video, index) => (
-                        <div key={index} className="mb-3">
-                            <input
-                                type="file"
-                                accept="video/mp4"
-                                onChange={(e) => handleFileChange(index, e)}
-                                className="form-control mb-2"
-                            />
-                        </div>
-                    ))}
-                    <Button variant="secondary" onClick={handleAddFileInput} className="mb-3">Add Another Video</Button>
-                </div>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Close
-                </Button>
-                <Button variant="primary" onClick={handleSubmit}>
-                    Create Video
-                </Button>
-            </Modal.Footer>
-        </Modal>
+                        <Button variant="secondary" onClick={handleAddLink} className="mb-3">Add Another Link</Button>
+                        
+                        {videoInput.videos.map((video, index) => (
+                            <div key={index} className="mb-3">
+                                <input
+                                    type="file"
+                                    accept="video/mp4"
+                                    onChange={(e) => handleFileChange(index, e)}
+                                    className="form-control mb-2"
+                                />
+                            </div>
+                        ))}
+                        <Button variant="secondary" onClick={handleAddFileInput} className="mb-3">Add Another Video</Button>
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleSubmit}>
+                        Create Video
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
     );
 };
 

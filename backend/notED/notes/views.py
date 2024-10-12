@@ -209,3 +209,28 @@ def deleteFile(request, group_tag, file_id):
 
     file.delete()
     return Response({'message': 'File deleted successfully.'}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getFilesAndVideosByTitle(request, title_id):
+    # Retrieve the title based on title_id
+    title = get_object_or_404(Title, pk=title_id)
+    user = request.user
+
+    # Check if the user is either the title's creator or a member of the group associated with the title
+    if user != title.user and user != title.group.user and user not in title.group.members.all():
+        return Response({'message': 'You are not authorized to access this title.'}, status=status.HTTP_403_FORBIDDEN)
+
+    # Retrieve files and videos associated with the title
+    files = File.objects.filter(title=title)
+    videos = Video.objects.filter(title=title)
+
+    # Serialize the retrieved files and videos
+    files_serializer = FileSerializer(files, many=True)
+    videos_serializer = VideoSerializer(videos, many=True)
+
+    # Return a combined response
+    return Response({
+        'files': files_serializer.data,
+        'videos': videos_serializer.data
+    })

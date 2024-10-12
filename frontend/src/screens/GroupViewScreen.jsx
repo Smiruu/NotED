@@ -61,10 +61,10 @@ const GroupViewScreen = () => {
             </div>
             <div className="header-links">
               <a
-                href={`/groups/${group_tag}/meetings`}
+                 href={`/groups/${group_tag}/announcements`}
                 className="header-button"
               >
-                Meetings
+                Announcements
               </a>
               <a href={`/groups/${group_tag}/chat`} className="header-button">
                 Chat
