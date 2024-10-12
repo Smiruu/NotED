@@ -7,6 +7,12 @@
     overflow: hidden;
     position: relative;
     margin: 10px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .folder-card:hover {
+    background-color: #d4edda; /* Soft green background on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
   }
   
   .folder-card-header {

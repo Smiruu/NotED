@@ -66,7 +66,7 @@ const AddFile = ({ group_tag, titles }) => {
 
     return (
         <div>
-            <Button variant="primary" onClick={() => setShowModal(true)}>
+            <Button onClick={() => setShowModal(true)}>
                 Add File
             </Button>
 
@@ -97,16 +97,6 @@ const AddFile = ({ group_tag, titles }) => {
                     {fileEntries.map((entry, index) => (
                         <div key={index} className="mb-3">
                             {/* Section Number (Optional) */}
-                            <label htmlFor={`section_${index}`} className="form-label">Section Number</label>
-                            <input
-                                type="number"
-                                id={`section_${index}`}
-                                name="section"
-                                className="form-control"
-                                value={entry.section}
-                                onChange={(e) => handleChangeFileEntry(index, e)}
-                                placeholder="Enter Section Number"
-                            />
 
                             {/* Text Area for Additional Text */}
                             <label htmlFor={`text_${index}`} className="form-label"> Text (Optional)</label>

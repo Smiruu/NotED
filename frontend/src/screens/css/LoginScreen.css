@@ -1,0 +1,230 @@
+.split-screen {
+display: flex;
+height: 100vh;
+overflow: hidden;
+}
+
+.login-left-container {
+flex: 1;
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: #f7f7f7;
+position: relative;
+}
+
+.login-image-container {
+position: relative;
+width: 100%;
+height: 100%;
+overflow: hidden;
+}
+
+.login-image-container img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+position: absolute;
+top: 0;
+left: 0;
+display: block;
+}
+
+.login-text-container {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+justify-content: space-between; /* Positions h1 at top and p at bottom */
+align-items: flex-start; /* Aligns text to the left */
+color: #fff; /* Text color */
+padding: 20px; /* Adds padding for spacing */
+}
+
+.login-text-container h1 {
+font-size: 3rem; /* Increase font size for h1 */
+margin-left: 1rem !important;
+margin-right: 10rem !important;
+margin-top: .1rem !important;
+padding-top: 1rem !important;
+padding: 10px 0; /* Adds some padding for better spacing */
+font-family: "Anton", sans-serif !important;
+font-weight: 700;
+font-style: bold;
+background: #B0967E;
+background: linear-gradient(to bottom right, #B0967E 10%, #004888 60%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.login-text-container p {
+font-size: 4rem; /* Increase font size for p */
+margin-bottom: 20px;
+/* padding-bottom: .5rem; */
+font-family: "Kanit", sans-serif !important;
+font-weight: 700 !important;
+font-style: bold;
+color: #004888;
+margin-left: 1rem !important;
+}
+
+.login-right-container {
+flex: 1;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 20px;
+}
+
+.login-container {
+width: 100%;
+max-width: 70%;
+}
+
+.logo-image {
+display: block;
+margin: 0 auto 1.5rem; /* Center the image and add spacing below */
+width: 100px; /* Adjust width as needed */
+height: auto; /* Maintain aspect ratio */
+border-radius: 50%;
+}
+
+.login-container h2 {
+text-align: center;
+font-family: "Kanit", sans-serif;
+font-weight: 500;
+font-style: bold;
+font-size: 2.7rem;
+padding-bottom: 1rem;
+}
+
+.login-form {
+width: 100%;
+max-width: 40rem;
+margin: 0 auto;
+display: flex;
+flex-direction: column;
+align-items: stretch;
+}
+
+.login-form-group {
+margin-bottom: 1rem;
+font-family: "Kanit", sans-serif;
+font-weight: 400;
+font-style: bold;
+display: block;
+}
+
+.login-form-group label {
+display: block;
+margin-bottom: 5px;
+margin-left: .5rem;
+font-size: 1.3rem;
+font-family: "Kanit", sans-serif;
+font-weight: 500;
+font-style: bold;
+}
+
+.login-input {
+display: block;
+width: 100% !important;
+padding: 1rem;
+border-radius: 2rem;
+border: solid .17rem;
+font-size: 1.2rem;
+padding-left: 1.2rem;
+transition: .2s ease-in-out !important;
+}
+
+.login-form-group input:hover{
+border-color: #d9b99b;
+transition: .2s ease-in-out;
+}
+
+.login-form-group input:focus {
+border-color: #d9b99b; /* Change this to the color you want when focused */
+outline: none; /* Optional: Removes the default browser outline */
+}
+
+
+
+.login-btn {
+width: 100%;
+padding: 10px;
+font-size: 1.5rem !important;
+font-family: "Kanit", sans-serif !important;
+font-weight: 500 !important;
+font-style: bold !important;
+border-radius: 2rem !important;
+background-color: rgb(0, 72, 136) !important;
+color: white !important;
+transition: .2s ease-in-out !important;
+border: none;
+margin-top: .8rem;
+}
+
+.login-btn:hover{
+background-color: #d9b99b !important;
+transition: .2s ease-in-out !important;
+color: black !important;
+}
+
+.register-link {
+text-align: center;
+margin-top: .6rem;
+font-family: "Kanit", sans-serif !important;
+font-weight: 500 !important;
+font-style: bold !important;
+font-size: 1.1rem !important;
+}
+
+.register-link a {
+color: rgb(0, 72, 136);
+transition: .2s ease-in-out !important;
+}
+
+.register-link a:hover{
+    color: #d9b99b ;
+    transition: .2s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+.login-left-container {
+    display: none;
+}
+
+.login-right-container {
+    width: 100%;
+    height: 100%;
+}
+
+.login-container {
+    max-width: 100%;
+    padding: 20px;
+}
+}
+
+.loading-container {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.loading-spinner {
+width: 40px;
+height: 40px;
+border: 4px solid rgba(0, 0, 0, 0.24);
+border-top: 4px solid rgb(0, 72, 136);
+border-radius: 50%;
+animation: spin 1s linear infinite;
+margin-top: 1.5rem;
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}

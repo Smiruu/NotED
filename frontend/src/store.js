@@ -42,9 +42,15 @@ import {
   fileCreateReducer,
   fileUpdateReducer,
   fileDeleteReducer,
+  fileVideoReducer,
 
 } from "./reducers/noteReducers";
 
+import {
+  announcementListReducer,
+  announcementCreateReducer,
+  announcementDeleteReducer,
+} from "./reducers/announcementReducers";
 
 
 import { conversationReducer, userListReducer } from "./reducers/chatsReducers";
@@ -92,6 +98,11 @@ const reducer = {
   fileUpdate: fileUpdateReducer,
   fileDelete: fileDeleteReducer,
 
+  fileVideo: fileVideoReducer,
+
+  announcementList: announcementListReducer,
+  announcementCreate: announcementCreateReducer,
+  announcementDelete: announcementDeleteReducer,
 
 
 

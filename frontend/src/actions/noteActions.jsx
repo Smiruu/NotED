@@ -35,7 +35,10 @@ import {
     FILE_LIST_SUCCESS,
     FILE_UPDATE_FAIL,
     FILE_UPDATE_REQUEST,
-    FILE_UPDATE_SUCCESS
+    FILE_UPDATE_SUCCESS,
+    GET_FILES_AND_VIDEOS_REQUEST,
+    GET_FILES_AND_VIDEOS_SUCCESS,
+    GET_FILES_AND_VIDEOS_FAIL,
 
 
 } from '../constants/noteConstants'
@@ -204,6 +207,7 @@ export const listVideos = (group_tag) => async (dispatch, getState) => {
 
 export const createVideo = (group_tag,videoData) => async (dispatch) => {
     try {
+        console.log('Dispatching VIDEO_CREATE_REQUEST');
         dispatch({ type: VIDEO_CREATE_REQUEST });
 
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -222,6 +226,7 @@ export const createVideo = (group_tag,videoData) => async (dispatch) => {
             payload: response.data,
         });
     } catch (error) {
+        console.log('Dispatching VIDEO_CREATE_FAIL');
         dispatch({
             type: VIDEO_CREATE_FAIL,
             payload:
@@ -413,3 +418,32 @@ export const deleteFile = (_id,group_tag) => async (dispatch) => {
         });
     }
 }
+
+export const getFilesAndVideosByTitle = (titleId) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: GET_FILES_AND_VIDEOS_REQUEST });
+
+        // Make the API call to get files and videos by title ID
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        const token = userInfo ? userInfo.token.access : null;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+
+        const { data } = await instance.get(`/api/notes/titles/${titleId}/files-videos/`, config);
+
+        dispatch({
+            type: GET_FILES_AND_VIDEOS_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: GET_FILES_AND_VIDEOS_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+        });
+    }
+};

@@ -249,26 +249,24 @@ const GroupListScreen = () => {
                 value={searchTerm}
                 onChange={handleSearchChange}
               />
-              <Row className="mt-3">
+              <Row>
                 {groupsLoading ? (
                   <h4>Loading Groups...</h4>
                 ) : (
                   filteredGroups.map((group, index) => (
-                    <Col
-                      key={`${group.group_tag}-${index}`}
-                      sm="6"
-                      md="4"
-                      lg="3"
-                    >
-                      <Card>
+                    <Col key={`${group.group_tag}-${index}`}>
+                      <Card className="modal-card">
                         <CardImg
                           top
                           width="100%"
                           src={group.group_image}
                           alt={group.name}
+                          style={{ objectFit: "cover", height: "150px" }} // Adjust image height
                         />
-                        <CardBody>
-                          <CardTitle tag="h5">{group.name}</CardTitle>
+                        <CardBody className="d-flex flex-column">
+                          <CardTitle tag="h5" className="flex-grow-1">
+                            {group.name}
+                          </CardTitle>
                           <button
                             className="thebutton"
                             onClick={() => {

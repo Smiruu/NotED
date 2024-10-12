@@ -16,5 +16,7 @@ urlpatterns = [
     path('files/create/<str:group_tag>/', createFile),
     path('files/edit/<str:group_tag>/<int:file_id>/', editFile),
     path('files/delete/<str:group_tag>/<int:file_id>/', deleteFile),
+
+    path('titles/<int:title_id>/files-videos/', getFilesAndVideosByTitle, name='get_files_and_videos_by_title'),
     
 ]

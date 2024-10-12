@@ -31,13 +31,15 @@ const NavigationBar = () => {
   return (
     <div className="navbar">
       <div className="profile-section">
-        {/* Display the profile picture if available */}
+        {/* Link to the profile page when clicking on the profile picture */}
         {userProfile?.profile?.photo && (
-          <img
-            src={userProfile.profile.photo}
-            alt="Profile"
-            className="profile-pic"
-          />
+          <Link to="/profile">
+            <img
+              src={userProfile.profile.photo}
+              alt="Profile"
+              className="profile-pic"
+            />
+          </Link>
         )}
         {/* Link to the profile page */}
         <Link to="/profile" className="profile-btn">
@@ -60,7 +62,7 @@ const NavigationBar = () => {
         <Link to="/groups" className="nav-button-groups">
           <div className="nav-link-content">
             <MdOutlineGroups2 size={30} />
-            <span>Groups</span>
+            <span className="group-icon-text">Groups</span>
           </div>
         </Link>
         <Link to="/todo" className="nav-button-todo">
@@ -73,8 +75,8 @@ const NavigationBar = () => {
       {/* Logout Button */}
       <div className="logout-section">
         <button className="logout-button" onClick={handleLogout}>
-          <IoLogOutSharp size={30} />
-          <span>Logout</span>
+          <IoLogOutSharp size={40} />
+          {/* <span>Logout</span> */}
         </button>
       </div>
     </div>

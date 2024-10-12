@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { ConfirmChangePassword } from '../actions/userActions'; // Adjust the path based on your file structure
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { changePassword } from "../actions/userActions"; // Import the changePassword action
+import './css/Confirmresetpassword.css';
 
-const ConfirmChangePasswordScreen = ({ match }) => {
+const ConfirmChangePasswordScreen = () => {
   const dispatch = useDispatch();
-  const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
 
   // Accessing loading state and error message from the redux store if necessary
   const resetPassword = useSelector((state) => state.confirmChangePassword); // Ensure this matches your reducer name
@@ -16,78 +17,60 @@ const ConfirmChangePasswordScreen = ({ match }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(ConfirmChangePassword(uid, token, password, password2));
+    if (password === password2) {
+      dispatch(changePassword({ uid, token, password })); // Call changePassword with the required parameters
+    } else {
+      alert("Passwords do not match!"); // Simple validation
+    }
   };
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.header}>Confirm Change Password</h1>
-      {error && <p style={styles.errorMessage}>{error}</p>}
-      {success && <p style={styles.successMessage}>Password changed successfully!</p>}
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <input
-          type="password"
-          placeholder="New Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          style={styles.input}
-        />
-        <input
-          type="password"
-          placeholder="Confirm New Password"
-          value={password2}
-          onChange={(e) => setPassword2(e.target.value)}
-          required
-          style={styles.input}
-        />
-        <button type="submit" style={styles.button} disabled={loading}>
-          {loading ? 'Changing...' : 'Change Password'}
-        </button>
-      </form>
+    <div className="split-screen">
+      <div className="confirm-left-container">
+        <div className="confirm-image-container">
+          <img
+            src="https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA2L3JtNjcwLWVsZW1lbnRzZ3JvdXAtdG4tMDEyLTAxYi1samR6ajh6di5qcGc.jpg"
+            alt="Password Change Illustration"
+          />
+          <div className="confirm-text-container">
+            <h1>Change Your Password, Secure Your Future!</h1>
+            <p>Keep your account safe with a strong password.</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="confirm-right-container">
+        <div className="confirm-container">
+          <h1 className="confirm-header">Confirm Change Password</h1>
+          {error && <p className="confirm-error">{error}</p>}
+          {success && (
+            <p className="confirm-success">Password changed successfully!</p>
+          )}
+          <form onSubmit={handleSubmit} className="confirm-form">
+            <input
+              type="password"
+              placeholder="New Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="confirm-input"
+            />
+            <input
+              type="password"
+              placeholder="Confirm New Password"
+              value={password2}
+              onChange={(e) => setPassword2(e.target.value)}
+              required
+              className="confirm-input"
+            />
+            <button type="submit" className="confirm-button" disabled={loading}>
+              {loading ? "Changing..." : "Change Password"}
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
-};
-
-
-
-const styles = {
-  container: {
-    padding: '20px',
-    backgroundColor: '#f9f9f9',
-    fontFamily: 'Arial, sans-serif',
-    borderRadius: '8px',
-    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-  },
-  header: {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    marginBottom: '20px',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  input: {
-    padding: '10px',
-    marginBottom: '10px',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-  },
-  button: {
-    padding: '10px',
-    backgroundColor: '#4CAF50',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-  },
-  errorMessage: {
-    color: 'red',
-  },
-  successMessage: {
-    color: 'green',
-  },
 };
 
 export default ConfirmChangePasswordScreen;
