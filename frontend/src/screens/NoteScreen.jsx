@@ -6,17 +6,18 @@ import {
   listTitles,
   updateFile,
   deleteFile,
+  updateVideo,
+  deleteVideo,
   getFilesAndVideosByTitle,
 } from "../actions/noteActions"; // Import other actions
 import TitleList from "../components/titleList";
 import Title from "../components/Title";
 import AddFile from "../components/AddFile";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Dropdown } from "react-bootstrap";
 import { Worker, Viewer } from "@react-pdf-viewer/core"; // Import PDF viewer components
 import "@react-pdf-viewer/core/lib/styles/index.css"; // Import styles
 import NavigationBar from "../components/NavigationBar";
 import "./css/NoteScreen.css";
-import { Dropdown } from "react-bootstrap";
 import AddVideo from "../components/AddVideo";
 
 function NoteScreen() {
@@ -28,7 +29,9 @@ function NoteScreen() {
     loading: loadingFiles,
     error: errorFiles,
     files,
+    videos, // Added to get videos
   } = useSelector((state) => state.fileVideo); // Use the new fileVideo reducer
+
   const {
     loading: loadingTitles,
     error: errorTitles,
@@ -44,7 +47,7 @@ function NoteScreen() {
     text: "",
   });
 
-  const pdfjsVersion = '3.0.279';
+  const pdfjsVersion = '2.16.105';
   const [titleId, setTitleId] = useState(
     localStorage.getItem("selectedTitleId") || null
   ); // Get the titleId from localStorage
@@ -136,6 +139,50 @@ function NoteScreen() {
     return null;
   };
 
+  const [showVideoEditModal, setShowVideoEditModal] = useState(false);
+const [selectedVideo, setSelectedVideo] = useState(null);
+const [videoData, setVideoData] = useState({
+  titleId: "",
+  link: "",
+  video: null,
+});
+
+// Function to handle video edit click
+const handleVideoEditClick = (video) => {
+  setSelectedVideo(video);
+  setVideoData({
+    titleId: video.title,
+    link: video.link || "",
+    video: null,
+  });
+  setShowVideoEditModal(true);
+};
+
+// Function to handle video delete
+const handleVideoDelete = (id) => {
+  if (window.confirm("Are you sure you want to delete this video?")) {
+    dispatch(deleteVideo(id, group_tag)); // Dispatch delete action
+  }
+};
+
+// Function to handle video edit submit
+const handleVideoEditSubmit = () => {
+  const formData = new FormData();
+  if (videoData.titleId) formData.append("title", videoData.titleId);
+  formData.append("link", videoData.link || "");
+  if (videoData.video) formData.append("video", videoData.video);
+
+  dispatch(updateVideo(selectedVideo._id, formData, group_tag));
+  handleCloseVideoEditModal();
+};
+
+// Function to close video edit modal
+const handleCloseVideoEditModal = () => {
+  setShowVideoEditModal(false);
+  setSelectedVideo(null);
+  setVideoData({ titleId: "", link: "", video: null });
+};
+
   return (
     <div className="note-screen-main">
       <NavigationBar />
@@ -177,66 +224,199 @@ function NoteScreen() {
             <p>No files available for this title.</p>
           )}
 
-          <ul className="list-group">
-            {files &&
-              files.map((file) => {
-                const title = titles.find((t) => t._id === file.title);
+<ul className="list-group">
+  {files &&
+    files.map((file) => {
+      const title = titles.find((t) => t._id === file.title);
 
-                return (
-                  <li key={file._id} className="list-group-item">
-                    <div className="file-info">
-                      <h6>{title ? title.name : "No Title"}</h6>
-                      <Dropdown>
-                        <Dropdown.Toggle
-                          className="ellipsis"
-                          variant="link"
-                          id={`dropdown-${file._id}`}
-                          drop="down"
-                          style={{
-                            padding: 0,
-                            border: "none",
-                            background: "none",
-                          }}
-                        >
-                          &#x22EE;
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                          <Dropdown.Item
-                            as="button"
-                            className="notebtn"
-                            onClick={() => handleEditClick(file)}
-                          >
-                            Edit
-                          </Dropdown.Item>
-                          <Dropdown.Item
-                            as="button"
-                            className="notebtn"
-                            onClick={() => handleDelete(file._id)}
-                          >
-                            Delete
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </div>
-                    <p>Section: {file.section}</p>
-                    <p>
-                      File:
-                      {file.file && (
-                        <a
-                          href={file.file}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {file.file.split("/").pop()}
-                        </a>
-                      )}
-                    </p>
-                    <p> Text: {file.text || "No text"}</p>
-                    {renderFilePreview(file)}
-                  </li>
-                );
-              })}
-          </ul>
+      return (
+        <li key={file._id} className="list-group-item">
+          <div className="file-info">
+            <h6>{title ? title.name : "No Title"}</h6>
+            <Dropdown>
+              <Dropdown.Toggle
+                className="ellipsis"
+                variant="link"
+                id={`dropdown-${file._id}`}
+                drop="down"
+                style={{
+                  padding: 0,
+                  border: "none",
+                  background: "none",
+                }}
+              >
+                &#x22EE;
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item
+                  as="button"
+                  className="notebtn"
+                  onClick={() => handleEditClick(file)}
+                >
+                  Edit
+                </Dropdown.Item>
+                <Dropdown.Item
+                  as="button"
+                  className="notebtn"
+                  onClick={() => handleDelete(file._id)}
+                >
+                  Delete
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+          <p>Section: {file.section}</p>
+          <p>
+            File:
+            {file.file && (
+              <a
+                href={file.file}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {file.file.split("/").pop()}
+              </a>
+            )}
+          </p>
+          <p>Text: {file.text || "No text"}</p>
+          {renderFilePreview(file)}
+        </li>
+      );
+    })}
+</ul>
+
+
+{/* Render Videos if available */}
+<ul className="list-group">
+  {videos && videos.length > 0 ? (
+    videos.map((video) => {
+      const title = titles.find((t) => t._id === video.title); // Find the title by ID
+
+      return (
+        <li key={video._id} className="list-group-item">
+          <div className="d-flex justify-content-between align-items-center">
+            <h6 className="mb-0">{title ? title.name : "No Title"}</h6>
+            <Dropdown>
+              <Dropdown.Toggle
+                className="ellipsis"
+                variant="link"
+                id={`dropdown-${video._id}`}
+                drop="down"
+                style={{
+                  padding: 0,
+                  border: "none",
+                  background: "none",
+                }}
+              >
+                &#x22EE;
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item
+                  as="button"
+                  className="notebtn"
+                  onClick={() => handleVideoEditClick(video)}
+                >
+                  Edit
+                </Dropdown.Item>
+                <Dropdown.Item
+                  as="button"
+                  className="notebtn"
+                  onClick={() => handleVideoDelete(video._id)}
+                >
+                  Delete
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+          <p>
+            Link:  
+            {video.link && (
+              <a href={video.link} target="_blank" rel="noopener noreferrer">
+                {video.link.split("/").pop()}
+              </a>
+            )}
+          </p>
+          {video.video && (
+            <video controls width="100%" height="auto">
+            <source src={video.video} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )}
+        </li>
+      );
+    })
+  ) : (
+    <p>No videos available for this title.</p>
+  )}
+</ul>
+
+
+
+{/* Video Edit Modal */}
+<Modal show={showVideoEditModal} onHide={handleCloseVideoEditModal}>
+  <Modal.Header closeButton>
+    <Modal.Title>Edit Video</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <div className="mb-3">
+      <label htmlFor="videoTitleId" className="form-label">
+        Title
+      </label>
+      <select
+        id="videoTitleId"
+        value={videoData.titleId}
+        onChange={(e) =>
+          setVideoData({ ...videoData, titleId: e.target.value })
+        }
+        className="form-select"
+      >
+        <option value="">Select Title</option>
+        {titles.map((title) => (
+          <option key={title._id} value={title._id}>
+            {title.name}
+          </option>
+        ))}
+      </select>
+    </div>
+    <div className="mb-3">
+      <label htmlFor="videoLink" className="form-label">
+        Video Link
+      </label>
+      <input
+        type="text"
+        id="videoLink"
+        className="form-control"
+        value={videoData.link}
+        onChange={(e) =>
+          setVideoData({ ...videoData, link: e.target.value })
+        }
+      />
+    </div>
+    <div className="mb-3">
+      <label htmlFor="video" className="form-label">
+        Video File
+      </label>
+      <input
+        type="file"
+        id="video"
+        className="form-control"
+        onChange={(e) =>
+          setVideoData({ ...videoData, video: e.target.files[0] })
+        }
+      />
+    </div>
+  </Modal.Body>
+  <Modal.Footer>
+    <Button variant="secondary" onClick={handleCloseVideoEditModal}>
+      Close
+    </Button>
+    <Button variant="primary" onClick={handleVideoEditSubmit}>
+      Save Changes
+    </Button>
+  </Modal.Footer>
+</Modal>
+
+
 
           {/* Edit Modal */}
           <Modal show={showEditModal} onHide={handleCloseEditModal}>
@@ -246,56 +426,62 @@ function NoteScreen() {
             <Modal.Body>
               <div className="mb-3">
                 <label htmlFor="titleId" className="form-label">
-                  Select Title
+                Title
                 </label>
                 <select
                   id="titleId"
-                  className="form-select"
                   value={fileData.titleId}
                   onChange={(e) =>
                     setFileData({ ...fileData, titleId: e.target.value })
                   }
-                  required
+                  className="form-select"
                 >
                   <option value="">Select Title</option>
-                  {titles &&
-                    titles.map((title) => (
-                      <option key={title._id} value={title._id}>
-                        {title.name}
-                      </option>
-                    ))}
+                  {titles.map((title) => (
+                    <option key={title._id} value={title._id}>
+                      {title.name}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="mb-3">
-                <label htmlFor="text" className="form-label">
-                  Text (Optional)
+                <label htmlFor="section" className="form-label">
+                  Section
                 </label>
-                <textarea
-                  id="text"
+                <input
+                  type="text"
+                  id="section"
                   className="form-control"
-                  value={fileData.text || ""}
+                  value={fileData.section}
                   onChange={(e) =>
-                    setFileData({
-                      ...fileData,
-                      text: e.target.value === "" ? "" : e.target.value,
-                    })
+                    setFileData({ ...fileData, section: e.target.value })
                   }
-                  placeholder="Enter text"
-                  rows={4}
-                  style={{ resize: "vertical" }}
                 />
               </div>
               <div className="mb-3">
                 <label htmlFor="file" className="form-label">
-                  Upload New File (Optional)
+                  File
                 </label>
                 <input
                   type="file"
                   id="file"
-                  accept=".pdf, .jpg, .jpeg, .png"
                   className="form-control"
                   onChange={(e) =>
                     setFileData({ ...fileData, file: e.target.files[0] })
+                  }
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="text" className="form-label">
+                  Description/Text
+                </label>
+                <textarea
+                  id="text"
+                  className="form-control"
+                  rows="3"
+                  value={fileData.text}
+                  onChange={(e) =>
+                    setFileData({ ...fileData, text: e.target.value })
                   }
                 />
               </div>
@@ -316,3 +502,6 @@ function NoteScreen() {
 }
 
 export default NoteScreen;
+
+                 
+              

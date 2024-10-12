@@ -14,7 +14,6 @@ import GroupChatScreen from "./screens/GroupChatScreen";
 import ChatsScreen from "./screens/ChatsScreen";
 import NavigationBar from "./components/NavigationBar";
 import NoteScreen from "./screens/NoteScreen";
-import VideoScreen from "./screens/VideoScreen";
 import EditGroupScreen from "./screens/EditGroupScreen";
 import AnnouncementScreen from "./screens/AnnouncementScreen";
 function App() {
@@ -37,7 +36,6 @@ function App() {
             <Route path="/profile" element={<ProfileScreen/>} />
             <Route path="/inbox" element={<ChatsScreen/>}/>
             <Route path="/groups/:group_tag/notes" element={<NoteScreen/>}/>
-            <Route path="/groups/:group_tag/videos" element={<VideoScreen/>}/>
           </Routes>
         </Container>
       </main>
