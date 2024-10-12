@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { ConfirmChangePassword } from "../actions/userActions"; // Import the changePassword action
 import './css/Confirmresetpassword.css';
 
 const ConfirmChangePasswordScreen = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
@@ -20,6 +21,7 @@ const ConfirmChangePasswordScreen = () => {
     e.preventDefault();
     if (password === password2) {
       dispatch(ConfirmChangePassword(uid, token, password, password2)); // Pass all required parameters
+      navigate("/")
     } else {
       alert("Passwords do not match!"); // Simple validation
     }
