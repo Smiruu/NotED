@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { changePassword } from "../actions/userActions"; // Import the changePassword action
+import { ConfirmChangePassword } from "../actions/userActions"; // Import the changePassword action
 import './css/Confirmresetpassword.css';
 
 const ConfirmChangePasswordScreen = () => {
@@ -14,15 +14,17 @@ const ConfirmChangePasswordScreen = () => {
   const { loading, success, error } = resetPassword || {}; // Default to an empty object
 
   const { uid, token } = useParams(); // Now uid and token are directly accessible
+  console.log(uid)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password === password2) {
-      dispatch(changePassword({ uid, token, password })); // Call changePassword with the required parameters
+      dispatch(ConfirmChangePassword(uid, token, password, password2)); // Pass all required parameters
     } else {
       alert("Passwords do not match!"); // Simple validation
     }
   };
+  
 
   return (
     <div className="split-screen">

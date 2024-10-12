@@ -120,7 +120,7 @@ export const changePassword = (passwordData) => async (dispatch, getState) => {
           },
       };
 
-      const response = await instance.post('/api/change-password/', passwordData, config);
+      const response = await instance.post('/api/user/changepassword/', passwordData, config);
 
       dispatch({
           type: CHANGE_PASSWORD_SUCCESS,
@@ -175,6 +175,9 @@ export const ConfirmChangePassword =
         type: CONFIRM_CHANGE_PASSWORD_REQUEST,
       });
 
+      console.log(uid)
+      console.log(token)
+
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -202,7 +205,6 @@ export const ConfirmChangePassword =
       });
     }
   };
-
   export const fetchUserProfile = () => async (dispatch) => {
     try {
         dispatch({ type: USER_PROFILE_REQUEST });
