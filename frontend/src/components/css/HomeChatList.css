@@ -1,0 +1,52 @@
+/* HomeChatList.css */
+.home-chat-list {
+  width: 100%;
+  margin: 0 auto;
+  overflow-y: auto; /* Enable scrolling if necessary */
+  padding-left: 0; /* Remove left padding from the chat list */
+}
+
+.home-chat-list-item {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center items vertically */
+  padding: 10px; /* Spacing around list items */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.3s ease; /* Smooth transitions */
+}
+
+.chat-list-home {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.home-chat-list-item:hover {
+  background-color: #d4edda; /* Soft green background on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+}
+
+.home-chat-list-item-photo {
+  width: 40px; /* Set fixed width for profile pictures */
+  height: 40px; /* Set fixed height for profile pictures */
+  border-radius: 50%; /* Round profile pictures to be circular */
+  margin-right: 10px; /* Space between photo and text */
+  object-fit: cover; /* Ensure the aspect ratio is maintained */
+  display: block; /* Ensure it behaves like a block element */
+}
+
+.home-chat-list-item-info {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack name and tag vertically */
+}
+
+.home-chat-list-item-name {
+  font-weight: bold; /* Bold font for username */
+  font-size: 1.1rem; /* Slightly larger font size */
+}
+
+.home-chat-list-item-tag {
+  font-size: 0.9rem; /* Smaller font size for user tag */
+  color: #666; /* Grey color for user tag */
+}
+
+/* Removed unnecessary img styles as they are applied directly to .home-chat-list-item-photo */
