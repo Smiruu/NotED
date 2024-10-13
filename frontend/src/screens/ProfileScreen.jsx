@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile, updateUserProfile } from "../actions/userActions";
+import { useNavigate } from "react-router-dom";
 import "./css/ProfileScreen.css";
 import NavigationBar from "../components/NavigationBar";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); 
   const { userProfile, loading, error } = useSelector(
     (state) => state.userProfile
   );
@@ -74,6 +76,12 @@ const ProfileScreen = () => {
                   onClick={() => setIsEditing(true)}
                 >
                   Edit Profile
+                </button>
+                <button
+                  className="edit-button"
+                  onClick={() => navigate("/changepassword")}
+                >
+                  Change Password
                 </button>
               </div>
 

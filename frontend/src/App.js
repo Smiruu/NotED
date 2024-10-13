@@ -17,6 +17,8 @@ import NoteScreen from "./screens/NoteScreen";
 import VideoScreen from "./screens/VideoScreen";
 import EditGroupScreen from "./screens/EditGroupScreen";
 import AnnouncementScreen from "./screens/AnnouncementScreen";
+import ChangePasswordScreen from "./screens/ChangePasswordScreen";
+
 function App() {
   return (
     <Router>
@@ -27,6 +29,7 @@ function App() {
             <Route path="/login" element={<LoginScreen />}/>
             <Route path="/register" element={<RegisterScreen />}/>
             <Route path="/reset-password" element={<ResetPasswordScreen/>} />
+            <Route path="/changepassword" element={<ChangePasswordScreen />} />
             <Route path="api/user/reset/:uid/:token" element={<ConfirmChangePasswordScreen />} />
             <Route path="/todo" element={<TodolistScreen />}/>
             <Route path="/groups" element={<GroupListScreen/>} />
