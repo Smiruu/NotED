@@ -65,7 +65,7 @@ const Title = () => {
 
     return (
         <div>
-            <Button onClick={() => handleOpen()}>+</Button>
+            <button className='titlebtn' onClick={() => handleOpen()}>+</button>
 
             {/* Modal for creating, editing, and displaying titles */}
             <Modal show={showModal} onHide={handleClose} size="lg">

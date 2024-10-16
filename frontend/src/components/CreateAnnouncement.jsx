@@ -37,9 +37,9 @@ const CreateAnnouncement = ({ group_tag }) => {
 
     return (
         <div>
-            <Button variant="primary" onClick={() => setShowModal(true)}>
+            <button className='announcement-button' onClick={() => setShowModal(true)}>
                 Create Announcement
-            </Button>
+            </button>
 
             <Modal show={showModal} onHide={handleClose} size="lg">
                 <Modal.Header closeButton>

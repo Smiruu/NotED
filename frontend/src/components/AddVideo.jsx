@@ -64,9 +64,9 @@ const AddVideo = ({ titles, group_tag }) => {
 
     return (
         <div>
-            <Button onClick={() => setShowModal(true)} className="mb-3">
+            <button  onClick={() => setShowModal(true)} className='notes-button'>
                 Add Video
-            </Button>
+            </button>
 
             <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
                 <Modal.Header closeButton>

@@ -66,9 +66,9 @@ const AddFile = ({ group_tag, titles }) => {
 
     return (
         <div>
-            <Button onClick={() => setShowModal(true)}>
+            <button className='notes-button' onClick={() => setShowModal(true)}>
                 Add File
-            </Button>
+            </button>
 
             <Modal show={showModal} onHide={handleClose} size="lg">
                 <Modal.Header closeButton>

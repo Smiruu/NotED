@@ -69,9 +69,9 @@ top: 9rem; /* Adjust as needed */
 /* Other styles... */
 }
 
-.nav-link-content span{
+/* .nav-link-content span{
     transition: .2s ease-in-out;
-}
+} */
 
 .nav-button-home {
 display: block;

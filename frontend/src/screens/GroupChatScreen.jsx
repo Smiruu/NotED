@@ -44,8 +44,8 @@ const GroupChatScreen = () => {
             Group: {group?.name} #{group?.group_tag}
           </div>
           <div className="header-links">
-            <a href={`/groups/${group_tag}/meetings`} className="header-button">
-              Meetings
+            <a href={`/groups/${group_tag}/announcements`} className="header-button">
+              Announcements
             </a>
             <a href={`/groups/${group_tag}/chat`} className="header-button">
               Chat

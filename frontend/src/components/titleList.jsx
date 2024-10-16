@@ -22,26 +22,31 @@ const TitleList = ({ groupTag, onSelectTitle }) => { // Add onSelectTitle as a p
             {/* Flexbox container for "Section" heading and Title component */}
             <div className="title-list-header">
                 <h1>Section</h1>
-                <Title group_tag={groupTag} /> {/* Place Title component beside Section */}
+                <Title className="titlebtn" group_tag={groupTag} /> {/* Place Title component beside Section */}
             </div>
 
+            <div className="section-line"></div>
             {loading ? (
                 <p>Loading...</p> // Simple loading text instead of a loader
             ) : error ? (
                 <p style={{ color: "red" }}>{error}</p> // Show error message as plain text
             ) : (
-                <ul className="list-group">
+                <ul className="section-list-group">
                     {titles && titles.map((title) => (
                         <li 
                             key={title._id} 
-                            className="list-group-item d-flex justify-content-between align-items-center"
+                            className="section-list-group-item d-flex justify-content-between align-items-center"
+                            id="sectionlist"
+                            tabIndex={0}
                             onClick={() => onSelectTitle(title._id)} // Call the onSelectTitle prop with the title ID
                             style={{ cursor: "pointer" }} // Change cursor to pointer for better UX
                         >
                             {title.name}    
                         </li>
                     ))}
+                    
                 </ul>
+                
             )}
         </div>
     );

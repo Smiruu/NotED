@@ -6,12 +6,72 @@
 
 .title-list-header h1 {
     margin-right: 20px;
-
     text-align: center;
     font-family: "Kanit", sans-serif;
     font-weight: 500;
     font-style: bold;
     font-size: 2.7rem;
         
+}
+
+.section-line{
+    border-bottom: 2px solid black;
+    margin-bottom: 2rem;
+    margin-top: .5rem;
+}
+
+#sectionlist{
+    font-family: "Kanit", sans-serif;
+    font-weight: 400;
+    font-style: bold;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    margin-right: 2rem;
+    transition: transform .2s ease-in-out !important;
+    align-content: center;
+    padding: .5rem;
+    padding-left: 1rem;
+    border-bottom: 1px solid #ccc ;
+}
+
+#sectionlist:hover{
+    transform: scale(1.1) !important;
+    background-color: #ead8b1;
+    border-radius: 2rem;
+    border-bottom: none;
+    -webkit-box-shadow: -1px 2px 6px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 2px 6px 0px rgba(0,0,0,0.75);
+    box-shadow: -1px 2px 6px 0px rgba(0,0,0,0.75);
+}
+
+#sectionlist:focus{
+    scale: 1.1 !important;
+    background-color: #ead8b1;
+    border-radius: 2rem;
+    border-bottom: none;
+    -webkit-box-shadow: -1px 2px 6px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 2px 6px 0px rgba(0,0,0,0.75);
+    box-shadow: -1px 2px 6px 0px rgba(0,0,0,0.75);
+    outline: none;
+}
+
+.titlebtn{
+    border-radius: 50%;
+    width: 2.5rem;
+    height: auto;
+    color: white;
+    font-family: "Kanit", sans-serif;
+    font-weight: 400;
+    font-style: bold;
+    font-size: 1.5rem !important;
+    padding: 0;
+    background-color: rgb(2, 54, 99);
+    transition: .2s ease-in-out;
+}
+
+.titlebtn:hover{
+    color: black;
+    background-color: #ead8b1;
+    transition: .2s ease-in-out;
 }
 
