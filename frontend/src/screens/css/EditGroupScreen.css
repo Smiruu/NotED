@@ -1,38 +1,78 @@
 .edit-group-main {
-    display: flex; /* Use flexbox for a horizontal layout */
-    height: 100vh; /* Full height of the viewport */
-  }
+  display: flex; /* Use flexbox for a horizontal layout */
+  height: 100vh; /* Full height of the viewport */
+}
+
+.edit-group-contents {
+  background-color: #ead8b1;
+  flex: 1; /* Take the remaining space */
+  padding: 2rem;
+}
+
+.edit-group-photo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit-group-photo h3 {
+  color: #0f1c49; /* Dark blue */
+  margin-bottom: 15px;
+}
+
+.group-image {
+  max-width: 75%; /* Keep it responsive */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 15px;
+  margin-bottom: 20px;
+  border: 3px solid #c38eb4; /* Light pink */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow for image */
+  width: 75%; /* Set to full width of the container */
+max-height: 35rem;
   
-  .edit-group-contents {
-    background-color: #ead8b1;
-    flex: 1; /* Take the remaining space */
-    padding: 2rem;
-  }
-  
-  .edit-group-photo,
-  .edit-group-name,
-  .edit-group-members {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .edit-button,
-  .remove-button,
-  .delete-button {
-    margin-top: 10px;
-    padding: 10px 15px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .edit-button:hover,
-  .remove-button:hover,
-  .delete-button:hover {
-    background-color: #0056b3;
-  }
-  
+}
+
+
+.file-input {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #26425a; /* Dark slate blue */
+  width: 100%;
+}
+
+.edit-button,
+.remove-button,
+.delete-button {
+  background-color: #86a8cf; /* Light blue */
+  color: #0b1b32; /* Darker blue */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  margin: 5px 0;
+  width: 100%;
+}
+
+.edit-button:hover,
+.remove-button:hover,
+.delete-button:hover {
+  background-color: #c38eb4; /* Light pink */
+  transform: translateY(-2px);
+}
+
+.remove-button {
+  background-color: #f44336; /* Red for removal */
+}
+
+.remove-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+.delete-button {
+  background-color: #ff5722; /* Orange for delete */
+}
+
+.delete-button:hover {
+  background-color: #e64a19; /* Darker orange on hover */
+}
