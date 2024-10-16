@@ -100,10 +100,10 @@ const GroupListScreen = () => {
     setModal(!modal);
     if (!modal) {
       dispatch(fetchGroupsList()); // Fetch groups when opening the modal
-    } else {
-      window.location.reload(); // Reload the page when closing the modal
     }
   };
+
+  const toggleCreateModal = () => setModalCreate(!modalCreate);
 
   // Handle search input change
   const handleSearchChange = (e) => {
@@ -123,21 +123,21 @@ const GroupListScreen = () => {
         group.group_tag.toLowerCase().includes(searchTerm.toLowerCase())) // Search by name or tag
   );
 
-  const toggleCreateModal = () => setModalCreate(!modalCreate);
   const handleImageUpload = (e) => {
     setGroupImage(e.target.files[0]);
   };
 
   // Handle Create Group form submission
-  const handleCreateGroup = () => {
+  const handleCreateGroup = async () => {
     const formData = new FormData();
     formData.append("name", groupName); // Append group name
     if (groupImage) {
       formData.append("group_image", groupImage); // Append uploaded image
     }
 
-    dispatch(createGroup(formData)); // Dispatch createGroup action
+    await dispatch(createGroup(formData)); // Dispatch createGroup action
     toggleCreateModal(); // Close modal after submission
+    window.location.reload(); // Reload page after group creation
   };
 
   return (
@@ -271,9 +271,9 @@ const GroupListScreen = () => {
                           </CardTitle>
                           <button
                             className="thebutton"
-                            onClick={() => {
-                              dispatch(joinGroup(group.group_tag)); // Dispatch the joinGroup action
-                              toggleModal(); // Close the modal after joining
+                            onClick={async () => {
+                              await dispatch(joinGroup(group.group_tag)); // Dispatch the joinGroup action
+                              window.location.reload(); // Reload page after joining group
                             }}
                           >
                             Join
