@@ -7,21 +7,23 @@
   .content {
     display: flex; /* Use flexbox for the content area */
     flex: 1; /* Take the remaining space */
-    background-color: #ead8b1;
+    background-color: aliceblue;
     padding: 2rem;
   }
   
   .folder-card-container {
-      display: flex;                 
-      flex-wrap: wrap;              
-      justify-content: flex-start;   /* Align items to the start */
-    }
-    
-    .folder-card {
-      margin: 10px;                   /* Adjust margin to reduce space */
-      /* Other styles... */
-    }
-    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Align items to the start */
+    gap: 20px; /* Optional: Add space between cards */
+  }
+  
+  .folder-card {
+    width: calc(50% - 35px); /* Adjust width to 50% minus margin for 2 cards per row */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+    border-radius: 6px; /* Optional: Rounded corners */
+    background-color: #ead8b1; /* Optional: White background for cards */
+  }
   
   .messages-column,
   .groups-column,
@@ -35,6 +37,7 @@
     background-color: #dcc89d;
   }
   
+ 
   /* Styling for individual items in each column */
   .message,
   .group,

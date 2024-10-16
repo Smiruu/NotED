@@ -14,121 +14,220 @@
     justify-content: space-between; /* Spread sections evenly */
   }
   
-  .create-todo,
-  .todo-list,
-  .save-changes {
-    width: 100%;
-  }
-  
-  .create-todo {
-    margin-bottom: 1rem; /* Add some space between input and todo-list */
-  }
-  
-  .save-changes {
-    display: flex;
-    justify-content: flex-end; /* Align button to the right */
-    margin-top: 1rem;
-  }
-  
-  .todo-list {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Align tasks to the top */
-    
-    border-radius: 0; /* No rounded corners */
-    background-color: #dcc89d; /* Background color */
-    padding: 1rem;
-    flex-grow: 1; /* Ensure this section grows with content */
-    overflow-y: auto; /* Allow scrolling if content exceeds screen */
-  }
-  
-  .todo-list li {
-    list-style-type: none; /* Remove bullet points from the list */
-    padding: 1rem; /* Add space between list items */
-  }
-  
-  .todo-item {
-    display: flex; /* Use flexbox to align items */
-    align-items: center; /* Center items vertically */
-    justify-content: space-between; /* Space between checkbox, title, and buttons */
-    padding: 0.5rem 1rem; /* Padding for better spacing */
-    border-bottom: 1px solid #ccc; /* Separator line */
-  }
-  
-  .todo-item:last-child {
-    border-bottom: none; /* Remove border from the last item */
-  }
-  
-  .todo-view,
-  .todo-edit {
-    display: flex; /* Flexbox for editing and viewing */
-    align-items: center; /* Center vertically */
-    flex-grow: 1; /* Allow the view to grow */
-  }
-  
-  .todo-checkbox {
-    margin-right: 1rem; /* Space between checkbox and title */
-  }
-  
-  .todo-title {
-    flex-grow: 1; /* Make the title take remaining space */
-    font-size: 1.1rem; /* Font size for title */
-  }
-  
-  .completed-text {
-    text-decoration: line-through; /* Strike through for completed tasks */
-    color: #888; /* Grey color for completed text */
-  }
-  
-  .todo-actions {
-    display: flex; /* Flexbox for action buttons */
-    gap: 0.5rem; /* Space between buttons */
-  }
-  
-  .todo-button {
-    padding: 0.5rem 1rem; /* Padding for buttons */
-    border: none; /* Remove default border */
-    border-radius: 4px; /* Rounded corners for buttons */
-    cursor: pointer; /* Pointer on hover */
-  }
-  
-  .save-button {
-    background-color: #4caf50; /* Green background for save button */
-    color: white; /* White text */
-    margin-left: 10px; /* Adjust this value to move the button to the left */
+/* Create To-Do Section */
+.create-todo {
+  margin-bottom: 2rem;
+  text-align: center; /* Center align input and button */
+}
+
+.create-todo h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #415a77; /* Darker header color */
+}
+
+.create-todo input {
+  padding: 0.75rem;
+  width: 60%;
+  font-size: 1.1rem;
+  border: 2px solid #415a77;
+  border-radius: 8px;
+  margin-right: 1rem;
+}
+
+.create-todo input:focus {
+  outline: none;
+  border-color: #81a4cd; /* Lighter border on focus */
+}
+
+.create-todo button {
+  padding: 0.75rem 1.5rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s;
+}
+
+.todo-actions{
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-content: flex-end;
+}
+
+.todo-edit {
+  display: flex; /* Use flexbox for horizontal alignment */
+  align-items: center; /* Center items vertically */
+  gap: 10px; /* Space between the input and buttons */
+}
+
+
+.todo-view {
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Space between checkbox/title and button */
+  width: 100%; /* Ensure it takes full width of the container */
+}
+
+
+.create-todo button:hover {
+  background-color: #388e3c; /* Darker green on hover */
+}
+
+/* To-Do List Section */
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-radius: 8px;
+  background-color: #ead8b1;
+  overflow-y: auto;
+  flex-grow: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Softer shadow */
+}
+
+/* To-Do List Items */
+.todo-list li {
+  list-style-type: none; /* Remove bullet points */
+  padding: 1rem; /* Padding for space */
+  border-radius: 8px; /* More rounded corners */
+  margin-bottom: 1rem; /* Space between items */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
+  background-color: #ffffff; /* Keep a clean white background */
+  transition: transform 0.3s, box-shadow 0.3s; /* Transition for hover effect */
+}
+
+.todo-list li:hover {
+  transform: translateY(-2px); /* Lift effect on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.todo-item {
+  display: flex; /* Flexbox for alignment */
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Space between checkbox and title/buttons */
+}
+
+/* Checkbox Styles */
+.todo-checkbox {
+  margin-right: 1rem; /* Space between checkbox and title */
+  cursor: pointer; /* Pointer on hover */
+  transform: scale(1.5); /* Larger checkbox for easier clicking */
+}
+
+/* Title Styles */
+.todo-title {
+  font-size: 1.2rem; /* Font size for title */
+  flex-grow: 1; /* Title takes up available space */
+  color: #333; /* Dark color for readability */
+  transition: color 0.3s; /* Smooth transition for color change */
+}
+
+.todo-title.completed-text {
+  text-decoration: line-through; /* Strike-through for completed tasks */
+  color: #888; /* Gray color for completed text */
+}
+
+/* Action Buttons */
+.todo-button {
+  padding: 0.5rem 1rem; /* Padding for buttons */
+  border-radius: 5px; /* Slight rounding for buttons */
+  cursor: pointer; /* Pointer on hover */
+  border: none; /* No border */
+  transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+.save-button {
+  background-color: #4caf50; /* Green background for save button */
+  color: white; /* White text */
+}
+
+.save-button:hover {
+  background-color: #388e3c; /* Darker green on hover */
 }
 
 .cancel-button {
-    background-color: #f44336; /* Red background for cancel button */
-    color: white; /* White text */
+  background-color: #f44336; /* Red background for cancel button */
+  color: white; /* White text */
 }
 
-  
-  .edit-button {
-    background-color: #ead8b1; /* Light background color */
-    color: black; /* Black text color */
-    border: 2px solid black; /* Black border */
-    padding: 0.5rem 1rem; /* Padding for better spacing */
-    border-radius: 4px; /* Rounded corners for button */
-    cursor: pointer; /* Pointer on hover */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+.cancel-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
 }
 
-.edit-button:hover {
-    background-color: #415a77; /* Change background on hover */
-    color: #ead8b1; /* Change text color on hover */
+.todo-checkbox {
+  margin-right: 1rem;
+  cursor: pointer;
+  transform: scale(1.2); /* Larger checkbox */
 }
 
+/* Task Title Styling */
+.todo-title {
+  font-size: 1.2rem;
+  flex-grow: 1;
+  color: #333;
+}
+
+.completed-text {
+  text-decoration: line-through;
+  color: #888;
+}
+
+/* Edit/Delete Buttons */
+.todo-button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.save-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.cancel-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.todo-button:hover {
+  background-color: #81a4cd; /* Lighter blue on hover */
+  color: white;
+}
+
+/* Task Done Button */
 .task-done-button {
-    background-color: #ead8b1; /* Background color */
-    color: black; /* Black text */
-    border: 2px solid black; /* Black border */
-    padding: 10px 20px; /* Padding for better appearance */
-    cursor: pointer; /* Change cursor on hover */
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .task-done-button:hover {
-    background-color: #415a77; /* Change background on hover */
-    color: #ead8b1; /* Change text color on hover */
+  background-color: #388e3c;
+}
+
+/* Save Changes Section */
+.save-changes {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1rem;
+}
+
+/* Smooth Transitions */
+input,
+button {
+  transition: all 0.3s ease;
+}
+
+input:focus,
+button:focus {
+  outline: none;
 }

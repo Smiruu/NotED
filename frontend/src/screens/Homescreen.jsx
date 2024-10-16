@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserGroups } from "../actions/groupActions";
 import { listToDoLists } from "../actions/todolistActions"; // Import the action to fetch todos
@@ -21,18 +21,18 @@ const HomeScreen = () => {
   const { loading: loadingTodos, error: todoError, todos } = todoListState;
 
   // State variables for selected user information
-  const [selectedUserTag, setSelectedUserTag] = useState('');
-  const [selectedUserName, setSelectedUserName] = useState('');
-  const [selectedPhoto, setSelectedPhoto] = useState('');
+  const [selectedUserTag, setSelectedUserTag] = useState("");
+  const [selectedUserName, setSelectedUserName] = useState("");
+  const [selectedPhoto, setSelectedPhoto] = useState("");
 
   const handleUserSelect = (userTag, userName, userPhoto) => {
     console.log("Selected User Tag: ", userTag); // Debug log
     setSelectedUserTag(userTag);
     setSelectedUserName(userName);
     setSelectedPhoto(userPhoto);
-    
+
     // Navigate to the Inbox screen with user information
-    navigate('/inbox', { state: { userTag, userName, userPhoto } });
+    navigate("/inbox", { state: { userTag, userName, userPhoto } });
   };
 
   // Check for userInfo in local storage
@@ -53,7 +53,11 @@ const HomeScreen = () => {
       <NavigationBar />
       <div className="content">
         <div className="messages-column">
-          <h1>Messages</h1>
+          <Link to="/inbox">
+            {" "}
+            {/* Use Link for navigation */}
+            <h1>Messages</h1>
+          </Link>
           <HomeChatList onConversationSelect={handleUserSelect} />
           {/* Display selected user's information */}
           {selectedUserTag && (
@@ -61,13 +65,22 @@ const HomeScreen = () => {
               <h2>Selected User:</h2>
               <p>Tag: {selectedUserTag}</p>
               <p>Name: {selectedUserName}</p>
-              {selectedPhoto && <img src={selectedPhoto} alt={`${selectedUserName}'s profile`} />}
+              {selectedPhoto && (
+                <img
+                  src={selectedPhoto}
+                  alt={`${selectedUserName}'s profile`}
+                />
+              )}
             </div>
           )}
         </div>
 
         <div className="groups-column">
-          <h1>Groups</h1>
+          <Link to="/groups">
+            {" "}
+            {/* Use Link for navigation */}
+            <h1>Groups</h1>
+          </Link>
           {loading && <p>Loading...</p>}
           {error && <p>{error}</p>}
 
@@ -80,7 +93,11 @@ const HomeScreen = () => {
         </div>
 
         <div className="todo-column">
-          <h1>To-Do List</h1>
+          <Link to="/todo">
+            {" "}
+            {/* Use Link for navigation */}
+            <h1>To-Do List</h1>
+          </Link>
           {loadingTodos && <p>Loading To-Do items...</p>}
           {todoError && <p>{todoError}</p>}
           {todos && todos.length > 0 ? (

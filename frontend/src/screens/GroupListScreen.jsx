@@ -96,11 +96,12 @@ const GroupListScreen = () => {
     });
   };
 
-  // Toggle modal for joining groups and fetch groups only when opening
   const toggleModal = () => {
     setModal(!modal);
     if (!modal) {
       dispatch(fetchGroupsList()); // Fetch groups when opening the modal
+    } else {
+      window.location.reload(); // Reload the page when closing the modal
     }
   };
 
@@ -159,84 +160,85 @@ const GroupListScreen = () => {
           {/* Container for Created Groups */}
           <div className="created-groups-container">
             <h2>Created Groups</h2>
-            <Row>
+            <div className="groups-grid">
               {sortedGroups(created_groups).map((group, index) => (
-                <Col key={`${group.group_tag}-${index}`} sm="6" md="4" lg="3">
-                  <Card className="mb-4 card">
-                    {" "}
-                    {/* Apply card class */}
-                    <CardImg
-                      top
-                      width="100%"
+                <div
+                  key={`${group.group_tag}-${index}`}
+                  className="custom-card"
+                >
+                  <img
+                    className="custom-card-img"
+                    src={group.group_image}
+                    alt={group.name}
+                  />
+                  <div className="custom-card-body">
+                    <h5 className="custom-card-title">
+                      <Link
+                        to={`/groups/${group.group_tag}`}
+                        style={{
+                          textDecoration: "underline",
+                          color: "inherit",
+                        }}
+                      >
+                        {group.name}
+                      </Link>
+                      <button
+                        className="favorite-btn"
+                        onClick={(event) => {
+                          event.stopPropagation(); // Prevents the link from triggering
+                          handleFavoriteToggle(group); // Toggle favorite state
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={renderStarIcon(group)}
+                          size="lg"
+                        />
+                      </button>
+                    </h5>
+                    <p className="custom-card-text">{group.group_tag}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Container for Joined Groups */}
+          <div className="joined-groups-container">
+            <h2>Joined Groups</h2>
+            <div className="groups-grid">
+              {sortedGroups(joined_groups).map((group, index) => (
+                <div
+                  key={`${group.group_tag}-${index}`}
+                  className="custom-card"
+                >
+                  <Link to={`/groups/${group.group_tag}`}>
+                    <img
+                      className="custom-card-img"
                       src={group.group_image}
                       alt={group.name}
                     />
-                    <CardBody>
-                      <CardTitle tag="h5" className="card-title">
-                        {" "}
-                        {/* Apply card-title class */}
-                        <Link
-                          to={`/groups/${group.group_tag}`}
-                          style={{
-                            textDecoration: "underline",
-                            color: "inherit",
-                          }}
-                        >
-                          {group.name}
-                        </Link>
-                        <Button
-                          color="link"
+                    <div className="custom-card-body">
+                      <h5 className="custom-card-title">
+                        {group.name}
+                        <button
+                          className="favorite-btn"
                           onClick={(event) => {
-                            event.stopPropagation(); // Prevents the link from triggering
-                            handleFavoriteToggle(group); // Toggle favorite state
+                            event.preventDefault(); // Prevents link from redirecting
+                            handleFavoriteToggle(group);
                           }}
                         >
                           <FontAwesomeIcon
                             icon={renderStarIcon(group)}
                             size="lg"
                           />
-                        </Button>
-                      </CardTitle>
-                      <CardText className="card-text">
-                        {group.group_tag}
-                      </CardText>{" "}
-                      {/* Apply card-text class */}
-                    </CardBody>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
-          </div>
-
-          {/* Container for Joined Groups */}
-          <div className="joined-groups-container">
-            <h2>Joined Groups</h2>
-            <Row>
-              {sortedGroups(joined_groups).map((group, index) => (
-                <Col key={`${group.group_tag}-${index}`} sm="6" md="4" lg="3">
-                  <Link to={`/groups/${group.group_tag}`}>
-                    <Card>
-                      <CardImg top src={group.group_image} alt={group.name} />
-                      <CardBody>
-                        <CardTitle tag="h5">
-                          {group.name}
-                          <button
-                            className="link-button" // You can style this if you need to
-                            onClick={() => handleFavoriteToggle(group)}
-                          >
-                            <FontAwesomeIcon
-                              icon={renderStarIcon(group)}
-                              size="lg"
-                            />
-                          </button>
-                        </CardTitle>
-                        <CardText>{group.group_tag}</CardText>
-                      </CardBody>
-                    </Card>
+                        </button>
+                      </h5>
+                      <p className="custom-card-text">{group.group_tag}</p>
+                    </div>
                   </Link>
-                </Col>
+                </div>
               ))}
-            </Row>
+            </div>
           </div>
 
           {/* Join Group Modal */}
