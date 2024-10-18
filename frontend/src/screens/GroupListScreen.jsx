@@ -175,10 +175,7 @@ const GroupListScreen = () => {
                     <h5 className="custom-card-title">
                       <Link
                         to={`/groups/${group.group_tag}`}
-                        style={{
-                          textDecoration: "underline",
-                          color: "inherit",
-                        }}
+                        className="custom-link" // Added class for custom styles
                       >
                         {group.name}
                       </Link>
@@ -195,6 +192,7 @@ const GroupListScreen = () => {
                         />
                       </button>
                     </h5>
+
                     <p className="custom-card-text">{group.group_tag}</p>
                   </div>
                 </div>

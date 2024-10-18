@@ -73,6 +73,20 @@ const ChatWindow = ({ receiverTag, receiverName, receiverPhoto }) => {
 
   return (
     <div className="chat-window">
+      {/* Add a chat header */}
+      <div className="chat-header">
+        {receiverPhoto ? (
+          <img
+            src={receiverPhoto}
+            alt={`${receiverName}'s profile`}
+            className="chat-header-photo"
+          />
+        ) : (
+          <div className="chat-placeholder" />
+        )}
+        <strong className="chat-header-name">{receiverName}</strong>
+      </div>
+  
       <div className="chat-messages">
         {messages.map((msg, index) => (
           <div
@@ -142,8 +156,8 @@ const ChatWindow = ({ receiverTag, receiverName, receiverPhoto }) => {
         ))}
         <div ref={messagesEndRef} />
       </div>
-
-      <form onSubmit={handleSendMessage}>
+  
+      <form onSubmit={handleSendMessage} className="send-area">
         <input
           type="text"
           value={newMessage}
@@ -158,6 +172,7 @@ const ChatWindow = ({ receiverTag, receiverName, receiverPhoto }) => {
       </form>
     </div>
   );
+  
 };
 
 export default ChatWindow;

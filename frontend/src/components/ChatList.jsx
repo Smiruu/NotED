@@ -21,7 +21,7 @@ const ChatList = ({ onConversationSelect }) => {
             ) : error ? (
                 <p>{error}</p>
             ) : (
-                <ul>
+                <ul className='chat-list-components'>
                     {conversations && conversations.length > 0 ? (
                         conversations.map(conversation => (
                             <li 

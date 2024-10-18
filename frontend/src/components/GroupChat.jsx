@@ -157,7 +157,7 @@ const Chat = ({ groupId, currentUser }) => {
         <div ref={messagesEndRef} /> {/* Empty div for scrolling */}
       </div>
 
-      <form onSubmit={sendMessage}>
+      <form onSubmit={sendMessage} className="group-send-area">
         <input
           type="text"
           value={input}

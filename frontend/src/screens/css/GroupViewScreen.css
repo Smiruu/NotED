@@ -4,7 +4,7 @@
 }
 
 .group-view-container {
-  background-color: #ead8b1;
+  background-color: aliceblue;
   flex: 1; /* Take the remaining space */
   padding: 2rem;
 }
@@ -87,18 +87,18 @@ transition: .2s ease-in-out;
 
 .group-content-wrapper {
   padding: 2rem; /* Padding around the entire section */
-  background-color: #dcc89d; /* Background color */
+  background-color: #d1e3fc81; /* Background color */
   border-radius: 8px; /* Rounded corners */
   margin-top: 2rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* Shadow effect */
 }
 
 .members-list {
   margin-top: 1rem; /* Add spacing above */
   padding: 1rem; /* Add padding inside the container */
-  border: 1px solid #ccc; /* Optional: Add a border for separation */
+  border: 2px solid #333; /* Optional: Add a border for separation */
   border-radius: 8px; /* Rounded corners */
-  background-color: #f9f9f9; /* Light background for contrast */
+  background-color: aliceblue; /* Light background for contrast */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
@@ -124,4 +124,39 @@ transition: .2s ease-in-out;
 
 .members-list li:hover {
   background-color: #eaeaea; /* Light gray background on hover */
+}
+
+.danger-button,
+.warning-button {
+  background-color: rgb(2, 54, 99); /* Dark blue color */
+  color: white; /* White text color */
+  padding: 10px 20px; /* Padding for better size */
+  font-size: 1rem; /* Font size */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-family: "Kanit", sans-serif; /* Custom font */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
+
+.danger-button:hover,
+.warning-button:hover {
+  background-color: #1a3e6d; /* Darker shade on hover */
+  transform: translateY(-4px); /* Slightly lift on hover */
+}
+
+.danger-button:focus,
+.warning-button:focus {
+  outline: none; /* Remove outline on focus */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add shadow on focus */
+}
+
+.GroupViewPage,
+.group-view-container,
+.header,
+.header-contents,
+.group-title,
+.members-list h3,
+.members-list li {
+  font-family: "Kanit", sans-serif; /* Ensure all these elements have the Kanit font */
 }

@@ -61,7 +61,7 @@ const GroupChatScreen = () => {
 
         <div className="group-chat-container-flex">
           {/* Group Chat */}
-          <h1>Group Chat</h1>
+          <h1 className="group-chat-header">Group Chat</h1>
           <Chat groupId={group_tag} currentUser={user} />{" "}
           {/* Pass user info as props */}
         </div>

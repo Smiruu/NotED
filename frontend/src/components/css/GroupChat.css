@@ -1,20 +1,28 @@
 .custom-chat-messages {
-  max-height: 90%; /* Set a max height for scrolling */
-  overflow-y: auto; /* Enable vertical scrolling */
-  padding: 10px; /* Padding inside the messages container */
-  background-color: #ffffff; /* White background for clarity */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 2px 10px rgba(160, 131, 131, 0.1); /* Soft shadow */
+  flex: 1; /* This will allow it to grow and fill available space */
+  overflow-y: auto; /* Enable scrolling for overflowing content */
+  padding: 1rem; /* Add padding for a better appearance */
+  background-color: aliceblue; /* Optional: Background color for the messages area */
+  border-radius: 8px; /* Optional: Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7); /* Optional: Subtle shadow for depth */
+  font-family: "Kanit", sans-serif; /* Set font family */
 }
 
 .custom-message {
   display: flex; /* Flexbox for positioning */
   align-items: flex-start; /* Align items to the start */
   margin-bottom: 15px; /* Space between messages */
+  font-family: "Kanit", sans-serif; /* Set font family */
 }
 
 .custom-chat-window {
-    height: 100%;
+  display: flex;
+  flex-direction: column; /* Arrange children vertically */
+  justify-content: flex-end;
+  height: 100%; /* Use full height of parent */
+  max-height: 100vh; /* Prevent overflow beyond viewport */
+  overflow: hidden; /* Hide overflow */
+
 }
 
 .custom-message-body {
@@ -26,12 +34,14 @@
   margin: 5px; /* Margin for spacing */
   word-wrap: break-word; /* Break long words and wrap to the next line */
   overflow-wrap: break-word; /* Ensures word wrapping on overflow */
+  font-family: "Kanit", sans-serif; /* Set font family */
 }
 
 .custom-message-content-wrapper {
   flex-grow: 1; /* Allow content to grow and fill available space */
   margin-right: 10px; /* Space between content and photo */
   margin-left: 10px;
+  font-family: "Kanit", sans-serif; /* Set font family */
 }
 
 .custom-message-photo-wrapper {
@@ -62,12 +72,14 @@
 .custom-message-header {
   font-weight: bold; /* Bold user name */
   margin-bottom: 5px; /* Space between user name and message */
+  font-family: "Kanit", sans-serif; /* Set font family */
 }
 
 .custom-message-content {
   flex-grow: 1; /* Allow content to grow and fill available space */
   word-wrap: break-word; /* Break long words onto new lines */
   overflow-wrap: break-word; /* Ensure long words break if necessary */
+  font-family: "Kanit", sans-serif; /* Set font family */
 }
 
 .custom-message-photo {
@@ -89,17 +101,31 @@
   border-radius: 5px; /* Rounded corners */
   border: 1px solid #ccc; /* Light border */
   margin-top: 10px; /* Space above input */
+  font-family: "Kanit", sans-serif; /* Set font family */
 }
 
 .custom-chat-button {
   padding: 10px 15px; /* Padding for button */
   border-radius: 5px; /* Rounded corners */
+  margin: 1rem;
   border: none; /* Remove border */
-  background-color: #007bff; /* Blue background for button */
+  background-color: rgb(2, 54, 99); /* Button background color */
   color: white; /* White text color */
   cursor: pointer; /* Pointer cursor on hover */
+  font-family: "Kanit", sans-serif; /* Set font family */
 }
 
 .custom-chat-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #1a3e6d; /* Darker blue on hover */
+}
+
+.group-send-area {
+  display: flex; /* Use flexbox for horizontal layout */
+  align-items: center; /* Center items vertically */
+  margin-top: 1rem; /* Space above the form */
+  padding: 0.5rem; /* Padding inside the form */
+  border-radius: 8px; /* Rounded corners for the form */
+  background-color: #d1e3fc81; /* Light background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  font-family: "Kanit", sans-serif; /* Set font family */
 }

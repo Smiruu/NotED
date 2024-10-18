@@ -1,39 +1,56 @@
 .chat-window {
-  max-height: 100% !important;
-  display: flex; /* Use flexbox to stack elements */
-  flex-direction: column; /* Stack children vertically */
-  background-color: #f9f9f9; /* Light background color */
-  padding: 10px; /* Padding inside the chat window */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: none; /* Remove any shadow */
+  height: 100% !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Push content to the bottom */
+  background-color: #d1e3fc81;
+  padding: 10px;
+  border-radius: 8px;
+  overflow-y: auto; /* Allow scrolling when messages overflow */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); /* Slightly larger shadow */
 }
 
-.chat-name {
-  display: flex; /* Flexbox for alignment */
-  align-items: center; /* Center items vertically */
-  margin-bottom: 15px; /* Space below the header */
+/* Chat header containing the user's name and photo */
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: aliceblue;
+  border-radius: 8px 8px 0 0; /* Rounded top corners */
+  margin-bottom: 10px; /* Space between header and messages */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
+  font-family: "Kanit", sans-serif;
 }
 
-.conversation-photo {
-  width: 40px; /* Fixed width for profile picture */
-  height: 40px; /* Fixed height for profile picture */
-  border-radius: 50%; /* Circular profile picture */
-  margin-right: 10px; /* Space between photo and name */
+.chat-header-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+  border: 2px solid #86a8cf; /* Add a border around the profile picture */
 }
 
+.chat-header-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #0f1c49;
+}
+
+/* Messages area styling */
 .chat-messages {
+  flex-grow: 1;
   max-height: 100%; /* Limit height for scrolling */
   overflow-y: auto; /* Enable vertical scrolling */
   padding: 10px; /* Padding inside the messages container */
-  background-color: #ffffff; /* White background for clarity */
+  background-color: aliceblue; /* White background for clarity */
   border-radius: 8px; /* Rounded corners */
-  box-shadow: none; /* Remove any shadow */
 }
 
 .message-chat-window {
   display: flex; /* Use flexbox for positioning */
   align-items: flex-start; /* Align items to the start */
-  margin-bottom: 0; /* Space between messages */
+  margin-bottom: 10px; /* Space between messages */
 }
 
 .message-header {
@@ -47,11 +64,11 @@
   max-width: 75%; /* Limit the width to 75% of the container */
   padding: 10px; /* Padding for the message body */
   border-radius: 15px; /* Rounded corners */
+  font-family: "Kanit", sans-serif;
   margin: 5px; /* Margin for spacing */
   word-wrap: break-word; /* Break long words and wrap to the next line */
   overflow-wrap: break-word; /* Ensures word wrapping on overflow */
   background-color: #f0f0f0; /* Light gray background for the message bubble */
-  box-shadow: none; /* Remove any shadow */
 }
 
 .message-content-wrapper {
@@ -75,13 +92,12 @@
 .sent .message-body {
   background-color: #147efb; /* Light blue for sent messages */
   color: white; /* Text color for better visibility */
-  box-shadow: none; /* Ensure no shadow */
+  
 }
 
 .received .message-body {
   background-color: #53d769; /* Green for received messages */
   color: white; /* Text color for better visibility */
-  box-shadow: none; /* Ensure no shadow */
 }
 
 .message-content {
@@ -97,26 +113,36 @@
   border-radius: 50%; /* Circle photo */
 }
 
-input[type="text"] {
-  width: 100%; /* Full width for input */
-  padding: 10px; /* Padding for input field */
-  border-radius: 5px; /* Rounded corners */
-  border: 1px solid #ccc; /* Light border */
-  margin-top: 10px; /* Space above input */
-  box-shadow: none; /* Remove any shadow */
+/* Chat input area */
+.chat-input {
+  margin: 0.5rem;
+  height: 40px; /* Adjust height for better visibility */
+  padding: 0 1rem; /* Add padding for spacing */
+  border: 2px solid #0f1c49; /* Dark blue border for consistency */
+  border-radius: 20px; /* Rounded corners */
+  outline: none; /* Remove default outline */
+  font-size: 1rem; /* Adjust font size for readability */
+  transition: border-color 0.3s ease; /* Smooth transition for border color */
 }
 
-button {
-  padding: 10px 15px; /* Padding for button */
-  border-radius: 5px; /* Rounded corners */
-  border: none; /* Remove border */
-  background-color: #007bff; /* Blue background for button */
-  color: white; /* White text color */
-  cursor: pointer; /* Pointer cursor on hover */
-  margin-top: 10px; /* Space above button */
-  box-shadow: none; /* Remove any shadow */
+.chat-button {
+  background-color: rgb(2, 54, 99); /* Bright blue background */
+  color: white; /* White text for contrast */
+  padding: 0 2rem; /* Increased padding for better spacing */
+  margin: 0.5rem;
+  border: none; /* Remove default button border */
+  border-radius: 20px; /* Rounded corners for a modern look */
+  font-size: 1rem; /* Adjust font size for better readability */
+  cursor: pointer; /* Change cursor to pointer for interactivity */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
 }
 
-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+.chat-button:hover {
+  background-color: #0f1c49; /* Darken the button on hover */
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+.send-area {
+  display: flex;
+  flex-direction: row;
 }

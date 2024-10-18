@@ -1,40 +1,64 @@
 /* components/ChatList.css */
 .chat-list {
-    width: 300px; /* Set a fixed width */
-    height: 500px; /* Set a fixed height */
-    overflow-y: auto; /* Allow vertical scrolling if needed */
-    background-color: #fff; /* White background for the chat list */
-    border: 1px solid #e0e0e0; /* Light gray border */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    padding: 10px; /* Padding around the content */
-    position: relative; /* Ensure positioning context for child elements */
+  width: 100%; /* Set a fixed width */
+  height: 500px; /* Set a fixed height */
+  overflow-y: auto; /* Allow vertical scrolling if needed */
+  background-color: #d1e3fc81; /* White background for the chat list */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+  justify-content: center;
+}
+
+.chat-list-components {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  max-height: 500px; /* Adjust as needed */
+  overflow-y: auto;
+  background-color:  #d1e3fc81;
+  border-radius: 8px;
+  padding: 10px;
 }
 
 .chat-list-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #e0e0e0; /* Divider between users */
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 8px;
+  background-color:  #d1e3fc81;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+  font-family: "Kanit", sans-serif;
+}
+
+.chat-list-item:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05); /* Slightly enlarge button on hover */
 }
 
 .chat-list-item-photo {
-    width: 40px; /* Size of the photo */
-    height: 40px; /* Size of the photo */
-    border-radius: 50%; /* Make the image round */
-    margin-right: 10px; /* Space between the photo and text */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+  border: 2px solid #86a8cf; /* Use your preferred color */
 }
 
 .chat-list-item-info {
-    display: flex;
-    flex-direction: column; /* Stack name and tag vertically */
+  display: flex;
+  flex-direction: column;
 }
 
 .chat-list-item-name {
-    font-weight: bold; /* Bold name */
+  font-weight: 600;
+  font-size: 16px;
+  color: #0f1c49; /* Dark blue from your palette */
 }
 
 .chat-list-item-tag {
-    color: #777; /* Lighter color for the tag */
-    font-size: 12px; /* Smaller font for the tag */
+  font-size: 14px;
+  color: #c38eb4; /* Light pink from your palette */
 }
