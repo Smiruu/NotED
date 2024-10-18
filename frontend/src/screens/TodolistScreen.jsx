@@ -110,13 +110,13 @@ const TodolistScreen = () => {
                           onClick={() =>
                             handleUpdate(todo._id, { title: editingTitle })
                           }
-                          className="todo-button save-button"
+                          className="save-button"
                         >
                           Save
                         </button>
                         <button
                           onClick={() => setEditingId(null)}
-                          className="todo-button cancel-button"
+                          className="cancel-button"
                         >
                           Cancel
                         </button>
@@ -142,7 +142,7 @@ const TodolistScreen = () => {
                           setEditingId(todo._id);
                           setEditingTitle(todo.title);
                         }}
-                        className="todo-button edit-button"
+                        className="edit-button"
                       >
                         Edit
                       </button>
@@ -162,7 +162,7 @@ const TodolistScreen = () => {
               onClick={handleDeleteCompleted}
               disabled={todos.filter((todo) => todo.completed).length === 0}
             >
-              Task Done
+              Deleted Completed Items
             </button>
           </div>
         </div>
