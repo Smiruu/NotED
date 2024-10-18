@@ -24,14 +24,20 @@ h2 {
   padding: 10px 20px;
   font-size: 1rem;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition:0.2s ease-in-out;
   margin: 5px;
+  font-family: "Kanit", sans-serif;
+  font-weight: 500;
+  font-style: bold; 
+  font-size: 1.2rem;
+  border-radius: 2rem;
 }
 
 .thebutton:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #ead8b1; /* Darker green on hover */
+  transition: 0.2s ease-in-out;
+  color: black;
 }
 
 .button-container {

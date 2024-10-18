@@ -108,7 +108,7 @@ const HomeScreen = () => {
               </div>
             ))
           ) : (
-            <p>No To-Do items found</p>
+            <p className="hsempty">No To-Do items found</p>
           )}
         </div>
       </div>

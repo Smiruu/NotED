@@ -75,21 +75,19 @@ function EditGroupScreen() {
     <div className="edit-group-main">
       <NavigationBar />
       <div className="edit-group-contents">
-        <div className="edit-group-photo">
-          <h3>Edit Group Photo</h3>
-          {group.group_image && <img src={group.group_image} alt="Group" className="group-image" />} {/* Display the current group image */}
-          <input type="file" accept="image/*" onChange={handleImageChange} />
-          <button onClick={handleImageUpload} className="edit-button">
-            Upload Photo
-          </button>
-          <button onClick={handleImageRemove} className="remove-button">
-            Remove Photo
-          </button>
+      <h3 className="edit-group-photo-title">Edit Group Photo</h3>
+      <div className="edit-group-photo">
+        {group.group_image && <img src={group.group_image} alt="Group" className="edit-group-image" />}
+        <div className="edit-group-photo-buttons">
+          <input className="editgroup-input" type="file" accept="image/*" onChange={handleImageChange} />
+          <button onClick={handleImageUpload} className="edit-upload-button">Upload Photo</button>
+          <button onClick={handleImageRemove} className="edit-remove-button">Remove Photo</button>
         </div>
-  
-        <button onClick={handleDeleteGroup} className="delete-button">
+        <button onClick={handleDeleteGroup} className="edit-delete-button">
           Delete Group
         </button>
+      </div>
+  
       </div>
     </div>
   );

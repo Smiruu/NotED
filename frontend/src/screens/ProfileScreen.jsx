@@ -66,8 +66,8 @@ const ProfileScreen = () => {
                     <p className="profile-tag">
                       @{userProfile.profile.user_tag}
                     </p>
-                    <p className="profile-bio">{userProfile.profile.bio}</p>
                   </div>
+                  <p className="profile-bio">{userProfile.profile.bio}</p>
                 </div>
                 <button
                   className="edit-button"
@@ -79,7 +79,7 @@ const ProfileScreen = () => {
 
               {isEditing && (
                 <div className="edit-form-container">
-                  <form onSubmit={handleSubmit} className="edit-form">
+                  <form onSubmit={handleSubmit} className="profile-edit-form">
                     <div className="form-group">
                       <label htmlFor="bio" className="form-label">
                         Bio:

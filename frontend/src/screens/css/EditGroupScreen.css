@@ -4,75 +4,168 @@
 }
 
 .edit-group-contents {
-  background-color: #ead8b1;
+  background-color: rgb(240, 248, 255);
   flex: 1; /* Take the remaining space */
   padding: 2rem;
 }
 
 .edit-group-photo {
   text-align: center;
-  margin-bottom: 20px;
+  background-color: #d1e3fc81;
+  border-radius: 2rem;
+  padding: 2rem;
+  -webkit-box-shadow: 1px 3px 7px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px 3px 7px 1px rgba(0,0,0,0.75);
+  box-shadow: 1px 3px 7px 1px rgba(0,0,0,0.75);
 }
 
-.edit-group-photo h3 {
-  color: #0f1c49; /* Dark blue */
-  margin-bottom: 15px;
+.edit-group-photo-title {
+  text-align: center;
+  font-family: "Kanit", sans-serif;
+  font-weight: 500;
+  font-style: bold;
+  font-size: 2.7rem;
+  padding-bottom: 1rem;
 }
 
-.group-image {
-  /* max-width: 75%;
-  height: auto; 
-  border-radius: 15px;
+.edit-group-image {
+  max-width: 30%;
+  max-height: 30%; 
+  border-radius: 5rem !important;
   margin-bottom: 20px;
-  border: 3px solid #c38eb4; 
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
-  width: 75%; 
-max-height: 35rem;
-   */
+  border: 3px solid #81a4cd; 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);  
+  border-radius: 20%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.445);
+}
+
+.edit-group-photo-buttons {
+  display: flex;
+  justify-content: space-between; /* Space the buttons evenly */
+  align-items: center; /* Vertically center the buttons */
+  gap: 10px; /* Add some space between the buttons */
+  width: 100%; /* Make sure it takes the full width of the container */
+  background-color: #81a4cd4b;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: 10rem;
+  border-radius: 1.5rem;
+  margin-top: .5rem;
+}
+
+.editgroup-input {
+  flex: 1; /* Make the buttons take equal space */
+  background-color: rgb(2, 54, 99);
+  color: white;
+  border: none !important;
+  border-radius: 2rem;
+  height: 4rem;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: .2s ease-in-out;
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-style: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: .8rem !important;
+  transition: .2s ease-in-out;
+}
+
+.edit-upload-button{
+  flex: 1; /* Make the buttons take equal space */
+  background-color: rgb(44, 138, 122);
+  color: white;
+  border: none;
+  border-radius: 2rem;
+  height: 4rem;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: .2s ease-in-out;
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-style: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding-top: .8rem !important; */
+  transition: .2s ease-in-out;
+}
+
+.edit-remove-button{
+  flex: 1; /* Make the buttons take equal space */
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 2rem;
+  height: 4rem;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: .2s ease-in-out;
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-style: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding-top: .8rem !important; */
+  transition: .2s ease-in-out;
+}
+
+.editgroup-input{
+  border-radius: 2rem !important;
+  padding-left: 2rem !important;
+  margin-top: 1rem !important;
 }
 
 
 .file-input {
-  margin-bottom: 15px;
+  margin-bottom: 15px !important;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #26425a; /* Dark slate blue */
+  border: 3px solid #26425a !important; /* Dark slate blue */
   width: 100%;
 }
 
-.edit-button,
-.remove-button,
-.delete-button {
-  background-color: #86a8cf; /* Light blue */
-  color: #0b1b32; /* Darker blue */
+.edit-delete-button {
+  flex: 1; /* Make the buttons take equal space */
+  margin-top: 2rem;
+  background-color: black;
+  color: white;
   border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
+  border-radius: 2rem;
+  height: 4rem;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  margin: 5px 0;
+  font-size: 1.5rem;
+  transition: .2s ease-in-out;
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-style: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding-top: .8rem !important; */
+  transition: .2s ease-in-out;
   width: 100%;
 }
 
-.edit-button:hover,
-.remove-button:hover,
-.delete-button:hover {
-  background-color: #c38eb4; /* Light pink */
-  transform: translateY(-2px);
+.edit-upload-button:hover,
+.edit-remove-button:hover,
+.editgroup-input:hover {
+  background-color: #ead8b1; /* Light pink */
+  transform: translateY(-.8rem);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.445);
+  outline: none !important;
+  transition: .2s ease-in-out;
+  color: black;
 }
 
-.remove-button {
-  background-color: #f44336; /* Red for removal */
-}
-
-.remove-button:hover {
-  background-color: #d32f2f; /* Darker red on hover */
-}
-
-.delete-button {
-  background-color: #ff5722; /* Orange for delete */
-}
-
-.delete-button:hover {
-  background-color: #e64a19; /* Darker orange on hover */
+.edit-delete-button:hover{
+  background-color: #f44336; /* Light pink */
+  transform: translateY(-.5rem);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.445);
+  outline: none !important;
+  transition: .2s ease-in-out;
+  color: black;
 }

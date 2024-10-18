@@ -36,10 +36,11 @@ color: white;
 cursor: pointer;
 text-align: center;
 font-family: "Kanit", sans-serif;
-font-weight: 400;
+font-weight: 500;
 font-style: bold;
 transition: .2s ease-in-out;
 margin-bottom: 2rem;
+font-size: 1.2rem;
 }
 
 .announcement-button:hover {
@@ -47,8 +48,9 @@ margin-bottom: 2rem;
     color: black;
     transition: .2s ease-in-out;
     font-family: "Kanit", sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     font-style: bold;
+    font-size: 1.2rem;
 }
 
 .announcementlist{

@@ -22,7 +22,10 @@
   width: calc(50% - 35px); /* Adjust width to 50% minus margin for 2 cards per row */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
   border-radius: 6px; /* Optional: Rounded corners */
-  background-color: #ead8b1; /* Optional: White background for cards */
+  background-color: #96a2df7c; /* Optional: White background for cards */
+  font-family: "Kanit", sans-serif;
+  font-weight: 500;
+  font-style: bold; 
 }
 
 .messages-column,
@@ -34,7 +37,28 @@
   margin: 1rem;
   box-shadow: #2c3e50;
   border-radius: 20px;
-  background-color: #dcc89d;
+  background-color: #d1e3fc81;
+  -webkit-box-shadow: -3px 4px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: -3px 4px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: -3px 4px 5px 0px rgba(0,0,0,0.75);
+}
+
+.messages-column h1,
+.groups-column h1,
+.todo-column h1{
+  font-family: "Kanit", sans-serif;
+  font-weight: 500;
+  font-style: bold; 
+  color: black;
+  text-decoration: underline #96a2df !important;
+  transition: .2s ease-in-out;
+}
+
+.messages-column h1:hover,
+.groups-column h1:hover,
+.todo-column h1:hover{
+  color: #96a2df;
+  transition: .2s ease-in-out;
 }
 
 
@@ -46,4 +70,5 @@
   margin-bottom: 10px; /* Space between items */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Intensified shadow */
   border-radius: 5px; /* Optional: Add slight rounded corners */
+  
 }
