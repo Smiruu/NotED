@@ -10,12 +10,31 @@
 }
 
 .header {
-  display: flex;
-  justify-content: space-between; /* Space between contents and links */
-  align-items: center; /* Center vertically */
-  padding: 1rem 2rem; /* Add padding around the header */
-  background-color: #dcc89d; /* Light gray background */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+display: flex;
+justify-content: space-between; /* Space between contents and links */
+align-items: center; /* Center vertically */
+padding: 1rem 2rem; /* Add padding around the header */
+padding-right: 2rem !important;
+padding-left: 2rem !important;
+background-color: aliceblue; /* Light gray background */
+/* -webkit-box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.75);
+box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.75); */
+border-radius: 3rem;
+font-family: "Kanit", sans-serif !important;
+font-weight: 700 !important;
+font-style: bold;
+font-size: 1.1rem;
+margin-top: -1rem !important;
+width: 100%;
+transition: .2s ease-in-out;
+}
+
+.header:hover{
+  -webkit-box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.75);
+box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.75);
+transition: .2s ease-in-out;
 }
 
 .header-contents {
@@ -38,23 +57,28 @@
 
 .header-links {
   display: flex; /* Arrange links in a row */
-  gap: 15px; /* Space between buttons */
+  gap: 17px; /* Space between buttons */
 }
 
 .header-button {
   display: inline-block; /* Treat the link like a button */
   padding: 10px 15px; /* Add some padding */
-  background-color: #007bff; /* Button background color */
+  background-color: rgb(2, 54, 99); /* Button background color */
+  border-radius: 2rem !important;
   color: white; /* Text color */
   border: none; /* Remove border */
   border-radius: 5px; /* Rounded corners */
   text-decoration: none; /* Remove underline */
-  font-weight: bold; /* Make text bold */
-  transition: background-color 0.3s; /* Smooth background color transition */
+  font-family: "Kanit", sans-serif !important;
+  font-weight: 500 !important;
+  font-style: bold;
+  transition: background-color 0.2s ease-in-out; /* Smooth background color transition */
 }
 
 .header-button:hover {
-  background-color: #0056b3; /* Darker color on hover */
+  background-color: #ead8b1; /* Darker color on hover */
+  color: black;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .header-button:focus {

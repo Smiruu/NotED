@@ -54,7 +54,8 @@ const GroupViewScreen = () => {
                 <img
                   src={group.group_image}
                   alt="Group"
-                  style={{ width: "50px", height: "50px", marginRight: "10px" }}
+                  // style={{ width: "50px", height: "50px", marginRight: "10px" }}
+                  className="group-image"
                 />
               )}
               Group: {group?.name} #{group?.group_tag}

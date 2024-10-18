@@ -79,7 +79,7 @@ const TodolistScreen = () => {
         <div className="todolist-content">
           {/* Create To-Do Section (Top) */}
           <div className="create-todo">
-            <h1>To-Do List</h1>
+          <h1 className="todo-title1">To-Do List</h1>
             <input
               type="text"
               placeholder="Enter a new task!"
@@ -93,65 +93,55 @@ const TodolistScreen = () => {
           <ul className="todo-list">
             {todos && todos.length > 0 ? (
               todos.map((todo) => (
-                <li
-                  key={todo._id}
-                  className={`todo-item ${todo.completed ? "completed" : ""}`}
-                >
-                  {editingId === todo._id ? (
-                    <div className="todo-edit">
-                      <input
-                        type="text"
-                        value={editingTitle}
-                        onChange={(e) => setEditingTitle(e.target.value)}
-                        className="todo-input"
-                      />
-                      <div className="todo-actions">
-                        <button
-                          onClick={() =>
-                            handleUpdate(todo._id, { title: editingTitle })
-                          }
-                          className="save-button"
-                        >
-                          Save
-                        </button>
-                        <button
-                          onClick={() => setEditingId(null)}
-                          className="cancel-button"
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="todo-view">
-                      <input
-                        type="checkbox"
-                        checked={todo.completed}
-                        onChange={() => handleToggleCompleted(todo)}
-                        className="todo-checkbox"
-                      />
-                      <span
-                        className={`todo-title ${
-                          todo.completed ? "completed-text" : ""
-                        }`}
-                      >
-                        {todo.title}
-                      </span>
-                      <button
-                        onClick={() => {
-                          setEditingId(todo._id);
-                          setEditingTitle(todo.title);
-                        }}
-                        className="edit-button"
-                      >
-                        Edit
-                      </button>
-                    </div>
-                  )}
-                </li>
+<li key={todo._id} className={`todo-item ${todo.completed ? "completed" : ""}`}>
+  {editingId === todo._id ? (
+    <div className="todo-edit">
+      <input
+        type="text"
+        value={editingTitle}
+        onChange={(e) => setEditingTitle(e.target.value)}
+        className="todo-input"
+      />
+      <div className="todo-actions">
+        <button
+          onClick={() => handleUpdate(todo._id, { title: editingTitle })}
+          className="save-button"
+        >
+          Save
+        </button>
+        <button
+          onClick={() => setEditingId(null)}
+          className="cancel-button"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  ) : (
+    <div className="todo-view">
+      <input
+        type="checkbox"
+        checked={todo.completed}
+        onChange={() => handleToggleCompleted(todo)}
+        className="todo-checkbox"
+      />
+      <span className={`todo-title ${todo.completed ? "completed-text" : ""}`}>
+        {todo.title}
+      </span>
+
+      {/* Ellipsis button for the dropdown */}
+      <div className="todo-ellipsis-container">
+        <button className="todo-ellipsis-button" onClick={() => setEditingId(todo._id)}>
+          &#x22EE; {/* Vertical ellipsis */}
+        </button>
+        {/* Dropdown with Edit option */}
+      </div>
+    </div>
+  )}
+</li>
               ))
             ) : (
-              <p>No To-Do items found</p>
+              <p className="todo-empty">No To-Do items found</p>
             )}
           </ul>
 

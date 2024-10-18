@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column; /* Stack items vertically */
     width: 100%;
-    background-color: #ead8b1;
+    background-color: aliceblue;
     padding: 2rem;
     height: 100vh; /* Fill the screen height */
     justify-content: space-between; /* Spread sections evenly */
@@ -16,39 +16,67 @@
   
 /* Create To-Do Section */
 .create-todo {
+  display: flex; /* Use flexbox to align items horizontally */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Optional: Center horizontally */
+  gap: 1rem; /* Add some space between the input and button */
   margin-bottom: 2rem;
-  text-align: center; /* Center align input and button */
 }
 
 .create-todo h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #415a77; /* Darker header color */
+  text-align: center;
+  font-family: "Kanit", sans-serif;
+  font-weight: 500;
+  font-style: bold;
+  font-size: 2.7rem;
+  margin-bottom: 2rem; /* Space between title and the input/button */
+  position: absolute;
+  top: 2rem; /* Keep the title near the top of the screen */
+  width: 100%;
 }
 
 .create-todo input {
-  padding: 0.75rem;
-  width: 60%;
-  font-size: 1.1rem;
-  border: 2px solid #415a77;
-  border-radius: 8px;
-  margin-right: 1rem;
+  display: flex !important;
+  width: 80% !important;
+  padding: 1rem !important;
+  padding-left: 1.5rem !important;
+  border-radius: 2rem !important;
+  border: solid .13rem !important;
+  font-size: 1.2rem;
+  font-family: "Kanit", sans-serif;
+  font-weight: 500;
+  transition: .2s ease-in-out !important;
+  align-items: center !important;
+  justify-content: center !important;
+  align-content: center !important;
+  flex-grow: 1; /* Ensure the input takes up available space */
+  margin-top: 5rem !important;
+}
+
+.create-todo input:hover {
+  border-color: #81a4cd !important; /* Lighter border on focus */
 }
 
 .create-todo input:focus {
   outline: none;
-  border-color: #81a4cd; /* Lighter border on focus */
+  border-color: #81a4cd !important; /* Lighter border on focus */
 }
 
 .create-todo button {
-  padding: 0.75rem 1.5rem;
-  background-color: #4caf50;
+  padding: 0.75rem 1.5rem !important;
+  background-color: rgb(2, 54, 99);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 2rem;
+  height: 4rem;
   cursor: pointer;
-  font-size: 1.1rem;
-  transition: background-color 0.3s;
+  font-size: 1.2rem;
+  transition: .2s ease-in-out;
+  flex-shrink: 0; /* Ensure the button doesn't shrink */
+  margin-top: 4.3rem !important;
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-style: bold;
 }
 
 .todo-actions{
@@ -62,6 +90,7 @@
   display: flex; /* Use flexbox for horizontal alignment */
   align-items: center; /* Center items vertically */
   gap: 10px; /* Space between the input and buttons */
+  width: 100%;
 }
 
 
@@ -74,7 +103,9 @@
 
 
 .create-todo button:hover {
-  background-color: #388e3c; /* Darker green on hover */
+  background-color: #ead8b1; /* Darker green on hover */
+  transition: .2s ease-in-out;
+  color: black;
 }
 
 /* To-Do List Section */
@@ -83,17 +114,22 @@
   flex-direction: column;
   padding: 1.5rem;
   border-radius: 8px;
-  background-color: #ead8b1;
+  background-color: #d1e3fc81;
   overflow-y: auto;
   flex-grow: 1;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Softer shadow */
+  -webkit-box-shadow: 1px 3px 7px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px 3px 7px 1px rgba(0,0,0,0.75);
+  box-shadow: 1px 3px 7px 1px rgba(0,0,0,0.75);
+  border-radius: 2rem;
+  width: 100% !important;
 }
 
 /* To-Do List Items */
 .todo-list li {
   list-style-type: none; /* Remove bullet points */
   padding: 1rem; /* Padding for space */
-  border-radius: 8px; /* More rounded corners */
+  padding-left: 1rem !important;
+  border-radius: 2.5rem; /* More rounded corners */
   margin-bottom: 1rem; /* Space between items */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
   background-color: #ffffff; /* Keep a clean white background */
@@ -101,8 +137,8 @@
 }
 
 .todo-list li:hover {
-  transform: translateY(-2px); /* Lift effect on hover */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.445); /* Stronger shadow on hover */
 }
 
 .todo-item {
@@ -113,16 +149,31 @@
 
 /* Checkbox Styles */
 .todo-checkbox {
-  margin-right: 1rem; /* Space between checkbox and title */
+  margin-right: 1rem !important; /* Space between checkbox and title */
+  margin-left: 1rem !important;
   cursor: pointer; /* Pointer on hover */
-  transform: scale(1.5); /* Larger checkbox for easier clicking */
+  background-color: black !important;
+  transform: scale(1.6) !important; /* Larger checkbox for easier clicking */
+  font-family: "Kanit", sans-serif !important;
+  font-weight: 500 !important;
+  font-style: bold !important;
+  transition: .2s ease-in-out;
+}
+
+.todo-checkbox:hover{
+  transform: scale(1.9) !important;
+  color: #ead8b1 !important;
+  transition: .2s ease-in-out;
 }
 
 /* Title Styles */
 .todo-title {
-  font-size: 1.2rem; /* Font size for title */
+  font-size: 1.3rem !important;
+font-family: "Kanit", sans-serif;
+font-weight: 500;
+font-style: bold;
   flex-grow: 1; /* Title takes up available space */
-  color: #333; /* Dark color for readability */
+  color: black; /* Dark color for readability */
   transition: color 0.3s; /* Smooth transition for color change */
 }
 
@@ -133,29 +184,65 @@
 
 /* Action Buttons */
 .todo-button {
-  padding: 0.5rem 1rem; /* Padding for buttons */
+  /* padding: 0.5rem 1rem; /* Padding for buttons */
   border-radius: 5px; /* Slight rounding for buttons */
   cursor: pointer; /* Pointer on hover */
   border: none; /* No border */
-  transition: background-color 0.3s; /* Transition for hover effect */
+  transition: background-color 0.3s;
+}
+
+.todo-edit input{
+  border-radius: 2rem !important;
+  border: solid .15rem !important;
+  font-size: 1.2rem;
+  font-family: "Kanit", sans-serif;
+  font-weight: 500;
+  transition: .2s ease-in-out !important;
+  padding-left: 1rem !important;
+}
+
+.todo-edit input:hover {
+  outline: none;
+  border-color: #81a4cd !important; /* Lighter border on focus */
+}
+
+.todo-edit input:focus {
+  outline: none;
+  border-color: #81a4cd !important; /* Lighter border on focus */
 }
 
 .save-button {
-  background-color: #4caf50; /* Green background for save button */
+  background-color: rgb(44, 138, 122); /* Green background for save button */
   color: white; /* White text */
+  border-radius: 2rem;
+  font-family: "Kanit", sans-serif;
+font-weight: 400;
+font-style: bold;
+transition: .2s ease-in-out;
+font-size: 1.2rem;
 }
 
 .save-button:hover {
-  background-color: #388e3c; /* Darker green on hover */
+  background-color: #ead8b1; /* Darker green on hover */
+  color: black;
+  transition: .2s ease-in-out;
 }
 
 .cancel-button {
-  background-color: #f44336; /* Red background for cancel button */
+  background-color: #f44336 !important; /* Red background for cancel button */
   color: white; /* White text */
+  border-radius: 2rem !important ;
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-style: bold;
+  transition: .2s ease-in-out;
+  font-size: 1.2rem;
 }
 
 .cancel-button:hover {
-  background-color: #d32f2f; /* Darker red on hover */
+  background-color: #ead8b1 !important; /* Darker green on hover */
+  color: black;
+  transition: .2s ease-in-out;
 }
 
 .todo-checkbox {
@@ -164,54 +251,26 @@
   transform: scale(1.2); /* Larger checkbox */
 }
 
-/* Task Title Styling */
-.todo-title {
-  font-size: 1.2rem;
-  flex-grow: 1;
-  color: #333;
-}
-
-.completed-text {
-  text-decoration: line-through;
-  color: #888;
-}
-
-/* Edit/Delete Buttons */
-.todo-button {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.save-button {
-  background-color: #4caf50;
-  color: white;
-}
-
-.cancel-button {
-  background-color: #f44336;
-  color: white;
-}
-
-.todo-button:hover {
-  background-color: #81a4cd; /* Lighter blue on hover */
-  color: white;
-}
-
 /* Task Done Button */
 .task-done-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
+  background-color: rgb(2, 54, 99);
   border: none;
-  border-radius: 8px;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  color: white;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  text-align: center;
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-style: bold;
+  transition: .2s ease-in-out;
+  font-size: 1.2rem;
 }
 
 .task-done-button:hover {
-  background-color: #388e3c;
+  background-color: #ead8b1;
+  transition: .2s ease-in-out;
+  color: black;
 }
 
 /* Save Changes Section */
@@ -230,4 +289,49 @@ button {
 input:focus,
 button:focus {
   outline: none;
+}
+
+
+.todo-ellipsis-container {
+  position: relative;
+  display: inline-block;
+}
+
+.todo-ellipsis-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #333;
+  border-radius: 2rem;
+}
+
+.todo-ellipsis-button:hover {
+  color: black;
+  background-color: #ead8b1;
+}
+
+.todo-empty{
+  display: block;
+margin-bottom: 5px;
+margin-left: .5rem;
+font-size: 1.5rem;
+font-family: "Kanit", sans-serif;
+font-weight: 500;
+font-style: bold;
+}
+
+.todo-list::-webkit-scrollbar{
+  display: none;
+}
+
+/* For Firefox */
+.todo-list::-webkit-scrollbar {
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar, but allow scrolling */
+.todo-list::-webkit-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  overflow-y: scroll; /* Allow scrolling */
 }

@@ -30,6 +30,7 @@ function NoteScreen() {
   const groupDetails = useSelector((state) => state.groupDetails);
   const { group, loading, error } = groupDetails;
 
+
   const user = useSelector((state) => state.userLogin.userInfo);
   const [isCreator, setIsCreator] = useState(false);
 
@@ -39,6 +40,10 @@ function NoteScreen() {
     }
   }, [group, user]);
   
+
+  useEffect(() => {
+    dispatch(getGroupDetails(group_tag)); // Fetch group details on component mount
+  }, [dispatch, group_tag]);
 
   // Get files and titles from Redux state
   const {
@@ -202,6 +207,7 @@ const handleCloseVideoEditModal = () => {
   return (
     <div className="note-screen-main">
       <NavigationBar />
+      <div className="note-screen-content row">
       <div className="header">
             <div className="header-contents">
               {group?.group_image && (
@@ -209,22 +215,20 @@ const handleCloseVideoEditModal = () => {
                   src={group.group_image}
                   alt="Group"
                   style={{ width: "50px", height: "50px", marginRight: "10px" }}
+                  className="group-image"
                 />
               )}
               Group: {group?.name} #{group?.group_tag}
             </div>
             <div className="header-links">
               <a
-                 href={`/groups/${group_tag}/announcements`}
+                href={`/groups/${group_tag}/announcements`}
                 className="header-button"
               >
                 Announcements
               </a>
               <a href={`/groups/${group_tag}/chat`} className="header-button">
                 Chat
-              </a>
-              <a href={`/groups/${group_tag}/notes`} className="header-button">
-                Notes
               </a>
               {isCreator && (
                 <a href={`/groups/${group_tag}/edit`} className="header-button">
@@ -233,7 +237,6 @@ const handleCloseVideoEditModal = () => {
               )}
             </div>
           </div>
-      <div className="note-screen-content row">
       {/* <h2>Files</h2> */}
         {/* Left Column for Titles */}
         <div className="col-md-3">
@@ -248,7 +251,7 @@ const handleCloseVideoEditModal = () => {
         {/* Right Column for Notes and Files */}
         <div className="col-md-9">
           <div id="custom-container">
-            <h2 className="notes-title">Notes</h2>
+            {/* <h2 className="notes-title">Notes</h2> */}
             <div className="add-actions">
               <div className="button-group">
                 <AddFile

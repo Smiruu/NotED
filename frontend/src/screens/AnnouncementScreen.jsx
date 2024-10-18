@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { listAnnouncements, deleteAnnouncement } from '../actions/announcementActions';
@@ -7,12 +7,33 @@ import CreateAnnouncement from '../components/CreateAnnouncement'; // Import Cre
 import "./css/AnnouncementScreen.css";
 import NavigationBar from '../components/NavigationBar';
 
+import {
+    getGroupDetails,
+  } from "../actions/groupActions";
+
 const AnnouncementScreen = () => {
     const { group_tag } = useParams(); // Get group_tag from URL parameters
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
+
+    const groupDetails = useSelector((state) => state.groupDetails);
+  const { group} = groupDetails;
+
+  useEffect(() => {
+    dispatch(getGroupDetails(group_tag)); // Fetch group details on component mount
+  }, [dispatch, group_tag]);
+
+  const user = useSelector((state) => state.userLogin.userInfo);
+  const [isCreator, setIsCreator] = useState(false);
+
+  useEffect(() => {
+    if (group && user) {
+      setIsCreator(group.creator?.user_tag === user.token?.user_tag); // Use optional chaining
+    }
+  }, [group, user]);
 
     const announcementList = useSelector((state) => state.announcementList);
     const { loading, error, announcements } = announcementList;
+    
 
     const announcementDelete = useSelector((state) => state.announcementDelete);
     const { success: successDelete } = announcementDelete;
@@ -31,6 +52,32 @@ const AnnouncementScreen = () => {
         <div className='announcement-screen-main'>
             <NavigationBar />
             <div className='announcement-screen-content'>
+            <div className="header">
+            <div className="header-contents">
+              {group?.group_image && (
+                <img
+                  src={group.group_image}
+                  alt="Group"
+                  style={{ width: "50px", height: "50px", marginRight: "10px" }}
+                  className='group-image'
+                />
+              )}
+              Group: {group?.name} #{group?.group_tag}
+            </div>
+            <div className="header-links">
+              <a href={`/groups/${group_tag}/chat`} className="header-button">
+                Chat
+              </a>
+              <a href={`/groups/${group_tag}/notes`} className="header-button">
+                Notes
+              </a>
+              {isCreator && (
+                <a href={`/groups/${group_tag}/edit`} className="header-button">
+                  Edit Group
+                </a>
+              )}
+            </div>
+          </div>
                 <h1 className='announcement-title'>Announcements for Group: {group_tag}</h1>
                 <div className='abtnplacement'>
                     <CreateAnnouncement className='announcement-button' group_tag={group_tag} />

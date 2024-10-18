@@ -38,7 +38,8 @@ const GroupChatScreen = () => {
               <img
                 src={group.group_image}
                 alt="Group"
-                style={{ width: "50px", height: "50px", marginRight: "10px" }}
+                // style={{ width: "50px", height: "50px", marginRight: "10px" }}
+                className="group-image"
               />
             )}
             Group: {group?.name} #{group?.group_tag}
@@ -46,9 +47,6 @@ const GroupChatScreen = () => {
           <div className="header-links">
             <a href={`/groups/${group_tag}/announcements`} className="header-button">
               Announcements
-            </a>
-            <a href={`/groups/${group_tag}/chat`} className="header-button">
-              Chat
             </a>
             <a href={`/groups/${group_tag}/notes`} className="header-button">
               Notes
