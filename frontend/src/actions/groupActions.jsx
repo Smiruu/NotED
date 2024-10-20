@@ -63,6 +63,8 @@ export const createGroup = (groupData) => async (dispatch) => {
       type: GROUP_CREATE_SUCCESS,
       payload: response.data,
     });
+
+    window.location.reload();
   } catch (error) {
     dispatch({
       type: GROUP_CREATE_FAIL,
@@ -71,54 +73,62 @@ export const createGroup = (groupData) => async (dispatch) => {
   }
 };
 
-export const uploadGroupImage = (groupTag, imageData) => async (dispatch, getState) => {
-  try {
-    dispatch({ type: GROUP_IMAGE_UPLOAD_REQUEST });
+export const uploadGroupImage =
+  (groupTag, imageData) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: GROUP_IMAGE_UPLOAD_REQUEST });
 
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    const token = userInfo ? userInfo.token.access : null; 
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      const token = userInfo ? userInfo.token.access : null;
 
+      const formData = new FormData();
+      formData.append("group_image", imageData);
+      formData.append("user_id", userInfo.token.user_id); // Include the user ID
 
-    const formData = new FormData();
-    formData.append('group_image', imageData);
-    formData.append('user_id', userInfo.token.user_id); // Include the user ID
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`, // Adjust based on your authentication setup
+        },
+      };
 
-    const config = {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${token}`, // Adjust based on your authentication setup
-      },
-    };
+      const response = await axios.patch(
+        `/api/groups/upload-image/${groupTag}/`,
+        formData,
+        config
+      );
 
-    const response = await axios.patch(`/api/groups/upload-image/${groupTag}/`, formData, config);
-
-    dispatch({
-      type: GROUP_IMAGE_UPLOAD_SUCCESS,
-      payload: response.data,
-    });
-  } catch (error) {
-    dispatch({
-      type: GROUP_IMAGE_UPLOAD_FAIL,
-      payload: error.response?.data?.message || error.message,
-    });
-  }
-};
+      dispatch({
+        type: GROUP_IMAGE_UPLOAD_SUCCESS,
+        payload: response.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GROUP_IMAGE_UPLOAD_FAIL,
+        payload: error.response?.data?.message || error.message,
+      });
+    }
+  };
 
 export const removeGroupImage = (groupTag) => async (dispatch) => {
   try {
     dispatch({ type: GROUP_IMAGE_REMOVE_REQUEST });
 
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    const token = userInfo ? userInfo.token.access : null; 
+    const token = userInfo ? userInfo.token.access : null;
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     };
 
-    const response = await instance.patch(`/api/groups/remove-image/${groupTag}/`, {}, config);
+    const response = await instance.patch(
+      `/api/groups/remove-image/${groupTag}/`,
+      {},
+      config
+    );
 
     dispatch({
       type: GROUP_IMAGE_REMOVE_SUCCESS,
@@ -251,6 +261,7 @@ export const fetchUserGroups = () => async (dispatch) => {
       type: USER_GROUPS_SUCCESS,
       payload: response.data,
     });
+
   } catch (error) {
     dispatch({
       type: USER_GROUPS_FAIL,

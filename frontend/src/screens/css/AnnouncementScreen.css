@@ -1,11 +1,11 @@
 .announcement-screen-main {
-display: flex; /* Use flexbox for a horizontal layout */
-height: 100vh; /* Full height of the viewport */
+display: flex;
+height: 100vh; 
 }
 
 .announcement-screen-content{
 background-color: aliceblue;
-flex: 1; /* Take the remaining space */
+flex: 1;
 padding: 2rem;
 height: fit-content;
 display: flex;
@@ -83,14 +83,6 @@ background-color: aliceblue;
     font-style: bold;
 }
 
-/* .announcement-item {
-    position: relative; 
-    padding: 10px;
-    margin-bottom: 15px; 
-    border: 1px solid #ccc;
-    border-radius: 5px; 
-} */
-
 .announcement-header {
     display: flex;
     justify-content: space-between;
@@ -98,30 +90,28 @@ background-color: aliceblue;
 }
 
 .anncellipsis {
-    cursor: pointer; /* Change cursor to pointer on hover */
-    font-size: 1.4rem !important; /* Adjust size as needed */
+    cursor: pointer;
+    font-size: 1.4rem !important;
     font-family: "Kanit", sans-serif !important;
     font-weight: 700 !important;
     font-style: bold !important;
-    margin-left: 0.5rem !important; /* Add some space between the title and ellipsis */
-    display: inline-block !important; /* Make sure it behaves like a button */
+    margin-left: 0.5rem !important; 
+    display: inline-block !important;
     text-decoration: none !important;
     color: black !important;
-    position: relative; /* To manage positioning if needed */
+    position: relative; 
 }
 
 .announcementlist::-webkit-scrollbar {
   display: none;
 }
 
-/* For Firefox */
 .announcementlist {
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none; 
 }
 
-/* Hide scrollbar, but allow scrolling */
 .announcementlist {
-  -ms-overflow-style: none; /* IE and Edge */
-  overflow-y: scroll; /* Allow scrolling */
+  -ms-overflow-style: none;
+  overflow-y: scroll; 
 }
 

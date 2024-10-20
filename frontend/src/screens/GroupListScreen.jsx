@@ -137,7 +137,7 @@ const GroupListScreen = () => {
 
     await dispatch(createGroup(formData)); // Dispatch createGroup action
     toggleCreateModal(); // Close modal after submission
-    window.location.reload(); // Reload page after group creation
+    // Reload page after group creation
   };
 
   return (
@@ -249,22 +249,22 @@ const GroupListScreen = () => {
                 value={searchTerm}
                 onChange={handleSearchChange}
               />
-              <Row>
+              <div className="modal-contents">
                 {groupsLoading ? (
                   <h4>Loading Groups...</h4>
                 ) : (
                   filteredGroups.map((group, index) => (
-                    <Col key={`${group.group_tag}-${index}`}>
-                      <Card className="modal-card">
-                        <CardImg
-                          top
-                          width="100%"
-                          src={group.group_image}
-                          alt={group.name}
-                          style={{ objectFit: "cover", height: "150px" }} // Adjust image height
-                        />
-                        <CardBody className="d-flex flex-column">
-                          <CardTitle tag="h5" className="flex-grow-1">
+                    <div key={`${group.group_tag}-${index}`} className="card-arrangements">
+                      <div className="modal-card">
+                        <div className="card-image">
+                          <CardImg src={group.group_image} />
+                        </div>
+                        <div className="d-flex justify-content-between align-items-center">
+                          {" "}
+                          {/* Flex container for title and button */}
+                          <CardTitle tag="h5" className="card-title">
+                            {" "}
+                            {/* Remove bottom margin */}
                             {group.name}
                           </CardTitle>
                           <button
@@ -276,12 +276,12 @@ const GroupListScreen = () => {
                           >
                             Join
                           </button>
-                        </CardBody>
-                      </Card>
-                    </Col>
+                        </div>
+                      </div>
+                    </div>
                   ))
                 )}
-              </Row>
+              </div>
             </ModalBody>
           </Modal>
 

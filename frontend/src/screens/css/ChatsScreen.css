@@ -1,14 +1,14 @@
 .ChatsScreen-main {
-  display: flex; /* Use flexbox for a horizontal layout */
-  height: 100vh; /* Full height of the viewport */
+  display: flex; 
+  height: 100vh; 
 }
 
 .chats-screen {
   font-family: "Kanit", sans-serif;
   color: #333;
-  display: flex; /* Use flexbox for the content area */
+  display: flex; 
   flex-direction: column;
-  flex: 1; /* Take the remaining space */
+  flex: 1; 
   background-color: aliceblue;
 }
 
@@ -21,70 +21,70 @@
 }
 
 .search-input {
-  width: 100%; /* Full width of the container */
-  padding: 10px 15px; /* Padding for a comfortable click area */
-  border: 2px solid #4a90e2; /* Border color */
-  border-radius: 50px; /* Rounded corners */
-  font-size: 1rem; /* Font size */
-  transition: border-color 0.3s; /* Smooth transition for border color */
-  box-shadow: none; /* Remove any shadow */
+  width: 100%; 
+  padding: 10px 15px; 
+  border: 2px solid #4a90e2; 
+  border-radius: 50px; 
+  font-size: 1rem; 
+  transition: border-color 0.3s; 
+  box-shadow: none; 
   font-family: "Kanit", sans-serif;
 }
 
 .search-input::placeholder {
-  color: #999; /* Placeholder text color */
+  color: #999; 
 }
 
 .search-input:focus {
-  border-color: #357abd; /* Change border color on focus */
-  outline: none; /* Remove default outline */
-  box-shadow: none; /* Remove shadow on focus */
+  border-color: #357abd;
+  outline: none;
+  box-shadow: none; 
 }
 
 .chat-container {
-  display: flex; /* Use flexbox for horizontal layout */
-  height: 100%; /* Full height of the parent container */
-  background-color: #f9f9f9; /* Light background for contrast */
-  border-radius: 8px; /* Rounded corners */
-  overflow: hidden; /* Prevent overflow of child elements */
+  display: flex; 
+  height: 100%;
+  background-color: #f9f9f9; 
+  border-radius: 8px; 
+  overflow: hidden; 
 }
 
 .chat-list-container {
-  background-color: #d1e3fc81; /* White background for the chat list */
-  padding: 1rem; /* Padding for inner elements */
-  box-shadow: none; /* Remove any shadow */
-  overflow-y: auto; /* Allow scrolling if content overflows */
-  height: 100%; /* Full height of the parent container */
+  background-color: #d1e3fc81; 
+  padding: 1rem; 
+  box-shadow: none; 
+  overflow-y: auto; 
+  height: 100%;
   width: 25%;
 }
 
 .chat-list {
-  list-style-type: none; /* Remove default list styling */
-  padding: 0; /* Remove padding from the list */
-  margin: 0; /* Remove margin from the list */
-  height: 100%; /* Full height of the parent container */
+  list-style-type: none; 
+  padding: 0;
+  margin: 0;
+  height: 100%; 
 }
 
 .chat-list-item {
-  padding: 10px; /* Padding for individual chat items */
-  border-radius: 5px; /* Rounded corners for chat items */
-  margin-bottom: 10px; /* Space between items */
-  transition: background-color 0.3s; /* Smooth background change on hover */
-  box-shadow: none; /* Remove any shadow */
+  padding: 10px; 
+  border-radius: 5px; 
+  margin-bottom: 10px; 
+  transition: background-color 0.3s;
+  box-shadow: none; 
 }
 
 .chat-list-item:hover {
-  background-color: #f9f9f9; /* Highlight item on hover */
+  background-color: #f9f9f9; 
   transition: 0.2s ease-in-out;
   color: black;
 }
 
 .chat-window-container {
-  flex: 1; /* Take the remaining space */
+  flex: 1;
   display: flex;
-  flex-direction: column; /* Stack chat messages vertically */
-  padding: 1rem; /* Padding for chat window */
-  background-color: #d1e3fc81; /* Slightly darker background for the chat window */
-  overflow-y: auto; /* Scroll if content overflows */
+  flex-direction: column; 
+  padding: 1rem; 
+  background-color: #d1e3fc81; 
+  overflow-y: auto; 
   height: 100%;
 }

@@ -141,7 +141,7 @@ const TodolistScreen = () => {
 </li>
               ))
             ) : (
-              <p className="todo-empty">No To-Do items found</p>
+              <p className="todo-empty">All tasks are done!</p>
             )}
           </ul>
 

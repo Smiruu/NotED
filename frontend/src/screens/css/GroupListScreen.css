@@ -93,6 +93,21 @@ h2 {
   text-decoration: none !important; /* Remove underline */
 }
 
+.card-image {
+  width: 100%;
+  align-self: center;
+}
+
+.card-title {
+  font-family: "Kanit", sans-serif;
+}
+
+.modal-contents {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
 .custom-card-text {
   font-size: 1rem;
   color: black;
@@ -115,6 +130,8 @@ h2 {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 300px;
 }
 
 .modal-body .d-flex {
@@ -196,3 +213,11 @@ h2 {
 .custom-card a:hover {
   text-decoration: none; /* Ensure no underline on hover */
 }
+
+.card-arrangements {
+  display: flex; /* Use flexbox */
+  justify-content: center; /* Center the card horizontally */
+  align-items: center; /* Center the card vertically, if necessary */
+  margin: 10px; /* Optional: Add spacing around each card arrangement */
+}
+
