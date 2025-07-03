@@ -120,7 +120,7 @@ export const changePassword = (passwordData) => async (dispatch, getState) => {
           },
       };
 
-      const response = await instance.post('/api/change-password/', passwordData, config);
+      const response = await instance.post('/api/user/changepassword/', passwordData, config);
 
       dispatch({
           type: CHANGE_PASSWORD_SUCCESS,
@@ -187,9 +187,11 @@ export const ConfirmChangePassword =
         config
       );
 
+      console.log(uid)
       dispatch({
         type: CONFIRM_CHANGE_PASSWORD_SUCCESS,
         payload: data,
+        
       });
 
     } catch (error) {
